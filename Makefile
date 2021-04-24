@@ -1,11 +1,9 @@
-all: main
-
-main:
-	pdflatex main
-	bibtex main
-	pdflatex main
-	pdflatex main
+all:
+	@printf "\nBuilding src\n"
+	cd src ; make all ; cd ..
+	ln -fs src/main.pdf
 
 .PHONY: clean
 clean:
-	rm -f main.pdf main.ps main.fls *.aux *.log *.bbl *.blg *.lof *.lot *.toc *.out *.fdb_latexmk
+	unlink main.pdf
+	cd src ; make clean ; cd ..
