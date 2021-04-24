@@ -1,0 +1,72 @@
+\documentclass[12pt]{include/ucthesis}
+\input{include/macros}
+
+\begin{document}
+
+\title{Computational Design of Materials from First-Principles: From energy conversion to quantum information}
+\author{Tyler J. Smart}
+\degreeyear{2021}
+\degreemonth{June}
+\degree{DOCTOR OF PHILOSOPHY}
+\chair{Prof. Frank Bridges}
+\committeememberone{Prof. Yuan Ping}
+\committeemembertwo{Prof. Yat Li}
+%\committeememberthree{Professor 4} % Uncomment if you have 4 committee members. Also change the next line to `\numberofmembers{4}`
+\numberofmembers{3}
+\deanlineone{Quentin Williams}
+\deanlinetwo{Acting Vice Provost and Dean of Graduate Studies}
+\deanlinethree{}
+\field{Physics}
+\campus{Santa Cruz}
+
+\begin{frontmatter}
+\maketitle
+
+\copyrightpage
+
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+\begin{abstract}
+    Hmm....
+\end{abstract}
+
+\begin{dedication}
+\vspace*{\fill}
+\begin{center}
+A loving dedication.
+\end{center}
+\vspace*{\fill}
+\end{dedication}
+
+\begin{acknowledgements}
+Proper acknowledgments of everyone else who helped you graduate.
+\end{acknowledgements}
+
+\end{frontmatter}
+
+\include{1-intro}
+\include{2-tmo}
+\include{3-2d}
+\include{4-cat}
+\include{5-conc}
+
+\appendix
+% molecular orbital
+% jahn teller
+% codes
+
+\include{a1-cfe}
+\include{a2-pw2py}
+
+
+\nocite{*}
+\bibliographystyle{plain}
+\singlespacing
+\bibliography{ref}
+\doublespacing
+
+\end{document}
