@@ -1,0 +1,345 @@
+\def\be{\Delta_{quad}}
+
+\section{Dopant Clustering in \ce{Fe2O3}}
+To overcome these limitations, several efforts have been made to dope hematite by tetravalent ions that yield improved photoelectrochemical performance of hematite photoelectrodes
+\cite{lohaus2018limitation,biswas2020tuning,ling2011sn,li2017morphology,kumar2011electrodeposited,fu2014highly,malviya2017influence,yang2013new,tian2020electronic,liu2013ge}.
+While the performance can be moderately improved via group IV and XIV dopants, the optimal doping concentration strongly varies with each individual dopant,\cite{kumar2011electrodeposited,fu2014highly,malviya2017influence,yang2013new,tian2020electronic,liu2013ge} thereby requiring extensive experimental testing each time \cite{walsh2017instilling}.
+%exact optimization of doping remains obscure due to physical limitations of doping \cite{walsh2017instilling}.
+%Specifically, the doping of tetravalent ions in hematite shows consistently non-monotonic behavior \cite{kumar2011electrodeposited,fu2014highly,malviya2017influence,yang2013new,tian2020electronic,liu2013ge}, although the exact doping concentration  optimal for improving performance, is seemingly random amongst dopants.
+
+For example, researchers\cite{fu2014highly,malviya2017influence} have found that Ti-doped hematite photoanodes had the highest carrier density and photocurrent at a doping concentration of around 0.1\%. Meanwhile, several works\cite{yang2013new,tian2020electronic,bindu2018electrical} have found that optimal PEC performance with Sn-doped hematite photoanodes was achieved at 3\% Sn doping concentration. In all of these cases there is a direct correlation between optimizing carrier density and PEC performance; however, the mystery of extremely low optimal doping concentration for certain dopants remains elusive.
+% There are two logical mechanisms for the stifling of the dopant effects: compensation by opposite-charged impurities or the clustering of dopants.
+Two possible mechanisms could be responsible for the doping bottleneck: compensation by oppositely-charged defects or the clustering of dopants.
+However, the concentration of intrinsic p-type defects is expected to be negligible in \ce{Fe2O3}\cite{lee2013thermodynamics}, which leaves a strong rationale for the clustering of dopants being the cause of low optimal doping concentration.
+ % TS: I shortened this part and combined with the previous paragraph
+On the theoretical side, group IV and XIV dopants in \ce{Fe2O3} have been previously investigated from first-principles, focusing on their
+electronic structure, formation energy, and polaron hopping barrier\cite{smart2017effect,zhou2019silicon,zhou2015understanding,liao2011electron}.
+% Although certain dopants were suggested to improve carrier concentration based on their reasonably low ionization energies\cite{smart2017effect,zhou2015understanding}, their equilibrium carrier concentrations were not computed and the interplay between dopants and intrinsic defects were not taken into account.
+However, these studies cannot explain the low optimal doping concentration observed experimentally.
+
+In this work, we will reveal the origin of the extremely low optimal doping concentration in \ce{Fe2O3} through a joint theoretical and experimental study. We suggest a novel form of dopant clustering in polaronic oxides and conclude its critical role on determining carrier concentration.
+We begin by detailing our computational methodology, including our proposed model for disentangling the effects of dopant clustering.
+Next, the electronic structure of isolated and clustered Sn dopant formation is provided, which resembles an electric dipole and quadrupole, respectively. The binding energy of the clustered dopants as quadrupoles is computed to validate their thermodynamic stability. Then, the formation of the theoretically predicted Sn-Sn pairs are confirmed by experimental EXAFS, and
+their mechanistic origin is unraveled theoretically in terms of electrostatic, magnetostatic and strain effects.
+Finally, carrier concentrations of \ce{Fe2O3} with and without dopant clustering are computed to elucidate the underlying mechanism of the doping bottleneck. At the end, essential design principles are provided to yield higher conductivity in polaronic oxides for the advancement of energy conversion applications.
+
+\subsection{First-Principles Calculations}
+All Density Functional Theory (DFT) calculations were carried out using the open source plane-wave code QuantumESPRESSO \cite{QE1} with ultrasoft pseudopotentials \cite{gbrv} and an effective Hubbard $U$ \cite{dudarev1998electron} value of 4.3 eV for Fe $3d$ orbitals \cite{smart2017effect,adelstein2014density}.
+This $U$ value is chosen for its ability to reproduce the bandgap of hematite ($\sim2.21$ eV) but also has shown to capture physics of small polarons such as the polaron hopping barrier~\cite{adelstein2014density,smart2017effect}.
+Plane-wave cutoff energies of 40 Ry and 240 Ry were used for wavefunctions and charge density, respectively. All calculations were performed with a $2\times 2\times 1$ supercell (120 atoms) of the hexagonal unit cell with a $2\times 2\times 2$ $k$-point mesh for integration over the Brillouin zone. A $3\times 3\times 1$ supercell was also tested to ensure convergence with supercell sizes (see supercell convergence in SI Table S1).
+The consistency between these supercell sizes also validates that the present calculations are in the dilute limit and while the Sn at Fe concentrations of the aforementioned supercells are 2.08\% and 0.93\%, respectively, these concentrations do not yield interactions between dopant periodic images (even for systems with two dopants, see SI Figure S1). The actual concentrations of dopants are determined by evaluating charge neutrality directly from dopant formation energies at a synthesis condition as discussed later in this section.
+Finally, we note that we use the same $U$ value for systems with dopants. While it is true that changing $U$ will vary the bandgap (in this case the conduction band shifts due to $U$ correction on Fe $3d$), it has been shown that the formation energies computed with different $U$ values were very similar and the ionization energies changed little when referenced to the free polaron level instead of the CBM for \ce{Fe2O3}.~\cite{smart2017effect}
+%Any non-neutral calculations (such as charged formation energy calculations) included a charged defect correction was computed using the JDFTx code \cite{JDFTx} following the scheme developed in Ref.~\cite{Ping2013}, which is necessary in order to remove the spurious interactions of the polarons with their periodic images and with the uniform compensating background charge \cite{kokott2018first}.
+
+
+\subsection{Electrostatic, Magnetostatic, and Strain Model of Binding Energy}
+We will later demonstrate that single dopants resemble dipoles, while dopant-pairs resemble quadrupoles. Here, we demonstrate our analysis on the physical contributions to the quadrupole binding energies computed from first-principles as we will discuss later, by using an electrostatic, magnetostatic, and strain (EMS) model.
+In this model, the binding energy is obtained by separately computing electrostatic ($\be^{elec}$), magnetostatic ($\be^{mag}$), and strain ($\be^{strain}$) contributions.
+For the electrostatic effect, we compute the electrostatic potential contribution to binding energy ($\be^{elec}$) by taking the difference between the quadrupole
+(quad) and twice the dipole configuration (dipole):
+
+\begin{align}
+    \be^{elec} = \frac{k\alpha}{2 \epsilon_r} \left( \sum_{ij}^{quad} \frac{q_i q_j}{r_{ij}} - 2\sum_{ij}^{dipole} \frac{q_i q_j}{r_{ij}} \right).
+    \label{eq:be_elec}
+\end{align}
+% k = 14.4   (eV*Å/e)
+% eps_r = 22.9 for hematite
+% alpha = 4.1719 for corundum
+Here $k$ is the Coulomb constant, $\alpha$ is the Madelung constant, and $\epsilon_r$ is the relative permeability (22.9 for hematite). \cite{onari1977infrared} The summation goes over all polarons and dopants $i$ and $j$, with relative charges $q_{i}$ and $q_{j}$, and physical separation $r_{ij}$.
+%\textcolor{red}{not sure this is necessary:}For example, in the dipole system there will be one term for the electrostatic interaction between the single Sn ($q=+1$) and the single $EP$ ($q=-1$). Meanwhile in the quadrupole system there will be six terms corresponding to four Sn-$EP$ interactions, one $EP$-$EP$ interaction, and one Sn-Sn interaction.
+
+Magnetic effects were computed using the Heisenberg Hamiltonian $H_{spin}=-\frac{1}{2}\sum_{ij}J_{ij}\hat{S}_i\cdot\hat{S}_j$, where $J_{ij}$ is the magnetic coupling between the spins of the $i^{\rm th}$ and $j^{\rm th}$ ion, and $\hat{S}_i$ is the spin of the $i^{\rm th}$ ion. Here we use the magnetic exchange coupling constants computed from Ref.~\cite{nabi2010magnetic}, which provided magnetic couplings for both the superexchange between two $\rm Fe (3+)$ or between two $\rm Fe (2+)$, as well as the double-exchange between $\rm Fe (3+)$ and $\rm Fe (2+)$. For high-spin $\rm Fe (3+)$ and $\rm Fe (2+)$, the value of $\hat{S}_i$ is $5/2$ and $2$, respectively, while the spin of the tetravalent dopants is zero (hence the magnetic interaction with these dopants is always zero). In this way, we can compute the magnetic contribution to the binding energy from the magnetic energy of the quadrupole system subtracted by two times of the dipole system:
+\begin{align}
+    \be^{mag} = -\frac{1}{2}\left( \sum_{ij}^{quad} J_{ij} \textbf{S}_i \cdot \textbf{S}_j - 2\sum_{ij}^{dipole} J_{ij} \textbf{S}_i \cdot \textbf{S}_j\right).
+    \label{eq:be_mag}
+\end{align}
+In this work, we assume $J_{ij}$ between two Fe ions before and after doping are the same, as lattice distortions are generally small compared to Fe distances.
+%and make the approximation that changes in $J_{ij}$ due to lattice distortions are likely negligible.
+With the above consideration and the non-magnetic nature of dopants, our computed magnetic energy is identical for all the dopants.
+% Note the magnetic energy does not depend on the dopant when the spin of the dopant is zero. Also, we make the approximation that changes in the coupling parameters $J$ between Fe ions due to lattice distortion is negligible., our computed magnetic energy is identical for all non-magnetic dopants.
+
+Finally, in order to compute the strain contribution to the binding energy, we evaluated the change in energy induced by lattice distortions before and after doping. As usual, taking this energy for the quadrupole system and subtracting twice the dipole system:
+\begin{align}
+    % \be^{strain} = \left[E_{prist} - E_{prist}(R_{quad})\right] - 2\left[E_{prist} - E_{prist}(R_{dipole})\right].
+    \be^{strain} = E_{quad}^{strain} - 2 E_{dipole}^{strain}.
+    \label{eq:be_strain}
+\end{align}
+Here $E_{X}^{strain}$ is the strain energy of system $X$, computed as a difference of total energy of the pristine system with its equilibrium geometry and with relaxed geometry from the doped system (first relax with dopants then substitute back Fe atoms to keep the same composition as pristine \ce{Fe2O3}). We note a similar approach was used in Ref.~\cite{bao2017first} to evaluate strain energies.
+% Here $E_{prist}$ is the total energy of the pristine system with a relaxed structure and $E_{prist}(R_{X})$ is the total energy of the pristine system with a fixed structure corresponding to the atomic positions in the doped system. We note a similar approach was used in Ref~\cite{bao2017first}.
+
+\subsection{Charged Defect Formation Energy and Concentration}
+We computed the formation energy ($E^f_q$) of each defect at a charge state $q$ according to:
+\begin{align}
+    E^f_q(X; \varepsilon_F) = E_q(X) - E_{prist} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q,
+    \label{eq:cfe}
+\end{align}
+where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ was computed with techniques developed in Refs. \cite{PING2017JCP, wu2017first} and implemented in the JDFTx code \cite{JDFTx}. The chemical potentials were carefully evaluated against the stability of byproduct compounds as detailed in the elemental chemical potential section of the SI.
+The corresponding charge transition levels of the defects were obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
+\begin{align}
+    \epsilon_{q|q'} = \frac{E^f_q - E^f_{q'}}{q' - q}
+    \label{eq:ctl}
+\end{align}
+The ionization energies are computed by referencing the CTLs to the free polaron state.
+\cite{seo2018role,radmilovic2020combined,zhou2020interstitial,lee2020electrochemical}
+Namely in \ce{Fe2O3}, it has been experimentally observed that photoexcited carriers relax on picosecond timescale to form small polarons~\cite{carneiro2017excitation}, which have been measured to form at energies $\sim$0.5 eV below the conduction band minimum (CBM)~\cite{lohaus2018limitation,pastor2019situ}. Theoretically this free polaron level is computed as the charge transition level from $q=0$ to $q=-1$ in the pristine system, $\varepsilon_{FP} = \varepsilon_{-1|0}^{prist} = E^f_{-1}(prist) - E^f_0(prist)$. By this method we obtain that the free polaron level is positioned at 0.497 eV below the CBM in excellent agreement with experimental observation.~\cite{lohaus2018limitation,pastor2019situ}
+
+From charge defect formation energies, charged defect concentration ($c_q$) can be computed as:
+\begin{align}
+    c_q(X; \varepsilon_F) = g \exp [- E^f_q(X; \varepsilon_F) / k_B T],
+\end{align}
+where $g$ is the degeneracy factor accounting for the internal degrees of freedom of the point defect, $k_B$ is the Boltzmann factor, and $T$ is temperature.
+Concentrations including intrinsic defects, extrinsic dopants and free electron polarons were computed by determine their charge neutrality condition~\cite{fe2o3concentration,lee2013thermodynamics,freysoldt2014first}
+(additional details are provided in the defect concentration section of the SI).
+To best relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K.
+The partial pressure of oxygen gas ($p_{\rm O_2}$) corresponding to atmospheric condition (1 atm) is used.
+
+% In order to maintain charge neutrality, the introduction of defect $X$ with charge $q$ into the lattice must be compensated by defects of opposite charge or through the generation of free carriers. Specifically charge neutrality must be held:
+% \begin{align}
+%     \sum_{X,q} c_q(X; \varepsilon_F) + n_h - n_e = 0, \label{eq:neutrality}
+% \end{align}
+% where $n_h$ denotes the concentration of free delocalized holes, and $n_e$ denotes free delocalized electrons. However, in hematite free electrons will nearly entirely localize into small polarons, so the concentration of free small electron polarons is entered in Eq.~\ref{eq:neutrality} in a similar way to that of a defect, i.e.\ with a specific formation energy.\cite{lee2013thermodynamics}
+% Furthermore, in order to relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K, considering thermodynamic equilibrium at each temperature (additional details can be found in the sections of defect formation energy and concentration in SI). In the end, the only variable of this approach is the partial pressure of oxygen gas ($p_\ce{O2}$).
+
+
+
+% \section{Results and Discussion}
+
+% \subsection{Formation of dopant-polaron quadrupoles}
+% Electronic and local structure
+% Binding energy (scatter plot)
+% EMS model
+
+% prelude to the section
+
+\begin{figure}
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.8\linewidth]{2-tmo/figures-fe2o3/electronic_500.png} % high resolution
+    \caption{Electronic structure of Sn-doped \ce{Fe2O3}. (\textbf{a}) Wavefunction of the small electron polaron ($EP$) in the single Sn-dopant system where the $EP$ and Sn form a dipole. (\textbf{b}) Band structure and projected density of states (PDOS) of the dipole Sn system. (\textbf{c}) Wavefunctions of the two $EP$ in the two Sn-dopant system where the two $EP$ and two Sn form a quadrupole.
+    The Sn-Sn separation is 3.784 {\AA}.
+    (\textbf{d}) Band structure and PDOS of the quadrupole Sn system. For the atomistic plots, gold=Fe, red=O, grey=Sn, and the yellow/blue ($+$/$-$) cloud is the isosurface of the polaron wavefunction (the isosurface level is 1\% of the maximum). In the band structures, dark/light blue is spin up/down and $\varepsilon_F$ is the Fermi energy.
+    }
+    \label{fig:electronic}
+\end{figure}
+
+% \subsection{Stable Multipole Formation by Dopant Clustering}
+\subsection{Dopant Clustering by Multipole Formation}
+% . experimentally there is strong indication of clustering from XAS; showing certain high Sn-Sn distance at very low concentration.
+% . We found quadrupole can be formed with stable binding energy and agree with experimental XAS.
+%
+% -> Propose this interpretation of clustering
+% -> Figure 1 goes here ;  describe the results of one dopant and two dopants; and binding energy (mention negative values)
+
+
+Substitutional doping by group IV and XIV elements was investigated theoretically by replacing a single Fe site by the dopant ($X$). Consistent with previous studies \cite{smart2017effect,zhou2015understanding} and experimental observation,\cite{ling2011sn,li2017morphology} we found this process yields the formation of small electron polarons corresponding to the identification of $\rm Fe (2+)$ after replacing $\rm Fe (3+)$ by the tetravalent dopant $X (4+)$. (Note in this paper we use the notation $X (i)$ to denote an ion $X$ with valency $i$). The electronic structure of the single Sn-doped system is shown in Figure~\ref{fig:electronic}b right panel, wherein the band structure exhibits a flat isolated occupied state in the gap corresponding to the small electron polaron ($EP$) with tight spatial localization similar in size to the Fe$-$O bond lengths. Likewise, the projected density of states (PDOS) in Figure~\ref{fig:electronic}b shows a sharp isolated peak composed mostly by Fe $3d$. The wavefunction of the $EP$ is shown in Figure~\ref{fig:electronic}a with a clear $d_{z^2}$ character. The $EP$ forms at the Fe site nearest to the Sn dopant with a Sn$-EP$ distance of $2.981$ {\AA} ($d_0$ in Figure~\ref{fig:electronic}a).
+
+
+To investigate dopant-dopant interactions, we placed a second Sn dopant in the lattice. All possible Sn-Sn pair configurations were tested, and the lowest energy configuration was clearly identified (see SI Figure S2, S3 and Table S2). The electronic structure of this corresponding configuration is shown in Figure~\ref{fig:electronic}c-d, which exhibit the formation of two $EP$ states.
+% with a noticeable energetic difference of 0.12 eV.
+We find the asymmetry of the local structure, which %differing distances of the polaron to the two Sn atoms
+is a natural consequence of the corundum crystalline form, causes a noticeable energetic difference of 0.12 eV between $EP_1$ and $EP_2$.
+Specifically, in Figure~\ref{fig:electronic}c, $EP_1$ has distances to the two adjacent Sn of $d_1=3.011$ and $d_2=3.129$ {\AA}, whereas $EP_2$ has distances of $d_3=3.510$ and $d_4=4.112$ {\AA}. The proximity of $EP_1$ to the Sn yields a lower energy state relative to $EP_2$.
+Lastly, the theoretically predicted Sn-Sn distance of $3.784$ {\AA} closely matches experimentally observed Sn-Sn peak in EXAFS data of Sn-doped hematite samples (as discussed in next section).
+% closely matches experimentally observed Sn-Sn peak in EXAFS data of Sn-doped hematite samples when the dopant concentration exceeds 3\%, which might imply a similar dopant clustering. \cite{annamalai2015activation}
+% TS: I modified the above sentence since we have our own EXAFS data in the next section. That section also refers back to this section
+
+The remaining group IV (Ti, Zr, Hf) and XIV (Si, Ge, Sn, Pb) dopants were also simulated in both single and pair dopant configurations with negligible differences in their electronic structure
+and polaron configurations from Sn (all electronic structures are presented in SI Figure S4-S9).
+Note for the present study, the configuration of two dopants is chosen to be the same for all dopants for the purpose of discussing chemical trends, as predicted by the case of Sn. It is possible that dopants may vary in their exact pair dopant configuration, for example see SI Table S3. This variation does not affect the main implications on carrier concentration we conclude later.
+Most importantly, the stable configuration of a single tetravalent dopant (such as Sn) resembles an electric dipole where the Sn and $EP$ represent positive and negative charge centers, respectively. In this way the system with two dopants resembles an electric quadrupole (two positive Sn centers and two negative $EP$ centers).
+Therefore, we will denote the single doped system as a first-order multipole (dipole) system and the pair doped systems as a second-order multipole (quadrupole) system.
+%Expanding on this idea, one may consider that larger order multipoles in \ce{Fe2O3} may form, wherein the negative charge of the polarons and the positive charge of the dopants aggregate together analogous to an electric multipole expansion.
+To examine the thermodynamic stability of dopant-polaron quadrupole, we studied their binding energy ($\be$) from two separate dipoles:
+%by the difference in the formation energy of the quadrupole and that of two separate dipoles:
+\begin{align}
+    \be = E^f(quad) - 2 E^f(dipole).
+    \label{eq:be1}
+\end{align}
+Here, $E^f(X)$ is the formation energy of the system with neutral dopants in a configuration $X$ (e.g.\ quadrupole or dipole dopant system) following Eq.~\ref{eq:cfe} at charge state $q=0$.
+%and is defined as $E^f(X) = E(X) - E_{prist} + \sum_i \mu_i \Delta N_i$. Here $E(X)$ and $E_{prist}$ is the DFT total energy of the doped and pristine systems, respectively, and $\mu_i$ is the chemical potential of atomic species $i$ with change $\Delta N_i$.
+%Substituting this definition into Eq.~\ref{eq:be1} simplifies the binding energy into a simple expression of DFT total energy,
+%\begin{align}
+%    \be = E(quad) - 2 E(dipole) + E_{prist}.
+%    \label{eq:be2}
+%\end{align}
+The quadrupole binding energy was evaluated for all group IV and XIV dopants considered in this study. We observed that the binding energy for all dopants is negative ($\sim-$0.1 to $-$0.2 eV), as shown in Table~\ref{table:ems} ($\be^{DFT}$), indicative of a strong tendency for dopants and polarons to aggregate.
+We note that we expect dopant clustering occurs during the cooling process from synthesis temperature (over one thousand K here) down to room temperature. At a synthesis condition, dopants will be all ionized and the binding of dopants into quadrupoles will not occur.
+Since all the binding energies are lower than $kT$ at room temperature, it is expected that the quadrupoles are stable at room temperature.
+% All in all, the negative binding energy is indicative of a strong tendency for dopants and polarons to aggregate.
+
+
+% \subsection {Experimental evidence for Sn pair formation: EXAFS results}
+\subsection{Experimental Evidence for Dopant-Pair Formations}
+
+Extended x-ray absorption fine structure (EXAFS) data at the Sn edge were collected at SSRL for two Sn doped \ce{Fe2O3} samples, with Sn nominal concentrations of 0.1\% and 1.0\%. (Sn concentration of 1\% corresponds to replacing 1 out of 100 Fe with Sn; measured concentrations are 10-20\% lower, see Table S4 in SI for details). Synthesis methods are detailed in the SI. A standard fluorescence set-up (32 element Ge fluorescent detector) was used with the sample set at 45$^{\circ}$ to the beam, and an Oxford helium cryostat maintained the temperature at 10 K. Details about the data collection and reduction are in the SI section on EXAFS characterization. The $r$-space data are plotted in Figure~\ref{exafs} for the 0.1\% Sn and 1.0\% Sn samples. For the 0.1\% Sn sample (Figure~\ref{exafs}a), the amplitudes of the further neighbor peaks are quite large and the data can be well fit (solid orange line) to the hematite structure, with a small expansion for the Sn-Fe pairs compared to hematite;  roughly 0.1 {\AA} for closer pairs but only 0.02 {\AA} for Fe neighbors near 3.7 {\AA}. This is the expected behavior around a substitutional dopant site when the dopant valence $\rm Sn(4+)$ is higher that the host valence $\rm Fe(3+)$, and this behavior has been observed in other similar situations.\cite{mackeen2018substitution}. The further neighbor Sn-O peaks are expected to contract very slightly, but because these small peaks overlap the larger Sn-Fe peaks, the pair-distances fluctuate too much. The first O shell, although split in hematite, collapses to a single peak with an average Sn-O distance of 2.05 {\AA}, very close to the averaged first neighbor distance in hematite, 2.03 {\AA}; this is a competition between a larger ionic radius for $\rm Sn(4+)$, and larger electrostatic force between $\rm Sn(4+)$ and $\rm O(2-)$.
+
+On the other hand, the EXAFS $r$-space plot for 1\% Sn sample is quite different (Figure~\ref{exafs}b). The data up to 3 {\AA} are very similar to that for 0.1\% Sn - i.e.\ the phase of the real part of the Fourier transform, R($r$), is the same. However in the range 3-3.8 {\AA}, the phase changes dramatically and a dip develops in the amplitude near 3.3 {\AA} which has the  shape of an interference dip. It occurs close to the expected position for the Sn-Fe peak in an EXAFS plot (actual distance $\sim$3.7 {\AA}: note that there is a calculable phase shift of peaks in $r$-space plots to lower $r$). These data can't be fit to a simple distorted hematite model and the shape of R($r$) suggests that another peak is present (see SI Figure S11). Consequently, an additional peak, corresponding to one Sn-Sn pair with a distance close to 3.7 {\AA}, was included in the fit. The number of Sn-Fe pairs was correspondingly reduced from 6 to 5. This yielded the good fit (details in SI) shown in Figure~\ref{exafs}b, and is a clear evidence that Sn-Sn pairs have formed.
+Remarkably, this Sn-Sn pair distance ($\sim$3.7 {\AA}) matches the theoretically predicted distance of Sn-Sn pair (3.784 {\AA}) shown above.
+%which forms due to quadrupole formation.
+% Again the Sn-O peaks are slightly contracted while the Sn-Fe pairs are slightly expanded; the long Sn-Sn peaks is at 3.67 {\AA}.
+
+%***************************** Fig. X ******************************
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.47\linewidth]{2-tmo/figures-fe2o3/exafs_500.png}
+    \caption{EXAFS $r$-space data at the Sn K edge, for (\textbf{a}) 0.1\% and (\textbf{b}) 1\% Sn in Fe$_2$O$_3$. The plot for 0.1\% Sn also shows a fit to the hematite structure; good agreement is obtained with a slight contraction of the Sn-O pairs and a slight expansion of the Sn-Fe pairs. At 1\% Sn, the EXAFS changes significantly. Although the first two peaks are very similar, the region from 3-3.8 \AA{} is quite different, particularly the shape of the phase (fast oscillating function), and a dip develops near 3.3 \AA{}. These data cannot be fit to the hematite structure. The data suggest that there is another peak present; in the fit shown in part (\textbf{b}), one of the Fe neighbors at $\sim$3.7 \AA{} is replaced with a Sn atom, forming a Sn-Sn pair. This leads to the excellent fit shown in (\textbf{b}).
+    Fourier transform range, 3.5-13 \AA$^{-1}$; fit range in $r$-space, 1.1-4.2 \AA{} for both plots.
+    In both figures, the blue and gold bars at the bottom indicate the position of Sn-O and Sn-Fe peaks, respectively, in undistorted hematite. The bar positions include the known shifts in $r$.
+    }
+    \label{exafs}
+\end{figure}
+%***************************** Fig. X ******************************
+
+
+\subsection{Mechanisms of Dopant-Polaron Binding into Quadrupoles}
+% . There are three parts:  electrostatic, strain,  and  magnetic. You need to explain briefly why physically important and how you compute them.
+% . Then show results agree with DFT.
+%
+% One figure a,b,c
+% -> first dipole can be explained by electrostatic
+% -> however quadrupole we notice it has a correlation with strain (ionic radius)
+% -> so we consider a model with three parts (ems)
+
+% Considering the electron polaron carry a net negative charge, while the tetravalent dopants carry a net positive charge (with respect to $\rm Fe (3+)$), this system closely resembles the formation of an electronic dipole where the charge of the electron polaron and dopant are attracted electrostatically. % This was already said above
+After confirming the existence of Sn-Sn clustering both theoretically and experimentally, we turn to investigate the mechanisms of their formation.
+Above the analogy was made between the single Sn-doped system and electric dipoles,
+so in order to probe this electrostatic interaction, we plotted the total energy of the single Sn-doped system as a function of Sn-polaron distance, as shown in Figure~\ref{fig:mechanisms}a.
+The computed total energies were fitted to a Coulomb potential ($-a/r+b$) with the fitted values of $a=0.658\ {\rm eV\cdot\text{AA}}$ and $b=0.230$ eV, and a coefficient of determination ($R^2$) of 0.85.
+This validates a clear electrostatic attraction between the two bodies with opposite charges like a dipole.
+%where the interaction is analogous to two point charges of opposite charge and the denotation of this system as a first-order multipole (dipole).
+Furthermore, we find that $b$ is close to the value of ionization energy of Sn (0.25 eV), as expected.
+
+%We note this Coulombic behavior is not universal, as non-Coulombic behavior was observed in,
+However, this Coulombic interaction competes with other factors. For example
+in Mo doped \ce{BiVO4}\cite{wu2018combining}, strain causes short-range repulsion between the dopant and polaron, and dominates over the Coulombic attraction.\cite{wu2018combining,zhang2018unconventional}
+We find this was also reflected in the computed quadrupole binding energies ($\be$), as shown in Figure~\ref{fig:mechanisms}b, where we plotted them versus the ionic radius ($R_I$) of each dopant.
+Specifically, there is a roughly positive correlation between the ionic radius and the quadrupole binding energy. We attribute this to the compensatory size effects of the dopant and the polarons. Namely, the replacement of Fe(3+) with ionic radius of 64.5 pm by $\rm Fe (2+)$ with ionic radius of 78.0 pm, yields an expansion strain at the lattice site. This strain can be reduced by smaller radii dopants (e.g.\ Ti, Ge, Si) that will increase the magnitude of $\be$ as shown in Figure~\ref{fig:mechanisms}b, or enhanced by larger radii dopants (e.g.\ Sn, Hf, Zr, Pb) that will decrease the magnitude of $\be$ towards zero.
+We note that the case of Ti, an outlier in Figure~\ref{fig:mechanisms}b, possess stronger correlated $3d$ orbitals, which in turn exhibit stronger electron localization, may compensate local expansion from small polarons  and lower its binding energy (similar to Si which intrinsically is smaller than the rest).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[keepaspectratio=true,width=1.0\linewidth]{2-tmo/figures-fe2o3/mechanisms_500.png} % high quality
+    \caption{
+    Mechanisms of dopant-polaron binding in \ce{Fe2O3}.
+    (\textbf{a}) Total energy of Sn-doped hematite system as a function of the Sn$-EP$ distance.
+    % The black curve represents a simple Coulomb potential fit with fit parameters $a=0.658\ {\rm eV/\AA}$ and $b=0.230$ eV and an $R^2$ value of 0.85. The accurate fit of the Coulomb potential strongly reflects the electrostatic attraction between the Sn (positive charge) and $EP$ (negative charge).
+    The black curve represents a simple Coulomb potential fit which has an $R^2$ value 0.85, supporting the intuition of an electrostatic interaction between the Sn (positive charge) and $EP$ (negative charge) centers.
+    (\textbf{b}) Quadrupole binding energy ($\be$) of group IV and XIV dopants in hematite computed by Eq.~\ref{eq:be1}, plotted against the ionic radius of the dopant\cite{shannon1976revised} ($R_I$; valency 4+, coordination VI).
+    % Additionally, the ionization energy ($IE$) is shown by the color of each point.
+    % TS: IE is discussed later so I decided to remove it here
+    (\textbf{c}) Computed $\be$ by Eq.~\ref{eq:be1} plotted against those computed with the EMS model in Eq.~\ref{eq:ems}. The linear fit relation ($f(x)$) between these models is shown in the inset box.
+    }
+    \label{fig:mechanisms}
+\end{figure}
+
+
+Therefore, it is necessary to consider electrostatic and strain effects simultaneously, and also include magnetic effects (binding energies may also be modified by the antiferromagnetism of \ce{Fe2O3}).
+%In order to put both electrostatic and strain effects together and additionally consider magnetic effects which can be considerable for \ce{Fe2O3},
+Hence, we propose a model of the quadrupole binding energy based on electrostatic, magnetostatic, and strain effects (abbreviated to EMS), in order to analyze the importance of each contribution:
+% In order to disentangle the various competing effects which dictate the formation of dopant-polaron quadrupoles, we propose a model of the binding energy based on electrostatic, magnetostatics, and strain (abbreviated to EMS):
+\begin{align}
+    \be^{EMS} = \be^{elec} + \be^{mag} + \be^{strain}.
+    \label{eq:ems}
+\end{align}
+Here $\be^{elec}$, $\be^{mag}$, $\be^{strain}$, correspond to electrostatic, magnetostatic, and strain contributions to the quadrupole binding energy, respectively.
+The exact formulation for each component of the EMS model is detailed in the methods section (Eq.~\ref{eq:be_elec}$-$\ref{eq:be_strain}) and the results are summarized in Table~\ref{table:ems}.
+We evaluate how well this model reproduces DFT calculations by plotting them against each other in Figure~\ref{fig:mechanisms}c.
+%In order to gauge the EMS model, we first consider its ability to reproduce the results from our DFT calculations which are plotted against each other in Figure~\ref{fig:mechanisms}c.
+The linear fitting shows adequate agreement between the simple EMS model and our exact DFT calculations (with a slope near unity and an $R^2$ value of 0.864), which justifies its use for interpreting the DFT binding energies.
+%Thus, the EMS model is able to reproduce the DFT results rather well and allows us to disentangle them into the three different components and interpret them separately.
+
+As shown in Table~\ref{table:ems}, each of the three components contributes significantly to the overall quadrupole binding energy. The electrostatic interaction ($\be^{elec}$) is typically the most dominant factor, and intuitively it is chiefly responsible for the attraction of dopants into the quadrupole configuration.
+Interestingly, we also found a non-negligible contribution from magnetostatic interactions ($\be^{mag}$, 42 meV) which further participates in the binding of quadrupoles.
+This effect is non-trivial but is an indirect consequence of placing non-magnetic dopants next to each other, which in-turn breaks fewer antiferromagnetic interactions and yields a lower energy configuration when dopant-pairs form. % \textcolor{red}{dopant clustering} occurs.
+In contrast, the effect of strain ($\be^{strain}$) typically mitigates the formation of dopant-pairs % \textcolor{red}{dopant clustering}
+(increases the system's energy with clustering) due to the accumulation of lattice distortion. However, as aforementioned, this effect can be compensatory in the dopant cases with smaller ionic radii than Fe(3+), which can pack more efficiently next to the polarons with larger ionic radius as specified in Figure~\ref{fig:mechanisms}b.
+% TS: I suppose the best solution is to just remove this sentence: \textcolor{red}{This is particularly evident in the case of Si which was found to be an outlier with a large negative strain component due to its significantly smaller ionic radius. -
+
+\begin{table}[H]
+    \footnotesize
+    \centering
+    \begin{tabular}{c|ccc|c|c}
+    \hline \hline
+    Dopant & $\be^{elec}$ & $\be^{mag}$ & $\be^{strain}$ & $\be^{EMS}$ & $\be^{DFT}$ \\
+    \hline
+    Si & -0.184 & -0.042 & -0.33 & -0.553 & -0.227 \\
+    Ge & -0.188 & -0.042 &  0.07 & -0.160 & -0.117 \\
+    Ti & -0.175 & -0.042 & -0.04 & -0.256 & -0.233 \\
+    Sn & -0.188 & -0.042 &  0.18 & -0.054 & -0.029 \\
+    Hf & -0.188 & -0.042 &  0.13 & -0.098 & -0.055 \\
+    Zr & -0.192 & -0.042 &  0.13 & -0.103 & -0.080 \\
+    Pb & -0.204 & -0.042 &  0.11 & -0.135 & -0.039 \\
+    \hline \hline
+    \end{tabular}
+    \caption{Collected values of the binding energy for group IV and XIV dopants in \ce{Fe2O3} computed by DFT ($\be^{DFT}$) or with the EMS model ($\be^{EMS}$) as in Eq.~\ref{eq:ems}. The various components of the EMS model are tabulated as well including the electronic ($\be^{elec}$), magnetic ($\be^{mag}$), and strain ($\be^{strain}$). All values are given in eV.}
+    \label{table:ems}
+\end{table}
+
+
+\subsection{Effects of Dopant Clustering on Polaron Concentrations}
+% \subsection{Dopant Clustering Negatively Impacts Free Polaron Concentration}
+
+\begin{figure}
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.9\linewidth]{2-tmo/figures-fe2o3/quad_500.png}
+    \caption{
+    Effects of quadrupole binding on carrier concentration in \ce{Fe2O3}.
+    (\textbf{a}) Band diagram of various doped systems either single-doped (dipole) or with two dopants (quadrupole), the solid horizontal lines represent the thermodynamic charge transition levels (CTLs), and the ionization energy corresponds to the separation of the CTLs to the free polaron line (dashed grey line).
+    (\textbf{b}) Change in the first ionization energy when quadrupoles are formed vs.\ ionic radius ($R_I$). Notably, when the ionic radius of dopants is below that of $\rm Fe (3+)$, the ionization energy is increased (as shown in blue bars), whereas it is decreased when the dopant radius is larger (as shown in orange bars).
+    (\textbf{c}) Computed free electron polaron concentration as a function of dopant concentration for Sn, Ge, and Ti, with and without the effect of clustering (i.e.\ quadrupole formation).
+    }
+    \label{fig:quad}
+\end{figure}
+
+Lastly, we discuss the effects of dopant clustering, which we will show to be responsible for the low optimal doping concentrations of \ce{Fe2O3} observed experimentally.
+The computed thermodynamic charge transition levels (CTLs) are displayed in Figure~\ref{fig:quad}a for both the dipole (single dopant) and quadrupole (pair dopants) systems. In quadrupole systems, there are two charge transition levels (gold and orange lines) which correspond to the ionization energies of two electron polarons (as shown in Figure~\ref{fig:electronic}c).
+Because quadrupoles yield consistently lower second CTLs, they possess very high second ionization energy ranging from 0.34 eV to 0.48 eV (the orange lines in Figure~\ref{fig:quad}a, nearly doubled the ionization energies of corresponding single-doped systems denoted by the blue lines). Therefore, the ionization of both electrons after quadrupole formation is nearly impossible. On the other hand, the first ionization energies of quadrupoles compared to the ones of dipoles shift in a manner correlated with the ionic radius as shown in Figure~\ref{fig:quad}b.
+In particular, dopants with a radius larger than the host site ($\rm Fe (3+)$) have a lower first ionization after quadrupole formation (orange bars in Figure~\ref{fig:quad}b) and vice versa.
+
+
+To show how dopant clustering affects carrier concentration quantitatively, we compute the polaron concentrations with and without the effect of dopant clustering for three representative cases: Sn, Ge, and Ti in Figure~\ref{fig:quad}c.
+Equilibrium polaron concentrations are computed following the defect formation energy and charge neutrality approach as detailed in the method section.\cite{fe2o3concentration,lee2013thermodynamics,freysoldt2014first}.
+We then introduce clustering in the theoretical synthesis process, by considering the probability at which two dopants form into a quadrupole following a thermal Boltzmann distribution (details in the SI section on probability of quadrupole formation).
+As dopant-dopant pairs form during cooling process from synthesis temperature to room temperature, an intermediate temperature of $T=500$ K is chosen as an approximate temperature where pairs start to form. We show the trends among different dopants remain the same for different temperatures (see SI Figure S13).
+%% Defect and polaron concentrations of Sn-doped, Ge-doped, and Ti-doped \ce{Fe2O3} are shown in \textcolor{red}{Figure~\ref{fig:dc}b-d} as representative examples (other simulated doped systems in group IV and XIV are shown in SI Figure S11). Although in undoped \ce{Fe2O3} free electron polarons are mostly generated by $\rm Fe_{i}^{+}$, in doped \ce{Fe2O3} they are mostly generated  from tetravalent group IV and XIV dopants (more than six orders of magnitude higher than the ones generated by $\rm Fe_{i}^{+}$).%%
+In Figure~\ref{fig:quad}c, we show that
+polaron concentration is reduced due to clustering (solid lines) compared to the case without clustering(dashed lines), and the magnitude of this reduction is closely related to their binding energy ($\be$) in Table \ref{table:ems}. Specifically, dopants such as Ge and Ti with large binding energies show significant trapping of polarons due to clustering in the second and third panels of Figure~\ref{fig:quad}c. %(the large difference between solid and dashed lines in the second and third panels of Figure~\ref{fig:quad}c).
+% TS -- I added a paragraph break here
+
+In order to avoid the adverse effects of clustering, Ti will be better suited to be doped at very low concentrations into hematite.
+% On the other hand, Ti will be better suited to be doped at very low concentrations into hematite in order to avoid the adverse effects of clustering.
+This explains the experimentally observed very low optimal doping concentration of Ti in hematite (about 0.1\%).\cite{fu2014highly,malviya2017influence} Furthermore, co-doping Ti with another dopant less prone to clustering may offer higher performance in hematite, which explains the success of recent co-doping strategies.\cite{zhang2010improved,mirbagheri2014visible,pan2015ti}
+On the other hand, the small quadrupole binding energy of Sn makes it easier to dope Sn into hematite to higher concentrations without experiencing an immediate bottleneck.
+This explains why the optimal doping of Sn into hematite (3\%) is an order of magnitude larger than Ti.\cite{yang2013new,tian2020electronic,bindu2018electrical}
+If neglecting the effect of clustering, Ti would be a better dopant than both Sn and Ge (see dashed lines in Figure 4c, which shows that Ti has predicted to contribute the highest carrier concentration without clustering). Therefore, to unlock the potential of Ti, it is necessary to mitigate its strong tendency of clustering.
+A strategy of co-doping Sn and Ti in hematite may offer the most effective strategy for maximizing performance of hematite photoanodes.
+Alternatively, co-doping of divalent dopants, such as Mg, has been shown to relieve lattice distortion and can also offer further improvement to PEC performance~\cite{cai2020engineered}.
+Ultimately, Ge is seen as the best dopant in group IV and XIV with the highest polaron concentration, which outperforms Sn and Ti in Figure~\ref{fig:quad}c.
+%due to its ideal solubility and ionization energy, along with a lower tendency for clustering (compared to Ti).
+%not the best for any of the property here
+
+Finally, we remark that here we have focused on formations of dopant clustering at an early stage, which dominate at relatively low concentrations of doping in hematite. We also tested higher-order multipole clustering such as `hexapole' formation in hematite (e.g.\ three Sn dopants with the three introduced $EP$, details in SI section on higher-order multipoles and SI Figure S14). We found that hexapoles also have a negative binding energy, and thus
+it is entirely possible that dopant clustering may grow even larger than the second-order multipoles we considered here.
+However, there will also be larger and more complicated strain effects and configurational entropy which can compensate binding energies of larger sized aggregations.
+Eventually, at even larger doping concentrations, the precipitation of different phases may occur, for example at 6\% Sn-doping in hematite XRD shows \ce{SnO2} secondary phases form \cite{tian2020electronic}.
+% In addition,  in experiment, carrier conductivity is often measured instead of carrier concentration alone, where the carrier mobility (specifically polaron mobility here) will also play a significant role. We have studied doping effects on polaron mobility in transition metal oxides in our past work\cite{wu2018combining,zhang2018unconventional,smart2017effect,smart2018mechanistic}, and we will investigate the effects of dopant clustering on polaron mobility in our future study.
+Future theoretical work should provide further insights to PEC experiments by investigating the role of dopants and dopant clustering on polaron mobility via small polaron hopping~\cite{wu2018combining,zhang2018unconventional,smart2017effect,smart2018mechanistic}
+and optical absorption\cite{smart2019optical,wheeler2019combined,zhou2020interstitial}, which together, along with carrier concentrations studied here, directly impact the photoconductivity of transition metal oxide based photoelectrodes.
+% Our future theoretical work will provide further insights to PEC experiments by investigating the role of dopants and dopant clustering on polaron mobility\cite{wu2018combining,zhang2018unconventional,smart2017effect,smart2018mechanistic} and optical absorption\cite{smart2019optical,wheeler2019combined,zhou2020interstitial}, which together, along with carrier concentrations studied here, directly impact the photoconductivity of transition metal oxide based photoelectrodes.
+
+
+\subsection{Conclusions}
+This work discovers a new mechanism of dopant clustering via the aggregation of n-type dopants and electron polarons into dopant-pairs % \textcolor{red}{bound dopant-polaron pairs}
+which resemble electric multipoles.
+% We find doping in \ce{Fe2O3} is limited by the formation of bound dopant-polaron pairs which resemble electric multipoles and trap electron polarons.
+These pairs are thermodynamically stable due to several contributions % and they severely slow down the carrier concentration increase with doping concentration.
+which we disentangle by a simple model involving three components: electronic, magnetic, and strain. Our model illuminates that binding occurs predominantly through electrostatic interactions but surprisingly is also mediated by magnetic interactions which together overcome strain to yield the consistently negative binding energies of tetravalent dopants in \ce{Fe2O3}. EXAFS experiments confirm the existence of these Sn-Sn pairs which formed at 1\% doping and have an identical interatomic distance compared to those predicted theoretically  ($\sim3.7$ {\AA}).
+
+The effect of doping with and without clustering on carrier (small electron polaron) concentration is carefully examined.
+We find doping in \ce{Fe2O3} is limited by dopant clustering which traps electron polarons and severely lowers the carrier concentration with respect to doping concentration. This clustering is shown to be responsible for the doping bottleneck in hematite, where dopants such as Ti exhibit extremely low optimal doping concentration (i.e.\ 0.1\%) for PEC application.
+% We exclude the possibility of intrinsic compensating defects such as iron vacancy as the cause of doping clustering through our first-principles prediction of intrinsic and extrinsic dopant concentrations.
+%and extrinsic dopants based on charge neutrality condition at thermodynamic equilibrium.
+% Meanwhile, the binding energy of dopants into quadrupoles was shown to be responsible for the low optimal doping in hematite, where dopants such as Ti with a large binding energy exhibit extremely low optimal doping for PEC application.
+Strategies to overcome this doping bottleneck are proposed; specifically codoping with dopants that exhibit low binding energies for clustering (e.g.\ Sn-Ti codoping) is seen as an ultimate solution.
+Lastly, for single-type doping in group IV and XIV, we found Ge is the best dopant which can contribute the highest polaron concentrations even at presence of dopant clustering.
+%Lastly, we demonstrated that dopants of slightly smaller ionic radii than the host site possess high solubility as well as low ionization energy making them better choices than other single dopants for optimal carrier concentrations.}
+These findings provide a cohesive picture of the doping bottleneck in hematite and help to establish an improved rationale for further development of hematite photoanodes usage in renewable energy applications.

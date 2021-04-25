@@ -1,0 +1,102 @@
+% //////////////////////////////////////////////////////////|
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++|
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%|
+%    CHAPTER                                                |
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%|
+% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++|
+% \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|
+\chapter{Introduction}
+
+% general "big picture" motivation, will introduce briefly both renewable energy and quantum information science motivations
+Understanding and developing material properties is essential to solving some of societies greatest concerns. One such concern of particular interest is the desperate need for renewable energy sources.
+Advancing novel technologies for energy harvesting, conversion, and storage is critical to ensure the economic viability of U.S. energy and chemical industries \cite{eia,renewable}. For many of these technologies, a detailed understanding of chemical processes at electrochemical interfaces is essential. For instance, optimizing water splitting reactions at the semiconductor-water interface in photoelectrochemical cells is key for improving the device efficiency and stability for generating hydrogen fuel from water and sunlight \cite{mccrory2015}. Alternatively, the causes of oxidation and corrosion at the interface can be illuminated via chemical degradation processes \cite{huang2019}. Last but not least, understanding the relationship between reactivity and electronic properties of liquid electrolytes at the interface with electrode materials is also one of the prerequisites for manipulating the electrochemical stability of electrode-electrolyte interfaces in ion batteries and supercapacitors \cite{wang2018}.
+
+However, the development of renewable energy resources is only a single example of the type of problem in which material design is crucial. As another example, material science is unsurprisingly at the very heart of developing brand new technoligies, particularly those in the realm of quantum information science.
+% IBM quantum computer – superconducting qubits
+
+
+% copied bs.
+Meanwhile, the development of innovative quantum technologies is immanent and will make broad impacts on our national technology sector \cite{quantum}. With the intention to expand these fields, the role of computational science has grown immensely alongside ever-growing supercomputing facilities. These facilities enable calculations of large-scale simulations which provide improved theoretical understanding of these aforementioned fields. In particular, first-principles simulations allow us to better understand the quantum mechanical nature of materials, which is an essential part of their application. These simulations have proven to be pivotal in the evolution of many fields all the way from renewable energy to quantum technology.
+
+As such, my research in modeling materials from first-principles calculations is bifurcated into two branches of motivation: 1. renewable energy and energy conversion with transition metal oxides (TMOs) and 2. quantum information sciences in two-dimensional (2D) materials. In this proposal I will discuss my research within both of these fields by covering the motivation behind my research, discussing progress achieved thus far and finally how these efforts are naturally extending and culminating in my dissertation year.
+
+
+%
+The rational design of materials by accurate yet feasible computational approach can offer researchers the ability to discover and describe otherwise unattainable phenomena. Specifically in the era of supercomputers, large-scale calculations have reached the stage of being more obtainable than ever before, heightening the interest in the computational approach to science. Here, large-scale may refer to pushing the limits of computational resources in terms of processing power, computer memory, or simply time to complete the task. Specifically the past 10 years, the scale of these computational resources has grown exponentially. And perhaps to no surprise, so has humanities interest in utilizing these resources to achieve tasks once never believed possible.
+% <May put here a graph of supercomputer resources etc.>
+
+
+The task which is relevant to this dissertation is that of the multi-electron problem. In the interrelated field of physics, chemistry, and material science,  the multi-electron problem essentially refers to any problem beyond involving interactions between more than one electron, often in an external field.
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    section
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Multi-Electron Problem}
+
+\subsection{Hohenberg-Kohn-Sham Theory}
+
+The many-electron problem refers to any
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    section
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formalism of Charged Defect Formation}
+
+Add intro here, may change dependening... Reword the below a bit.
+
+Defect formation energies and charge transition levels are the fundamental properties of defects in solids, where the former represents how easily a defect can form at a specific chemical condition and the latter represents how easily the defect can be ionized or excited.
+
+\subsection{Elemental Chemical Potentials}
+% the discussion here is similar to https://pubs.rsc.org/en/content/articlepdf/2013/cp/c3cp53311e and https://pubs.acs.org/doi/pdf/10.1021/acs.jpcc.5b08081 but also https://pubs.acs.org/doi/pdf/10.1021/acs.chemmater.8b05362
+The chemical potential of Fe and O was evaluated from first principles following the approach employed in Ref.~\cite{lee2013thermodynamics}.
+Namely, for \ce{Fe2O3} in thermodynamic equilibrium growth conditions, the chemical potentials $\mu_{\rm Fe}$ and $\mu_{\rm O}$ must satisfy Eq.~\ref{eq:chem_fe2o3}$-$\ref{eq:chem_poor}:
+\begin{align}
+    2\Delta \mu_{\rm Fe} + 3\Delta \mu_{\rm O} = \Delta H_{\ce{Fe2O3}} \label{eq:chem_fe2o3} \\
+    2\Delta \mu_{O} \leq  \Delta H_{\ce{O2}} \label{eq:chem_rich} \\
+    3\Delta \mu_{\rm Fe} + 4\Delta \mu_{\rm O} \leq \Delta H_{\ce{Fe3O4}} \label{eq:chem_poor}
+\end{align}
+where $\Delta \mu_{\rm i}$ is the chemical potential of species $i$ referenced to its most stable phase.
+In an O rich environment, \ce{Fe2O3} will be in equilibrium with \ce{O2} as in Eq.~\ref{eq:chem_rich}, whereas in an O poor environment (Fe rich), \ce{Fe2O3} will be in equilibrium with \ce{Fe3O4} as in Eq.~\ref{eq:chem_poor}.
+In order to correct the well-known overbinding problem of O$_2$ by DFT, we use the experimental value of 5.23 eV for the binding energy of \ce{O2} in order to correct the total energy of \ce{O2} computed by DFT. \cite{wang2006oxidation}
+Meanwhile, the chemical potential of each tetravalent dopant $X$ was computed as in Ref.~\cite{zhou2015understanding}, where after obtaining the chemical potential of O in the rich/poor limit, the chemical potential $\Delta \mu_{\rm X}$ can be computed from Eq.~\ref{eq:chem_x}.
+\begin{align}
+    \Delta \mu_X + 2\Delta \mu_{\rm O} \leq \Delta H_{X{\rm O}_2} \label{eq:chem_x}
+\end{align}
+
+
+\subsection{Defect Formation Energy and Ionization Energy}
+The charge defect formation energy provides insight into the charge states of dopants providing some insight into the influence on carrier concentration.
+We computed the charge defect formation energy ($E^f_q$) of each defect system according to:
+\begin{align}
+    E^f_q(X; \varepsilon_F) = E_q(X) - E_{prist} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q,
+    \label{eq:cfe}
+\end{align}
+where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ was computed for charged cell calculations with the JDFTx code \cite{JDFTx} by employing the techniques developed in Ref.~\cite{wu2017first,Ping2013}. Meanwhile, the chemical potentials were carefully evaluated against the stability of byproduct compounds as detailed above.
+Finally, the corresponding charge transition levels of the defects can be obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
+\begin{align}
+    \epsilon_{q|q'} = \frac{E^f_q - E^f_{q'}}{q' - q}
+    \label{eq:ctl}
+\end{align}
+Typically, for a semiconductor or insulator the ionization energy of a p-type/n-type dopant is given by the value(s) of its charge transition level(s) referenced to the valence/conduction band edge of the host materials. However, in systems which form small polarons the ionization energy should be referenced to the free polaron state. \cite{seo2018role} Here the free electron small polaron level is defined as the $\epsilon_{0|-1}$ transition level in the pristine system. In this way the free polaron level was computed and all ionization energies of n-type defects/dopants in this paper are referenced to this level.
+
+
+
+\subsection{Defect Concentration}
+In order to relate the effects of doping directly to polaron concentrations, we can compute the defect concentrations self-consistently by evaluating charge neutrality based on the formation energy of each defect. Following the formalism presented in Ref.~\cite{freysoldt2014first}, the charged defect concentration ($c_q$) is computed as:
+\begin{align}
+    c_q(X; \varepsilon_F) = g \exp [- E^f_q(X; \varepsilon_F) / k_B T],
+\end{align}
+where $g$ is the degeneracy factor accounting for the internal degrees of freedom of the point defect, $k_B$ is the Boltzmann factor, and $T$ is temperature. In order to maintain neutrality, the introduction of defect $X$ with charge $q$ into the lattice must be compensated by defects of opposing charge or through the generation of free carriers. Specifically charge neutrality must be held:
+\begin{align}
+    \sum_{X,q} c_q(X; \varepsilon_F) + n_h - n_e = 0, \label{eq:neutrality}
+\end{align}
+where the concentration of free delocalized holes ($n_h$) and free delocalized electrons ($n_e$) can be evaluated via:
+\begin{align}
+    n_e - n_h = \int_{-\infty}^{\infty} dE \frac{D(E)}{1+\exp[(E-\varepsilon_F)/k_B T]}.
+\end{align}
+Here $D(E)$ is the electronic density of states of the pristine system. Eq.~\ref{eq:neutrality} can be evaluated by standard root-finding algorithms to obtain $\varepsilon_F$ where charge neutrality is held.
+Note, in hematite free electrons will localize into small polarons, and so the formation of free electron small polarons is entered in a similar way to a defect, i.e.\ with a formation energy.
+Finally, in order to relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K while maintaining defects total concentrations similar to methods employed by Ref.~\cite{lee2013thermodynamics}.

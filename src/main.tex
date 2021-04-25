@@ -31,40 +31,71 @@
 \listoftables
 
 \begin{abstract}
-    Hmm....
+    State-of-the-art first-principles calculations are implemented and utilized in order to optimize or give insight into material properties for various techonologies and applications. These applications, and therefore the research, have two primary focuses: energy conversion and storage using transition metal oxides and quantum defects in two-dimensional materials. Regarding the former, the limitation of transition metal oxides is in their poor carrier conduction due to the formation of small polarons. Here, detail and insight are given into the formation of small polarons, especially under atomic doping wherein doping can help to improve carrier conduction in these systems and offer better energy conversion. The latter application, has an emphasis in the design of single photon emitters and spin-based qubits in hexagonal boron nitride. In particular, defect ionization energies, optoelectronic properties, and nonradiative propreties, including intersystem crossing, is discussed. Finally, selected topics are presented which does not necessarily fall into these two categories but is otherwise interesting to discuss.
 \end{abstract}
 
 \begin{dedication}
 \vspace*{\fill}
 \begin{center}
-A loving dedication.
+Enter dedication here.
 \end{center}
 \vspace*{\fill}
 \end{dedication}
 
 \begin{acknowledgements}
-Proper acknowledgments of everyone else who helped you graduate.
+Enter acknowledgements here.
 \end{acknowledgements}
 
 \end{frontmatter}
 
-\include{1-intro}
-\include{2-tmo}
-\include{3-2d}
-\include{4-cat}
-\include{5-conc}
+% ------------------------------------------------------------
+% intro
+\include{1-intro/intro}
 
-\appendix
+
+% ------------------------------------------------------------
+% tmo
+\include{2-tmo/overview}
+\include{2-tmo/fe2o3-hop}
+\include{2-tmo/fe2o3-conc}
+\include{2-tmo/fe2o3-clust}
+\include{2-tmo/cuo}
+\include{2-tmo/co3o4}
+\include{2-tmo/exp}
+
+% ------------------------------------------------------------
+% 2d
+\include{3-2d/overview}
+\include{3-2d/cfe}
+\include{3-2d/spin}
+\include{3-2d/opto}
+\include{3-2d/nonrad}
+
+% ------------------------------------------------------------
+% other
+\chapter{Selected Topics}
+\include{4-other/cat}
+\include{4-other/2denv}
+\include{4-other/nv}
+\include{4-other/nerd}
+\include{4-other/open}
+
+% ------------------------------------------------------------
+\chapter{Conclusions}
+
+% \appendix
+
 % molecular orbital
 % jahn teller
 % codes
 
-\include{a1-cfe}
-\include{a2-pw2py}
+% \include{a1-cfe}
+% \include{a2-pw2py}
 
 
 \nocite{*}
-\bibliographystyle{plain}
+% \bibliographystyle{plain}
+\bibliographystyle{ieeetr}
 \singlespacing
 \bibliography{ref}
 
