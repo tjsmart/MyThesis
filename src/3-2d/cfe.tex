@@ -1,2 +1,284 @@
+\def\cbns{C$_\text{B}$}
+\def\cb{C$_\text{B}$ }
+\def\vncbns{V$_\text{N}$C$_\text{B}$}
+\def\vncb{V$_\text{N}$C$_\text{B}$ }
+\def\vnns{C$_\text{N}$}
+\def\cn{C$_\text{N}$ }
+\def\gwns{$G_0W_0$}
+\def\gw{$G_0W_0$ }
+\def\gns{$\Gamma$}
+\def\g{$\Gamma$ }
+\def\bR{\mathbf{R}}
+\def\veps{\varepsilon}
+\def\pans{PBE0($\alpha$)}
+\def\p0a{PBE0($\alpha$)\text{}}
+
 \section{Charge Defect Formation Energies}
 % PRM and also other calculations (I have a lot here)
+
+\subsection{Introduction}
+Two-dimensional (2D) materials provide the unique opportunity to scale future electronics smaller than ever believed physically possible, implying engineering 2D materials is a promising strategy that can meet the demands of future nanotechnologies~\cite{butler2013progress}.
+As defects play a crucial role in the optical and electronic properties of these systems, the engineering of defects in 2D materials has sparked continuous interest~\cite{wang2017engineering,hong2017atomic,lin2016defect,dreyer2018first,weston2018native,tawfik2017first}. For example, defects in \textit{h}-BN have been found to be the source of stable polarized and ultra-bright single-photon emissions at room temperature~\cite{bourrellier2016bright,abdi2018color,aharonovich2017quantum,tran2016quantum}. Hence, the development of our understanding of defects in 2D materials will open up further possibilities for emerging applications in quantum information and nanotechnology with much better scalability than traditional defects in 3D materials.
+
+Unlike in their 3D counterparts~\cite{freysoldt2009fully,freysoldt2014first,vinichenko2017accurate,kumagai2014electrostatics,komsa2013finite}, first-principles techniques for calculating defect properties in 2D materials still face significant challenges.  Specifically, eliminating the periodic charge interactions for charged defects in 2D materials requires a charge correction scheme that accounts for the weak and anisotropic dielectric screening of 2D systems~\cite{komsa2014charged,komsa2018erratum,wang2015determination}. Furthermore, several exchange-correlation functionals that provide accurate electronic structures for 3D bulk systems are no longer applicable to ultrathin 2D systems.
+For example, the fraction of Fock exchange ($\alpha$) in hybrid functionals can be approximated as the inverse of dielectric constant ($\varepsilon_{\infty}$) of the material~\cite{alkauskas2011defect,skone2014self}, but this is problematic for ultrathin 2D materials where $\varepsilon_{\infty}$  decreases to unity in the limit of infinite vacuum sizes (complete separation between periodic images). Therefore, the determination of $\alpha$ in hybrid functionals for 2D materials remains an open question. On the other hand, many body perturbation theory techniques ($\textit{e.g.}$ GW approximation) give accurate quasiparticle energies such as band gaps and band positions; however, high computational cost and slow convergence with respect to empty states make the screening of many defects in 2D materials impractical with conventional implementations~\cite{qiu2016screening,rasmussen2016efficient,thygesen2017calculating,huser2013quasiparticle,attaccalite2011coupling,felipe2017nonuniform}.
+
+In our previous work~\cite{wu2017first,PING2017JCP}, we developed an efficient and accurate method that can give reliable charge corrections for total energies and electronic states of charged defects in 2D materials \textit{without any supercell extrapolations}, and then provided accurate defect CTLs with the DFT+GW scheme~\cite{malashevich2014first,chen2013correspondence,chen2015first,chen2017accuracy}. Such implementation is built on top of the WEST-code~\cite{govoni2015large}, Quantum-Espresso~\cite{QE1} and JDFTx~\cite{JDFTx} packages. In our GW calculations, we avoided explicit inclusion of empty states and inversion of dielectric matrices~\cite{govoni2015large,ping20132electronic,pham2013gw}, while also speeding up vacuum size convergence with a 2D Coulomb truncation~\cite{ismail2000new}. In this letter, we propose to solve two important issues for 2D materials. First, we determine which level of theory and which electron chemical potential reference one should use to calculate a CTL. Second, we show how to define the fraction of Fock exchange in hybrid functionals for accurate band edges and band gaps. In the end, we combine these two findings to obtain accurate defect ionization energies for 2D materials.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%METHODS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Methodology}
+
+\textbf{Computational Methods}
+In this work, all structural relaxations and total energy calculations were performed using open source plane wave code Quantum-ESPRESSO~\cite{QE1} with Perdew-Burke-Ernzerhof (PBE)~\cite{perdew1996generalized} exchange-correlation functional, ONCV norm-conserving pseudopotentials~\cite{ONCV1,ONCV2}, a wavefunction cutoff of 70 Ry and a $k$-point mesh corresponding to $12\times12\times1$ or higher in the primitive cell. The vacuum between periodic images along non-periodic direction is at least 30 Bohr.
+
+Once the structural parameters were determined, we performed a separate single-point calculation using a wavefunction cutoff of 45 Ry and hybrid functionals including HSE, B3PW91, PBE0 and PBE0($\alpha$) with a sufficient  $k$-point mesh as large as $36\times 36$.
+The band gap is determined from the difference between valence band maximum (VBM) and conduction band minimum (CBM). If the k-point of VBM or CBM is not included in the $k$-point mesh, it is interpolated between eigenvalues of the same band of nearby $k$-points.
+
+A single point calculation using a wavefunction cutoff of 45 Ry and PBE functional was performed as the starting point for GW calculations. The GW calculations were performed using the WEST code~\cite{govoni2015large}. We used the $G_0W_0$ approach with starting wavefunctions and eigenvalues at the PBE level of theory. We employed the contour deformation technique for frequency integration of the self energy. For the dielectric matrix calculation, the number of eigenpotentials ($N_{\textrm{PDEP}}$) was chosen to be  $3N_{\textrm{electron}}$, and we used $4N_{\textrm{electron}}$ to validate its convergence. The final GW correction values were extrapolated between $9\times 9$ and $12\times 12$ $k$-point meshes to infinite $k$-points similar to Ref.~\cite{wu2017first}.
+
+
+The charge corrections~\cite{PING2017JCP} for the total energies and eigenvalues of charged defects at the DFT level employed the techniques developed in Ref.~\cite{PING2017JCP} and in the SI section IV, which were implemented in the JDFTx code~\cite{JDFTx,ismail2000new,arias1992ab} (computed dielectric profiles are shown in the SI). Dielectric profiles are computed by applying finite electric fields following the procedure discussed in Ref.~\cite{wu2017first}, with a smearing width of 1 Bohr (smearing widths of 0.5 to 4.0 Bohr yield  identical charge corrections).
+
+
+
+\textbf{Thermodynamic Charge Transition Levels}
+
+\begin{figure}[t]
+\includegraphics[keepaspectratio=true,width=\linewidth]{3-2d/figures-prm/path.png}
+\caption{Schematic plot of the two paths (distinguished with blue/red color) that transition from charge state $q$ to $q+1$. For each path, there is a corresponding vertical excitation, which can be computed either with EA$_{q+1}$ or IP$_q$ (noted with up/down arrowheads), as discussed in the main text.}  \label{fig:path}
+\end{figure}
+
+
+A thermodynamic CTL is the value of electron chemical potential $\veps_F$ at which the stable charge state of the system changes, \textit{e.g.} from $q$ to $q+1$. Therefore, CTLs are calculated through the equivalency of the formation energies $q$ and $q+1$, given by Eq. (\ref{eq:ctl0})~\cite{freysoldt2014first}.
+\begin{align}
+\veps_{q+1|q}&=E_q^f(\bR_q)-E_{q+1}^f(\bR_{q+1}) \nonumber\\
+&=E_q(\bR_q)-E_{q+1}(\bR_{q+1})-\veps_F
+\label{eq:ctl0}
+\end{align}
+Here $E_q^f(\bR)$ is the defect formation energy with charge $q$ and geometry $\bR$, and $\bR_q$ is the relaxed geometry of the system with charge $q$. $E_q(\bR)$ is the total energy that relates to $E_q^f(\bR)$ and $\veps_F$ following the definition of Eq. (1) in Ref.~\cite{wu2017first}.  Diagrammatically, Eq. (\ref{eq:ctl0}) is the energy difference between two potential  surface minimua in position space $\bR$, as shown in Fig. \ref{fig:path}.
+
+
+
+% \section{Results}
+\subsection{Implementing Quasiparticle Corrections in Defect Charge Transition Levels}
+
+
+It is well-known that local and semi-local functionals do not give accurate total energy differences between two charge states, where an electron removing (IP)/adding process (EA) is involved. An alternative approach~\cite{wu2017first} is to separate Eq.~(\ref{eq:ctl0}) into two parts: the vertical excitation energy between two charge states ($q$ and $q+1$) at the same geometry ($\bR$) (denoted as quasiparticle energies $\veps^{QP}$) and the geometry relaxation energy at a fixed charge state (denoted with $E^{rlx}$). Since DFT is known to provide reliable geometry relaxation energies (if one corrects the fictitious charge interactions between periodic images as we did in Ref.~\cite{wu2017first}), this separation allows us to accurately calculate the vertical excitation energies with a higher level of theory appropriate for non-neutral excitations, such as the GW approximation.
+
+One can separate Eq.~(\ref{eq:ctl0}) by two possible physical pathways from $E_q^f(\bR_q)$ to $E_{q+1}^f(\bR_{q+1})$ as shown in Fig. \ref{fig:path}. One pathway (red path) occurs with a vertical excitation at $\bR_{q}$ ($E_{q+1}^f(\bR_q)-E_q^f(\bR_q)$) followed by a geometry relaxation at the charge state $q+1$ ($E_{q+1}^f(\bR_{q+1})-E_{q+1}^f(\bR_q)$), shown in Eq.~(\ref{eq:ctl1}). The other pathway (blue path) occurs through the geometry relaxation at the charge state $q$ plus a vertical excitation at $\bR_{q+1}$, corresponding to Eq.~(\ref{eq:ctl2}).
+\begin{align}
+\veps_{q+1|q} &= \underbrace{E_{q}^f(\bR_q)-E_{q+1}^f(\bR_q)}_{\veps^{QP}}+\underbrace{E_{q+1}^f(\bR_q)-E_{q+1}^f(\bR_{q+1})}_{E^{rlx}}  \nonumber\\
+&= \veps^{QP}_{q+1|q}(\bR_q) + E^{rlx}_{q+1}
+\label{eq:ctl1}
+\end{align}
+\begin{align}
+\veps_{q+1|q}&=\underbrace{E_q^f(\bR_q)-E_q^f(\bR_{q+1})}_{E^{rlx}}+\underbrace{E_q^f(\bR_{q+1})-E_{q+1}^f(\bR_{q+1})}_{\veps^{QP}} \nonumber\\
+&= E^{rlx}_q  + \veps^{QP}_{q+1|q}(\bR_{q+1})
+\label{eq:ctl2}
+\end{align}
+Note that all three equations (Eq. (\ref{eq:ctl0}), (\ref{eq:ctl1}), (\ref{eq:ctl2})) are exactly equivalent theoretically. Yet, in practice they may yield sizable differences, as discussed later.
+
+Furthermore, the vertical excitation energies $\veps^{QP}_{q+1|q}$ in Eq.~(\ref{eq:ctl1}) and Eq.~(\ref{eq:ctl2}) can be determined from either the ionization potential of the charge state $q$ ($\text{IP}_q$) or
+the electron affinity of the charge state $q+1$ ($\text{EA}_{q+1}$)
+, as noted in Fig.~\ref{fig:path} with up/down arrowheads. Note that we obtained IP and EA through eigenvalues at different levels of theory based on the Janak's theorem~\cite{janak1978proof}.
+%\begin{align}
+%\veps^{QP}_{q|q+1}(\bR_q) &= \text{EA}_{q+1}(\bR_q) = %\text{IP}_q(\bR_q) \label{eq:kp1} \\
+%\veps^{QP}_{q|q+1}(\bR_{q+1}) &= \text{EA}_{q+1}(\bR_{q+1}) = %\text{IP}_q(\bR_{q+1}) \label{eq:kp2}
+%\end{align}
+The difference between $\text{IP}_q$ and $\text{EA}_{q+1}$ is largely related to the delocalization or localization error at a particular level of theory, and serves as a stringent test for an exchange-correction scheme in electronic structure calculations~\cite{bruneval2009g}.
+
+
+\begin{table}[H]
+    \footnotesize
+\centering
+% \begin{tabular}{p{1.5cm}p{1.5cm}p{1.2cm}p{1.2cm}p{1.2cm}p{1.2cm}}
+\begin{tabular}{cccccc}
+\hline\hline
+\multicolumn{2}{c}{Method} & \multicolumn{4}{c}{Defect} \\
+%\hline
+     &                 & \cb & \vncb & C$_\text{N}$ & \vncb \\
+% &&&&&\\
+     &    CTL             & (0/+1) & (0/+1) & (-1/0) & (-1/0) \\
+\hline
+ %   &&&&&\\
+     & Eq\ref{eq:ctl0} & -3.63  & -4.22  & -3.54  & -1.57  \\
+PBE  & Eq\ref{eq:ctl1} & -3.61  & -4.29  & -3.51  & -1.66  \\
+     & Eq\ref{eq:ctl2} & -3.64  & -4.33  & -3.49  & -1.67  \\
+     \hline
+    % & IP-EA           & 2.68  & 2.60  & 2.75  & 2.50  \\
+ % &&&&&\\
+     & Eq\ref{eq:ctl0} & -3.65  & -4.19  & -3.50  & -1.87  \\
+PBE0 & Eq\ref{eq:ctl1} & -3.60  & -4.17  & -3.50  & -1.87  \\
+     & Eq\ref{eq:ctl2} & -3.62  & -4.21  & -3.50  & -1.21*  \\
+\hline
+    % & IP-EA           & 1.15  & 1.09  & 1.13  & 1.42  \\
+% &&&&&\\
+     & Eq\ref{eq:ctl1} & -3.40  & -4.29  & -3.74  & -1.74 \\
+\gw  & Eq\ref{eq:ctl2} & -3.28  & -4.22  & -3.73  & -1.70  \\
+\hline
+    % & IP-EA           & 0.04  & 0.20  & 0.03  & 0.19  \\
+    % &&&&&\\
+    \multicolumn{6}{c}{IP$_{q}(\bR_{q})$-EA$_{q+1}(\bR_{q})$} \\
+     % &&&&&\\
+PBE && 2.68  & 2.60  & 2.75  & 2.50  \\
+PBE0 && 1.15  & 1.09  & 1.13  & 1.42  \\
+\gw && 0.04  & 0.20  & 0.03  & 0.19  \\
+ \hline\hline
+\end{tabular}
+\caption{\label{table:path} Charge transition levels (CTLs) relative to vacuum (in eV) of multiple defects in monolayer \textit{h}-BN. These values are collected via three methods (Eq. (\ref{eq:ctl0}-\ref{eq:ctl2})) at various levels of theory (PBE, PBE0, \gwns$@$PBE ). The CTLs relative to vacuum are remarkably similar. The one exception, \vncb (-1/0) at PBE0 (marked with *) incidentally has a band inversion resulting in a defect level within the valence band, breaking the reliability of Eq. (\ref{eq:ctl2}).
+We also show IP$_{q}(\bR_{q})-$EA$_{q+1}(\bR_{q})$ at different levels of theory. Note that at the \gw level, this difference is $<0.2$ eV.}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%RESULTS & DISCUSSION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Therefore, we firstly compared the CTL with PBE, PBE0 and $G_0W_0@$PBE for three different defects in monolayer BN as shown in Table \ref{table:path}, where $\veps^{QP}$ is obtained by taking the average of $\text{IP}_q$ and $\text{EA}_{q+1}$ as:
+\begin{equation}
+\veps^{QP}_{q+1|q}(\bR) = \frac{1}{2}(\text{EA}_{q+1}(\bR) + \text{IP}_q(\bR))
+\end{equation}
+Note that we propose to set $\veps_F$ equal to the vacuum level (determined by the electrostatic potential in the vacuum region of supercells) and use it as a reference for Eq. (\ref{eq:ctl0}).
+We found this choice (opposed to band edges) is particularly advantageous for obtaining consistent CTLs among different methods as shown in Table~\ref{table:path}.
+(More computational details for $G_0W_0@$PBE can be found in SI, with similar numerical techniques and parameters used in Ref.~\cite{wu2017first}). There are several interesting observations from Table \ref{table:path}, as follows. First, we found excellent agreement (within 0.1 eV) among Eq. (\ref{eq:ctl0}), (\ref{eq:ctl1}) and (\ref{eq:ctl2}) for each defect at each level of theory. Second, we found the results obtained among PBE, PBE0 and $G_0W_0@$PBE are also strikingly similar (within 0.2 eV) for each defect. This means the CTLs of 2D materials relative to vacuum are \textit{not affected by the level of theory one chooses}. Note that the difference between $\text{IP}_q$ and $\text{EA}_{q+1}$ is more than 2 eV for PBE, reduced to $~$1 eV at PBE0 level ($\alpha=0.25$), but less than 0.2 eV at $G_0W_0@$PBE, which indicates the delocalization error present with semi-local DFT has been mostly corrected at $G_0W_0$@PBE~\cite{bruneval2009g}.
+%As we will discuss later, it is the linearity of the Kohn-Sham eigenvalues with $\alpha$ (Figure \ref{fig:ipea}) that allows the averaging of $\text{IP}_q$ and $\text{EA}_{q+1}$ to give accurate PBE, PBE0 results in Eq. \ref{eq:ctl1} and \ref{eq:ctl2}, which are in great agreement with each other, despite this error.
+
+
+\subsection{Generalized Koopman's Condition for Exact Exchange of 2D Materials}
+After we obtained reliable CTLs, in particular relative to vacuum, we focused on how to calculate accurate band edge positions and band gaps of 2D materials in order to determine defect ionization energies. Using the GW approximation, we obtained an accurate quasiparticle band gap (indirect at T$\rightarrow$M) 6.01 eV for bulk h-BN (Table \ref{table:gap}), in excellent agreement with the experimental fundamental electronic gap 6.08 $\pm$ 0.015~\cite{cassabois2016hexagonal}. Nonetheless, GW is still too computationally demanding for materials' screening and computing forces is non-trivial. Therefore, the development of computationally affordable methods such as accurate non-empirical hybrid functionals for 2D materials is strongly desired.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=0.5\linewidth]{3-2d/figures-prm/exx_eig.pdf}
+\caption{The IP at $q=0$ and the EA at $q=+1$ for the defects \cbns , \cn and \vncb in monolayer h-BN as a function of the fraction of Fock exchange $\alpha$ for PBE0($\alpha$). The predicted exchange constant ($\alpha = 0.409$, 0.41 and 0.382, respectively) is the corresponding crossing point where $\text{EA}_{q+1}=\text{IP}_{q}$.} \label{fig:ipea}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=0.7\linewidth]{3-2d/figures-prm/p0a_gap.pdf}
+\caption{Comparing computed band gaps of \textit{h}-BN (monolayer, bilayer, trilayer, bulk) and graphane with \p0a versus those computed with \gwns$@$PBE . Overall we find that our \p0a results agree very well with \gwns , yielding a MAE of 0.14 eV. } \label{fig:p0a}
+\end{center}
+\end{figure}
+
+\begin{table}[H]
+    \footnotesize
+    \centering
+\begin{tabular}{ccccccc}
+	 \hline\hline
+     System & PBE & HSE & PBE0 & B3PW & \p0a & \gw \\
+	 % \hspace{2mm} System & \hspace{4mm} PBE & \hspace{4mm} HSE & \hspace{3mm} PBE0 & \hspace{2mm} B3PW & \hspace{1mm} \p0a & \hspace{3mm} \gw \\
+	 \hline
+	% \hspace{0.1mm} Graphane
+	Graphane
+	& 3.57 $|$ \gns$\,\rightarrow\,$\g & 4.41 $|$ \gns$\,\rightarrow\,$\g
+	& 5.06 $|$ \gns$\,\rightarrow\,$\g & 5.04 $|$ \gns$\,\rightarrow\,$\g
+	& 6.54 $|$ \gns$\,\rightarrow\,$\g & 6.41 $|$ \gns$\,\rightarrow\,$\g   \\
+	% \hspace{0.1mm} ML BN
+	ML BN
+	& 4.71 $|$ K$\,\rightarrow\,$K & 5.70 $|$ K$\,\rightarrow\,$\g
+	& 6.33 $|$ K$\,\rightarrow\,$\g & 6.33 $|$ K$\,\rightarrow\,$\g
+	& 7.34 $|$ K$\,\rightarrow\,$\g & 7.01 $|$ K$\,\rightarrow\,$\g   \\
+	% \hspace{0.1mm} BL BN
+	BL BN
+	& 4.49 $|$ T$\,\rightarrow\,$M & 5.81 $|$ T$\,\rightarrow\,$M
+	& 6.46 $|$ T$\,\rightarrow\,$\g & 6.17 $|$ T$\,\rightarrow\,$M
+	& 7.08 $|$ T$\,\rightarrow\,$\g & 7.00 $|$ T$\,\rightarrow\,$\g   \\
+	% \hspace{0.1mm} TL BN
+	TL BN
+	& 4.36 $|$ T$\,\rightarrow\,$M & 5.68 $|$ T$\,\rightarrow\,$M
+	& 6.40 $|$ T$\,\rightarrow\,$M & 6.03 $|$ T$\,\rightarrow\,$M
+	& 7.01 $|$ T$\,\rightarrow\,$\g & 6.92 $|$ T$\,\rightarrow\,$M  \\
+	% \hspace{0.1mm} Bulk BN
+	Bulk BN
+	& 4.22 $|$ T$\,\rightarrow\,$M & 5.60 $|$ T$\,\rightarrow\,$M
+	& 6.28 $|$ T$\,\rightarrow\,$M & 5.91 $|$ T$\,\rightarrow\,$M
+	& 6.07 $|$ T$\,\rightarrow\,$M & 6.01 $|$ T$\,\rightarrow\,$M   \\
+	 \hline
+    % \hspace{0.5mm} Exp.(Bulk BN) & \multicolumn{2}{c}{6.08 $\pm$ 0.015}  \\
+	Exp.(Bulk BN) & \multicolumn{2}{c}{6.08 $\pm$ 0.015}  \\
+	 \hline
+	 \hline
+	\end{tabular}
+      \captionof{table}{Band gaps for various pristine 2D materials. In general, PBE severely underestimates the gap. Hybrid functionals HSE, B3PW, and PBE0 ($\alpha=0.25$) generally enlarge the bulk band gap, but still underestimate the gaps of ultrathin 2D systems compared with experiments and GW approximation. Only PBE0($\alpha$) with $\alpha$ satisfying $\text{IP}_{q}=\text{EA}_{q+1}$ of localized defects (\cbns) yield gaps in good agreement with experiment~\cite{cassabois2016hexagonal} and $G_0W_0$@PBE.}
+      \label{table:gap}
+\end{table}
+
+
+
+The generalized Koopmans' condition has been mostly used to determine the appropriate fraction of Fock exchange ($\alpha$) for molecules and molecular crystals~\cite{atalla2016enforcing,korzdorfer2014organic,refaely2012quasiparticle,sai2011hole,cohen2007development,pinheiro2015length,ma2016using}.
+One recent work~\cite{miceli2018} enforced this condition (\textit{i.e.} $\text{EA}_{q+1}=\text{IP}_{q}$) on defects in bulk semiconductors to obtain $\alpha$ and in turn predicted accurate electronic structure of the corresponding pristine bulk systems. The fundamental assumption is that the optimized $\alpha$ depends on the long range screening of the system and not on the nature of the probe defects. This condition is also valid for deep defects in 2D materials, where defect wavefunctions are well localized like molecule orbitals in the supercells, and their  contribution to dielectric screening is negligible compared to the crystal environment.
+Another advantage of applying this condition to 2D systems is that both $\text{EA}_{q+1}$ and $\text{IP}_{q}$ can be exactly referenced to vacuum.
+In order to validate the applicability of the generalized Koopmans' condition to 2D materials, we used the defect \cb as a probe to determine $\alpha$ for \textit{h}-BN (B$_\text{C}$ for graphane). This method gives $\alpha$ of
+%we use it to predict $\alpha$ instead of 25$\%$ in PBE0 calculations (\pans ) as shown in Eq. \ref{eq:p0a}:
+%\begin{equation}
+%E_{X}^{PBE0(\alpha)} = \alpha E_{X}^{HF} + (1-\alpha) %E_{X}^{PBE}
+%\label{eq:p0a}
+%\end{equation}
+%Namely, the $\alpha$ which gives an equivalent ionization %potential and electron affinity (IP$(q=0)=$EA$(q=+1)$) for a %given defect may determine the accurate hybrid functional for %the host 2D materials.
+%In this paper, we will refer to this method simply as  \pans. %Using the defect \cb at geometry $R_{0}$ we can determine %$\alpha$ to be
+0.409, 0.347, 0.324, 0.225 for monolayer, bilayer, trilayer and bulk \textit{h}-BN, respectively. Note that the $\alpha$ value 0.225 for bulk h-BN, agrees well with the predicted $\alpha$ from the inverse of high frequency dielectric constant ($\alpha = 1/\veps_{\infty} \approx 0.2$)~\cite{brar2014hybrid}, which supports the assumption that long-range screening determines $\alpha$. We also investigated other defects C$_{\text{N}}$ and {\vncbns} as probes of $\alpha$ (their corresponding electronic structure can be found in SI).
+%while the band gaps of few layer \textit{h}-BN follow the trend of a monotonic decrease  in dielectric constant vs. number of layers~\cite{dielectric2}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[keepaspectratio=true,width=1.0\linewidth]{3-2d/figures-prm/cbctl.png}
+
+% \begin{picture}(500,180)
+% \put(0,10){\subfloat[\hspace{2mm}PBE\hspace{1mm}]{\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_pbe.pdf}}}
+% \put(120,10){\subfloat[\hspace{2mm}HSE\hspace{1mm}]{\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_hse.pdf}}}
+% \put(240,10){\subfloat[\hspace{0mm}PBE0($\alpha$)]{\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_pbe0ie.pdf}}}
+% \put(360,10){\subfloat[\hspace{2mm}\gw\hspace{1mm}]{\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_gw.pdf}}}
+% \put(305,10){\includegraphics[keepaspectratio=true,scale=0.3]{3-2d/figures-prm/white.png}}
+% \put(240,10){\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_pbe0ie.pdf}}
+% \put(185,10){\includegraphics[keepaspectratio=true,scale=0.3]{3-2d/figures-prm/white.png}}
+% \put(120,10){\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_hse.pdf}}
+% \put(65,10){\includegraphics[keepaspectratio=true,scale=0.3]{3-2d/figures-prm/white.png}}
+% \put(0,10){\includegraphics[keepaspectratio=true,scale=0.7]{3-2d/figures-prm/cbctl_pbe.pdf}}
+% \end{picture}
+
+\caption{Charge transition level \cb (+1/0) in \textit{h}-BN with different  levels of theory. Defect charge transition levels gradually become shallower with lower ionization energies while increasing the number of layers (ionization energies are written adjacent to arrows from the CTL to CBM). Note that the defect CTLs are very similar relative to vacuum between different methods.}  \label{fig:ctl2}
+\end{center}
+\end{figure}
+
+
+Interestingly, we found that IP$_q$ and EA$_{q+1}$ from Kohn-Sham eigenvalues varied linearly with $\alpha$.
+%consistent with the case of bulk materials in Ref.~\cite{miceli}.As shown in Figure \ref{fig:ipea}, linear fits of IP at $q=0$ and EA at $q=+1$ of the \cb defect in monolayer \textit{h}-BN %yield R-Squared values of 0.9997 and 0.9999, respectively for %$\alpha$ from 0.25 to 0.51.
+Fig. \ref{fig:ipea} shows this linearity for three defects in monolayer \textit{h}-BN, and three defects predict very similar $\alpha$, which justifies the insensitivity of $\alpha$ to the explicit defect. %Note that  defects with localized wavefunctions such as atomic substitutions (\cb) determine more accurate $\alpha$ because their contribution to dielectric screening is negligible. In this way, the screening is determined from the crystal.
+It is also notable that the slopes of  IP$_q$ and EA$_{q+1}$ are opposite but nearly equal, explaining how the average of IP$_q$ and EA$_{q+1}$ as $\veps^{QP}$ for CTL in Eq. (\ref{eq:ctl1}) and (\ref{eq:ctl2}) works well (as shown in Table \ref{table:path}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%RESULTS & DISCUSSION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+Most commonly, two-dimensional systems are synthesized with a few layers of the material, therefore understanding the effect of increasing thickness is essential to connect with realistic experiments. As such, we have computed the band gaps of monolayer, bilayer, trilayer and bulk \textit{h}-BN, as well as graphane with several hybrid functionals including HSE, PBE0, B3PW and \p0a (with $\alpha$ predicted earlier), as well as with \gwns @PBE for a reliable comparison (see Table \ref{table:gap}). As anticipated, PBE strongly underestimated monolayer \textit{h}-BN band gap: 4.71 eV with a direct transition at the K point. With any level of theory beyond PBE, monolayer \textit{h}-BN is predicted to have a larger, indirect gap from K to \gns. In accordance with quantum confinement, we observed that the band gaps of \textit{h}-BN obtained at B3PW,  \pans , and \gw show a sharp increase at ultrathin BN (monolayer to trilayer) compared to bulk BN. However, HSE and PBE0 provide almost the same band gaps between ultrathin and bulk BN. This is because there is a severe change in the dielectric screening from monolayer to bulk, and a different portion of Fock exchange must be instilled.
+
+Using \p0a we obtained results consistent with quantum confinement and in best agreement with our \gw calculations with a MAE of 0.14 eV (see SI Fig. 3). In addition, the B3PW functional~\cite{becke1993density,crowley2016resolution} provided a more accurate bulk BN band gap than PBE0 and HSE but still underestimated the band gaps of ultrathin BN. Therefore, the direct/indirect transitions and magnitude of the gaps from bulk to monolayer are provided accurately solely with \p0a and \gwns.
+%The measured band gap of bulk \textit{h}-BN is 6.08 eV with valence and conduction band extrema near the symmetric points K and M~\cite{expgap} respectively, in agreement with our B3PW, \pans , and \gw results (within 0.1 eV).
+In brief, the results shown in Table \ref{table:gap} validate our method for determining accurate fundamental band gaps for 2D materials from first-principles. We note that calculated band edge positions relative to vacuum are also similar at \p0a and \gw as shown in Fig. \ref{fig:ctl2} and SI.
+
+
+
+\subsection{Defect Ionization Energies in 2D Materials}
+Finally, CTLs and ionization energies for \cb in \textit{h}-BN computed at PBE, HSE, \p0a and $G_0W_0$ levels of theory as a function of number of layers are shown in Fig. \ref{fig:ctl2}. Consistent with the findings in Table \ref{table:path}, CTLs changed less than 0.1 eV across different theoretical methods relative to vacuum. Interestingly, no clear trend and only small difference have been found in the band edge positions of \textit{h}-BN from monolayer to triple layers. These results illustrate that one just needs to correct the band edge positions of pristine 2D materials with \p0a or \gwns , and use CTLs determined from DFT with semi-local functionals, then the difference of the two yields accurate defect ionization energies in 2D materials. On another note, we found there is a clear monotonic decrease in the ionization energies of defects in BN with increasing number of layers, mostly contributed by CTLs' shift towards vacuum (shown in Fig. \ref{fig:ctl2}; also see SI Fig. 5). This effect can be understood as a result of increased dielectric screening with more layers of \textit{h}-BN, and is consistent with the effect of dielectric environments on the ionization energies of MoS$_2$~\cite{noh2015deep}.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=0.5\linewidth]{3-2d/figures-prm/ie.pdf}
+\caption{Ionization energies of \cb in \textit{h}-BN with varying number of layers. It is observed that ionization energies decrease monotonically with increasing number of layers. Note that \p0a and \gw give results in excellent agreement.} \label{fig:ie}
+\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%CONCLUSION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conclusions}
+
+In summary, we established fundamental principles to reliably and efficiently compute ionization energies for defects in 2D materials.
+Specifically, band edge positions of the pristine systems should be computed with our proposed \p0a hybrid functional or GW approximations, and the defect CTL can be obtained reliably by standard DFT with semi-local functional, if relative to vacuum.
+We successfully applied the proposed methods for a variety of defects from monolayer to triple layer \textit{h}-BN, as well as  graphane.  We also demonstrated that defect ionization energies decreased with increasing number of layers in \textit{h}-BN, mainly due to enlarged dielectric screening. Our findings in this work suggest efficient and accurate methods to compute defect ionization energies and electronic structures in 2D materials, which can be applied to screening new promising defects for quantum information and optoelectronic applications.
