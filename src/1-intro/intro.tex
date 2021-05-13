@@ -9,34 +9,94 @@
 
 % general "big picture" motivation, will introduce briefly both renewable energy and quantum information science motivations
 Understanding and developing material properties is essential to solving some of societies greatest concerns. One such concern of particular interest is the desperate need for renewable energy sources.
-Advancing novel technologies for energy harvesting, conversion, and storage is critical to ensure the economic viability of U.S. energy and chemical industries \cite{eia,renewable}. For many of these technologies, a detailed understanding of chemical processes at electrochemical interfaces is essential. For instance, optimizing water splitting reactions at the semiconductor-water interface in photoelectrochemical cells is key for improving the device efficiency and stability for generating hydrogen fuel from water and sunlight \cite{mccrory2015}. Alternatively, the causes of oxidation and corrosion at the interface can be illuminated via chemical degradation processes \cite{huang2019}. Last but not least, understanding the relationship between reactivity and electronic properties of liquid electrolytes at the interface with electrode materials is also one of the prerequisites for manipulating the electrochemical stability of electrode-electrolyte interfaces in ion batteries and supercapacitors \cite{wang2018}.
+Advancing novel technologies for energy harvesting, conversion, and storage is critical to ensure the economic viability of U.S. energy and chemical industries.~\cite{eia,renewable} For many of these technologies, a detailed understanding of chemical processes at electrochemical interfaces is essential. For instance, optimizing water splitting reactions at the semiconductor-water interface in photoelectrochemical cells is key for improving the device efficiency and stability for generating hydrogen fuel from water and sunlight.~\cite{mccrory2015} Alternatively, the causes of oxidation and corrosion at the interface can be illuminated via chemical degradation processes.~\cite{huang2019} Last but not least, understanding the relationship between reactivity and electronic properties of liquid electrolytes at the interface with electrode materials is also one of the prerequisites for manipulating the electrochemical stability of electrode-electrolyte interfaces in ion batteries and supercapacitors.~\cite{wang2018}
 
-However, the development of renewable energy resources is only a single example of the type of problem in which material design is crucial. As another example, material science is unsurprisingly at the very heart of developing brand new technoligies, particularly those in the realm of quantum information science.
-% IBM quantum computer – superconducting qubits
+However, the development of renewable energy resources is only a single example of the type of problem in which material design is crucial. As another example, material science is unsurprisingly at the very heart of developing brand new technoligies, particularly those in the realm of quantum information science. The development of innovative quantum technologies is immanent and will make broad impacts on our national technology sector.~\cite{quantum} For example, point defects in two-dimensional materials are hosts for emerging quantum phenomena such as single-photon emitters and defect-based spin qubits. Both of these technologies neccesitate the development of material design.
 
+With the intention to expand these fields, the role of computational material science has grown immensely alongside ever-growing supercomputing facilities. These facilities enable calculations of large-scale simulations which provide improved theoretical understanding of these aforementioned fields. In particular, first-principles simulations allow us to better understand the quantum mechanical nature of materials, which is an essential part of their application. These simulations have proven to be pivotal in the evolution of many fields all the way from renewable energy to quantum technology.
 
-% copied bs.
-Meanwhile, the development of innovative quantum technologies is immanent and will make broad impacts on our national technology sector \cite{quantum}. With the intention to expand these fields, the role of computational science has grown immensely alongside ever-growing supercomputing facilities. These facilities enable calculations of large-scale simulations which provide improved theoretical understanding of these aforementioned fields. In particular, first-principles simulations allow us to better understand the quantum mechanical nature of materials, which is an essential part of their application. These simulations have proven to be pivotal in the evolution of many fields all the way from renewable energy to quantum technology.
+As such, my research in modeling materials from first-principles calculations is bifurcated into two branches of motivation: 1.\ renewable energy and energy conversion with transition metal oxides (TMOs) and 2.\ quantum information sciences in two-dimensional (2D) materials. In this dissertation I will discuss my research within both of these fields by covering the motivation behind my research, discussing progress achieved thus far and finally how these efforts have culiminated or are being extended.
 
-As such, my research in modeling materials from first-principles calculations is bifurcated into two branches of motivation: 1. renewable energy and energy conversion with transition metal oxides (TMOs) and 2. quantum information sciences in two-dimensional (2D) materials. In this proposal I will discuss my research within both of these fields by covering the motivation behind my research, discussing progress achieved thus far and finally how these efforts are naturally extending and culminating in my dissertation year.
-
-
-%
-The rational design of materials by accurate yet feasible computational approach can offer researchers the ability to discover and describe otherwise unattainable phenomena. Specifically in the era of supercomputers, large-scale calculations have reached the stage of being more obtainable than ever before, heightening the interest in the computational approach to science. Here, large-scale may refer to pushing the limits of computational resources in terms of processing power, computer memory, or simply time to complete the task. Specifically the past 10 years, the scale of these computational resources has grown exponentially. And perhaps to no surprise, so has humanities interest in utilizing these resources to achieve tasks once never believed possible.
-% <May put here a graph of supercomputer resources etc.>
-
-
-The task which is relevant to this dissertation is that of the multi-electron problem. In the interrelated field of physics, chemistry, and material science,  the multi-electron problem essentially refers to any problem beyond involving interactions between more than one electron, often in an external field.
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    section
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Multi-Electron Problem}
+\section{Density Functional Theory}
 
-\subsection{Hohenberg-Kohn-Sham Theory}
+\subsection{Background}
 
-The many-electron problem refers to any
+In the interrelated field of physics, chemistry, and material science, there is no greater problem than that of the electron. The electron can determine so many of the properties of material, from its ability to absorb light, conduct electrical currents, thermally or electrically insulate, and so much more. Hence, in order to have a grasp on fundamental material properties we must understand the electron and the quantum mechancial nature by which it lives by solving the multi-electron Schr{\"o}dinger equation (SE). The multi-electron problem essentially refers to any problem involving interactions between more than one electron, often in an external field. In principal, the problem is well understood in the formalism of Schr{\"o}dinger quantum mechanics, the Hamiltonian of the multi-electron system in a material with ion potential within the Born-Oppenheimer approximation (rigid ion approximation) is given by:
+\begin{align}
+    \left[ -\frac{\hbar^2}{2m} \sum_i \nabla_i^2 + \sum_i V_{ext} (\textbf{r}_i) + \frac{1}{2} \sum_{i\neq j} \frac{e^2}{|\textbf{r}_i-\textbf{r}_j|} \right] \Psi(\textbf{r}_1,\textbf{r}_2,\ldots\textbf{r}_N) = E\ \Psi(\textbf{r}_1,\textbf{r}_2,\ldots\textbf{r}_N)
+    \label{eq:multi-se}
+\end{align}
+However, this has its immediate challenges. Namely, even the classical (non-quantum) three body problem has no general solution! Clearly a non-analytical approach is needed. Such a non-analytical approach is discussed below and is the foundation of all density functional theory (DFT) calculations.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=\linewidth]{1-intro/figures/mean-field.png}
+\caption{Density functional theory is a mean field approach which replaces the many-electron problem with one of a single electron interacting with a mean-field electron density at a significantly reduced complexity while maintaining remarkable predictive power.}  \label{intro:fig:mean}
+\end{center}
+\end{figure}
+
+\subsection{Hohenberg Kohn and Sham}
+
+Typically, one may envision that given an external potential $V_{ext}(\textbf{r})$, one may solve the multi-electron SE as in Eq.~\ref{eq:multi-se}, determining all of the eigenstates of the SE, $\Psi_i({\textbf{r}})$. This would include a ground state $\Psi_0({\textbf{r}})$ wavefunction and corresponding ground-state density $n_0(\textbf{r})$. This process logically demonstrates that given an external potential, a unique ground state density can be found ($V_{ext}(\textbf{r})\Rightarrow n_0(\textbf{r})$). Hohenberg and Kohn's first theorem,~\cite{hohenberg1964inhomogeneous} demonstrates that the reverse is also true, namely that given a ground state denisty, one can find (up to a constant), a unique external potential, \textit{e.g.}\ $n_0(\textbf{r}) \Rightarrow V_{ext}(\textbf{r})$. In other words, all properties of the system are completely determined by the ground state density. Secondly, Hohenberg and Kohn defined that a universal functional of the energy $E[n]$ can be constructed for any external potential. And the ground state density is a global minimum of this functional, $E[n]\geq E[n_0]$.
+
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=\linewidth]{1-intro/figures/hks.png}
+    \caption{Top left, the true multi-particle potential and wavefunctions are replaced by an auxiliary single-particle system, as in the top right. At the end the Kohn-Sham method involves solving the Schr{\"o}dinger equation for the auxiliary Hamiltonian ($H_{KS}$) as defined on the bottom panel. Adapted from Ref.~\cite{martin2020electronic}.}  \label{intro:fig:hks}
+\end{center}
+\end{figure}
+
+Following these theorems by Hohenberg and Kohn, Kohn and Sham were able to demonstrate the very basis of density functional theory.~\cite{kohn1965self} Namely, they proved that there exists an auxiliary single-particle Hamiltonian ($H_{KS}$) with the exact same electron density ($n_0(\textbf{r})$) as would be obtained by solving the multi-particle system. Schematically the theorems of Hohenberg and Kohn (HK) as well as Kohn and Sham (KS) are shown in Figure~\ref{intro:fig:hks}.
+
+\subsection{Self-Consistent Approach}
+
+Today, there are many density functional theory (DFT) codes which are built upon the theory presented by Hohenberg, Kohn, and Sham. The exact procedure is shown in Figure~\ref{intro:fig:scf}. Specifically, an initial guess of the electron density is constructed. Here a basis set of gaussians (for molecular systems) or plane waves (for crystal systems) is constructed to represent the density and make the computation efficient and cheap. The typical guess of the electron density may involve a completely random guess or one utilizing a linear combination of atomic orbitals (or both). From this initial guess, the effective potential can be constructed, which is then solved by typical diagonalization methods such as Davidson or conjugate gradient. This will yield eigenfunctions ($\psi_i(\textbf{r})$) and a new electron density $n(\textbf{r})$. These electron density can be checked for self consistency (for example do they produce a similar total energy) and if not then they are mixed to create a new guess. Once self-consistency is reached we can obtain energy, forces, stress, eigenvalues, and so much more from the DFT approach.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[keepaspectratio=true,width=0.5\linewidth]{1-intro/figures/scf-loop.png}
+    \caption{The procedure of the self-consistent loop implemented in various density functional theory codes existing today.}  \label{intro:fig:scf}
+\end{center}
+\end{figure}
+
+
+\subsection{Electron-Electron interactions}
+
+In the auxiliary approach, there is a single functional component which is expected to capture the full many-body interacting electron problem, the exchange-correlation energy $E_{xc}[n]$. And much of the success of density functional theory must be paid to the success in finding an approximate exchange-correlation functional which yields reliable results.
+To cover all the many methods of exchange and correlation would be an unbearably difficult task. In practice, the most popular method by far is that of the local density approximation (LDA) which uses the approximate form of exchange-correlation one can obtain for an electron gas. Alternatively, the PBE functional is an immensely popular GGA (generalized gradient approximation) which is widely used today.~\cite{perdew1996generalized}
+
+The shortcoming of LDA and GGA, comes for systems where the electrons in the system deviate significantly from that of an electron gas. For example, transition metal oxides, which possess $3d$ orbitals exhibit strong correlation, and have been more successfully treated by including a Hubbard correction.~\cite{dudarev1998electron}
+\begin{align}
+    E_{\text{DFT}+\text{U}}=E_{\text{DFT}}+\frac{U_{\text{eff}}}{2}\sum_{I,\sigma}\sum_{i}\lambda_{i}^{I\sigma}(1-\lambda_{i}^{I\sigma})
+    \label{intro:eq:U}
+\end{align}
+Here, $E_\text{DFT}$ is the energy obtained from standard DFT methods which is corrected by the following term which includes the occupation matrix $\lambda_i^{I\sigma}$ ($I$ ranges over all ions, $i$ ranges over $3d$ orbitals and $\sigma$ is for spin up or down). For example, we have shown that applying a $U$ of 4.3 eV on Fe $3d$ orbitals in \ce{Fe2O3} yields bandgap, electron localization, hopping barrier, and ionization energies which agree with experiment.~\cite{smart2017effect}
+
+An alternative method, is built upon mixture of the semi-local PBE exchange-correlation functional and that of the non-local exact Hartree-Fock exchange:
+\begin{align}
+    E_x^{HF} = -\frac{1}{2} \sum_{i,j} \int\int \psi_i^*(\textbf{r}_1)\psi_j^*(\textbf{r}_2) \frac{1}{r_{12}} \psi_j(\textbf{r}_1)\psi_i(\textbf{r}_2) d\textbf{r}_1 d\textbf{r}_2
+    \label{intro:eq:HF}
+\end{align}
+A popular and most simple hybrid functional method (PBE0($\alpha$)) mixes $E_x^{HF}$ with that obtained from PBE:
+\begin{align}
+    E_{x}^{PBE0}(\alpha) = (1-\alpha) E_x^{PBE} + \alpha E_x^{HF},
+    \label{intro:eq:PBE0a}
+\end{align}
+where most commonly $alpha=0.25$ (denoted simply PBE0). Other variations of hybrid functionals, including HSE, B3LYP, and B3PW, will be discussed in necessary detail as they pertain to the research in later sections.
+
+
+More exact methods of including many-body interactions include the GW approximation. In the one shot $G_0W_0$ (here all cases will be oneshot, so I will simply write GW instead of explicitly $G_0W_0$) approach the self energy $\Sigma$ pertubatively replaces the XC functional obtained in DFT. First the single particl Green's function is constructed:
+\begin{align}
+    G_0 = \sum_i \frac{\varphi_i(r)\varphi_i^*(r')}{\omega-\varepsilon_i \pm i\eta },
+    \label{intro:eq:g0}
+\end{align}
+where $\varphi_i$ and $\varepsilon_i$ are eigenfunctions and eigenvalues obtained from DFT. Then the screened Coulomb interaction can be obtained where the vertex $\Gamma = 1$, $W = v/(1+\chi_0 v) = \epsilon^{-1} v$. Here the polarizability is obtained directly from the Green's function $P_0=G_0G_0$. The new new self energy is then obtained as $\Sigma = iG_0W_0$, and quasi-particle corrections are obtained from 1$^\text{st}$ order perturbation theory with $V_p = \Sigma - V_{xc}$.
 
 
 
@@ -45,26 +105,22 @@ The many-electron problem refers to any
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Formalism of Charged Defect Formation}
 
-Add intro here, may change dependening... Reword the below a bit.
-
-Defect formation energies and charge transition levels are the fundamental properties of defects in solids, where the former represents how easily a defect can form at a specific chemical condition and the latter represents how easily the defect can be ionized or excited.
+The below research takes special interst into the formation of impurities into crystal lattices. These impurities could include native vacancies, interstitials, and antisites but also extrinsic dopants and localized carriers (small polarons will be discussed later).
+The most fundamental properties of these impurities are their formation energy (how easily the impurity can form in the lattice) and their ionization energy (how easily the impurity changes charge state and contributes electrons or holes).
+Below an overview is provided on computing formation energies from First-Principles.
 
 \subsection{Elemental Chemical Potentials}
-% the discussion here is similar to https://pubs.rsc.org/en/content/articlepdf/2013/cp/c3cp53311e and https://pubs.acs.org/doi/pdf/10.1021/acs.jpcc.5b08081 but also https://pubs.acs.org/doi/pdf/10.1021/acs.chemmater.8b05362
-The chemical potential of Fe and O was evaluated from first principles following the approach employed in Ref.~\cite{lee2013thermodynamics}.
-Namely, for \ce{Fe2O3} in thermodynamic equilibrium growth conditions, the chemical potentials $\mu_{\rm Fe}$ and $\mu_{\rm O}$ must satisfy Eq.~\ref{eq:chem_fe2o3}$-$\ref{eq:chem_poor}:
+In order to evalute the formation of atomic impurities the source of the impurities need to be evaluated in the form of a chemical potential. Rather than introduce this notion abstractly, below I present the procedure for obtaining chemical potential energies for the \ce{CsPbBr3} compound.
+For, \ce{CsPbBr3} the chemical potential of atomic Cs, Pb, and Br can be evaluated by determining the stability of the parent compound \ce{CsPbBr3} against its byproducts.
+Namely in thermodynamic equilibrium growth conditions, the chemical potentials $\mu_{\rm Cs}$, $\mu_{\rm Pb}$ and $\mu_{\rm Br}$ must satisfy Eq.~\ref{intro:eq:chem_parent}$-$\ref{intro:eq:chem_byproduct}:
 \begin{align}
-    2\Delta \mu_{\rm Fe} + 3\Delta \mu_{\rm O} = \Delta H_{\ce{Fe2O3}} \label{eq:chem_fe2o3} \\
-    2\Delta \mu_{O} \leq  \Delta H_{\ce{O2}} \label{eq:chem_rich} \\
-    3\Delta \mu_{\rm Fe} + 4\Delta \mu_{\rm O} \leq \Delta H_{\ce{Fe3O4}} \label{eq:chem_poor}
+    & \Delta \mu_{\rm Cs} + \Delta \mu_{\rm Pb} + 3\Delta \mu_{\rm Br} = \Delta H_{\ce{CsPbBr3}} \label{intro:eq:chem_parent} \\
+    & i\Delta \mu_{\rm Cs} + j\Delta \mu_{\rm Pb} + k\Delta \mu_{\rm Br} \leq \Delta H_{ {\rm Cs}_i {\rm Pb}_j {\rm Br}_k}, \hspace{0.5cm} (i, j, k) \in \mathbb{N}. \label{intro:eq:chem_byproduct}
 \end{align}
-where $\Delta \mu_{\rm i}$ is the chemical potential of species $i$ referenced to its most stable phase.
-In an O rich environment, \ce{Fe2O3} will be in equilibrium with \ce{O2} as in Eq.~\ref{eq:chem_rich}, whereas in an O poor environment (Fe rich), \ce{Fe2O3} will be in equilibrium with \ce{Fe3O4} as in Eq.~\ref{eq:chem_poor}.
-In order to correct the well-known overbinding problem of O$_2$ by DFT, we use the experimental value of 5.23 eV for the binding energy of \ce{O2} in order to correct the total energy of \ce{O2} computed by DFT. \cite{wang2006oxidation}
-Meanwhile, the chemical potential of each tetravalent dopant $X$ was computed as in Ref.~\cite{zhou2015understanding}, where after obtaining the chemical potential of O in the rich/poor limit, the chemical potential $\Delta \mu_{\rm X}$ can be computed from Eq.~\ref{eq:chem_x}.
-\begin{align}
-    \Delta \mu_X + 2\Delta \mu_{\rm O} \leq \Delta H_{X{\rm O}_2} \label{eq:chem_x}
-\end{align}
+Here $\Delta \mu_{\rm X}$ is the chemical potential of species $X$ referenced to its most stable phase.
+In Eq.~\ref{intro:eq:chem_byproduct}, ${\rm Cs}_i {\rm Pb}_j {\rm Br}_k$ refers to possible byproducts of \ce{CsPbBr3}, e.g.\ \ce{Cs}, \ce{Pb}, \ce{Br2}, \ce{CsBr}, \ce{CsBr3}, \ce{PbBr2}, \ce{Cs4Pb9}, and \ce{Cs4PbBr6}.
+From Eq.~\ref{intro:eq:chem_parent}$-$\ref{intro:eq:chem_byproduct} and considering each of these byproducts we obtained a phase diagram as shown in the main text Figure 2a. The results are in good agreement with previous reported diagrams for \ce{CsPbBr3}.~\cite{kang2017high,li2019sodium}
+More details can be found at \url{https://github.com/Ping-Group-UCSC/PhaseDiagram} and in particular see \href{https://github.com/Ping-Group-UCSC/PhaseDiagram/blob/main/Examples/CsPbBr3-PhaseDiagram/diagram.ipynb}{the \ce{CsPbBr3} tutorial} (NOTE: at the time of this writing, this link is only available internally within the Ping Group).
 
 
 \subsection{Defect Formation Energy and Ionization Energy}
@@ -72,31 +128,51 @@ The charge defect formation energy provides insight into the charge states of do
 We computed the charge defect formation energy ($E^f_q$) of each defect system according to:
 \begin{align}
     E^f_q(X; \varepsilon_F) = E_q(X) - E_{prist} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q,
-    \label{eq:cfe}
+    \label{intro:eq:cfe}
 \end{align}
-where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ was computed for charged cell calculations with the JDFTx code \cite{JDFTx} by employing the techniques developed in Ref.~\cite{wu2017first,ping2013}. Meanwhile, the chemical potentials were carefully evaluated against the stability of byproduct compounds as detailed above.
+where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ must be computed for charged cell calculations. For the cases presented here, with the JDFTx code~\cite{JDFTx} by employing the techniques developed in Ref.~\cite{wu2017first,ping2013}. Meanwhile, chemical potentials can be carefully evaluated against the stability of byproduct compounds as detailed above.
 Finally, the corresponding charge transition levels of the defects can be obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
 \begin{align}
     \epsilon_{q|q'} = \frac{E^f_q - E^f_{q'}}{q' - q}
     \label{eq:ctl}
 \end{align}
-Typically, for a semiconductor or insulator the ionization energy of a p-type/n-type dopant is given by the value(s) of its charge transition level(s) referenced to the valence/conduction band edge of the host materials. However, in systems which form small polarons the ionization energy should be referenced to the free polaron state. \cite{seo2018role} Here the free electron small polaron level is defined as the $\epsilon_{0|-1}$ transition level in the pristine system. In this way the free polaron level was computed and all ionization energies of n-type defects/dopants in this paper are referenced to this level.
+Typically, for a semiconductor or insulator the ionization energy of a p-type/n-type dopant is given by the value(s) of its charge transition level(s) referenced to the valence/conduction band edge of the host materials. However, in systems which form small polarons the ionization energy should be referenced to the free polaron state.~\cite{smart2017effect,seo2018role} For example, the free electron small electron polaron level is defined as the $\epsilon_{0|-1}$ transition level in the pristine system.
 
 
 
 \subsection{Defect Concentration}
-In order to relate the effects of doping directly to polaron concentrations, we can compute the defect concentrations self-consistently by evaluating charge neutrality based on the formation energy of each defect. Following the formalism presented in Ref.~\cite{freysoldt2014first}, the charged defect concentration ($c_q$) is computed as:
+In order to simultaneously consider defect, dopant, and carrier fomrations, I implemented the procedure of defect concentrations via a self-consistent approach based on charge neutrality. Following the formalism presented in Ref.~\cite{freysoldt2014first}, the charged defect concentration ($c_q$) is computed as:
 \begin{align}
     c_q(X; \varepsilon_F) = g \exp [- E^f_q(X; \varepsilon_F) / k_B T],
 \end{align}
 where $g$ is the degeneracy factor accounting for the internal degrees of freedom of the point defect, $k_B$ is the Boltzmann factor, and $T$ is temperature. In order to maintain neutrality, the introduction of defect $X$ with charge $q$ into the lattice must be compensated by defects of opposing charge or through the generation of free carriers. Specifically charge neutrality must be held:
 \begin{align}
-    \sum_{X,q} c_q(X; \varepsilon_F) + n_h - n_e = 0, \label{eq:neutrality}
+    \sum_{X,q} c_q(X; \varepsilon_F) + n_h - n_e = 0, \label{intro:eq:neutrality}
 \end{align}
 where the concentration of free delocalized holes ($n_h$) and free delocalized electrons ($n_e$) can be evaluated via:
 \begin{align}
     n_e - n_h = \int_{-\infty}^{\infty} dE \frac{D(E)}{1+\exp[(E-\varepsilon_F)/k_B T]}.
 \end{align}
-Here $D(E)$ is the electronic density of states of the pristine system. Eq.~\ref{eq:neutrality} can be evaluated by standard root-finding algorithms to obtain $\varepsilon_F$ where charge neutrality is held.
-Note, in hematite free electrons will localize into small polarons, and so the formation of free electron small polarons is entered in a similar way to a defect, i.e.\ with a formation energy.
-Finally, in order to relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K while maintaining defects total concentrations similar to methods employed by Ref.~\cite{lee2013thermodynamics}.
+Here $D(E)$ is the electronic density of states of the pristine system. Eq.~\ref{intro:eq:neutrality} can be evaluated by standard root-finding algorithms to obtain $\varepsilon_F$ where charge neutrality is held.
+Note, for systems where free carriers will localize into small polarons, the formation of free electron small polarons is entered in a similar way to a defect, i.e.\ with a formation energy.
+Finally, in order to relate to experimental measurements, concentrations are first computed at a synthesis temperature ($T_S$) and then charge neutrality is recomputed at room temperature ($T_O=300$ K) while fixing the total defect concentration to that obtained at synthesis condition as employed by Ref.~\cite{lee2013thermodynamics}.
+The software computing defect concentrations cane be found (for Ping Group members) at \url{https://github.com/Ping-Group-UCSC/DefectConcentration}.
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    section
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Defect Mediated Carrier Recombination}
+
+\subsection{Radiative Recombination}
+
+
+\subsection{Nonradiative Recombination}
+
+
+\subsection{Intersystem Crossing}
+
+
+\subsection{Photodynamics}
+
+% Zero field splitting mentioned here, will go into appendix

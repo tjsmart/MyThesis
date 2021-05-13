@@ -1,0 +1,491 @@
+\def\bS{\mathbf{\hat{S}}}
+\def\bD{\mathbf{D}}
+\def\H{\mathcal{\hat{H}}_D}
+\def\br{\mathbf{r}}
+\def\bR{\mathbf{R}}
+\def\bG{\mathbf{G}}
+\def\bC{\mathbf{C}}
+\def\intinf{\int_{-\infty}^{\infty}}
+
+\newcommand{\svar}[1]{\hat{S}_{#1}}
+\newcommand{\ovar}[1]{\hat{\sigma}_{#1}}
+
+\chapter{Zero-Field Splitting}
+
+\section{Dipole-Dipole Spin Hamiltonian}
+
+This section follows chapter 6 in Ref.~\cite{weil2007electron} closely. Here is a method for computing spin-spin contribution of the zero-field splitting from Kohn-Sham orbitals at defect centers with high spin ($S > 1$). Originally, we consider the spin-spin interaction of two dipole moments $\bS_1$ and $\bS_2$, separated by $\br$:
+\begin{align}
+    \H = \frac{\mu_0}{4\pi}g^2\mu_B^2\left[\frac{ \bS_1\cdot\bS_2}{r^3}-3\frac{(\bS_1\cdot\br)(\bS_2\cdot\br)}{r^5} \right]
+    \label{zfs:eq:1}
+\end{align}
+where $g$ is the electron g-factor and $\mu_B$ is the Bohr magneton. Expanding scalar products gives:
+\begin{align}
+    \H =& \frac{\mu_0}{4\pi}\frac{g^2\mu_B^2}{r^5}\bigg[ (r^2-3x^2)\svar{1x}\svar{2x}
+    + (r^2-3y^2)\svar{1y}\svar{2y} + (r^2-3z^2)\svar{1z}\svar{2z} \label{zfs:eq:2} \\
+    & - 3xy(\svar{1x}\svar{2y}+\svar{1y}\svar{2x}) - 3xz(\svar{1x}\svar{2z}+\svar{1z}\svar{2x})
+    - 3yz(\svar{1y}\svar{2z}+\svar{1z}\svar{2y}) \bigg] \nonumber \, .
+\end{align}
+Now we seek to convert from the operators $\bS_1$ and $\bS_2$ to the combinatory $\bS = \bS_1+\bS_2$. It easily shown (see appendix) that:
+\begin{align}
+    \svar{1x}\svar{2x}=\frac{1}{2}\hat{S}_x^2-\frac{1}{4}\mathbb{1}
+    \label{zfs:eq:3}
+\end{align}
+and
+\begin{align}
+    \svar{1x}\svar{2y}+\svar{1y}\svar{2x}=\frac{1}{2}(\hat{S}_x\hat{S}_y+\hat{S}_y\hat{S}_x)\, .
+    \label{zfs:eq:4}
+\end{align}
+Inserting Eq.~\ref{zfs:eq:3} and Eq.~\ref{zfs:eq:4} into Eq.~\ref{zfs:eq:2} gives:
+\begin{align}
+    \H =& \frac{\mu_0}{4\pi}\frac{g^2\mu_B^2}{r^5}\frac{1}{2}\bigg[ (r^2-3x^2)\svar{x}^2
+    + (r^2-3y^2)\svar{y}^2 + (r^2-3z^2)\svar{z}^2 \label{zfs:eq:5} \\
+    & - 3xy(\svar{x}\svar{y}+\svar{y}\svar{x}) - 3xz(\svar{x}\svar{z}+\svar{z}\svar{x})
+    - 3yz(\svar{y}\svar{z}+\svar{z}\svar{y}) \bigg] \nonumber \, .
+\end{align}
+which is analogous to Eq.~\ref{zfs:eq:2} but is in terms of a single spin operator $\bS$. Therefore Eq.~\ref{zfs:eq:5} can be converted into a typical spin-hamiltonian form where $\braket{\,}$ represents integration over real space wavefunctions.
+\begin{align}
+    \H = \bS^{T}\cdot\bD\cdot\bS
+    \label{zfs:eq:6}
+\end{align}
+\begin{align}
+    \bD = \frac{\mu_0}{8\pi}g^2\mu_B^2
+        \begin{bmatrix}
+        \braket{\frac{r^2-3x^2}{r^5}} &
+        \braket{\frac{-3xy}{r^5}}     &
+        \braket{\frac{-3xz}{r^5}}     \\
+        &
+        \braket{\frac{r^2-3y^2}{r^5}} &
+        \braket{\frac{-3yz}{r^5}}     \\
+        &
+        &
+        \braket{\frac{r^2-3z^2}{r^5}} &
+        \end{bmatrix}
+    \quad \quad
+    \bS =
+    \begin{bmatrix}
+    \svar{x} \\
+    \svar{y} \\
+    \svar{z}
+    \end{bmatrix}
+    \label{zfs:eq:7}
+\end{align}
+
+
+\section{Two Particle Wavefunctions from DFT Calculations}
+
+This section follows Ref.~\cite{rayson2008first} exactly. Here we are interested in the evaluation of integrals of the form:
+\begin{align}
+    I_{ab}=\iint\rho(\br_1,\br_2)f_{ab}(\br_1-\br_2)\, d\br_1\, d\br_2 \, ,
+    \label{zfs:eq:8}
+\end{align}
+with
+\begin{align}
+    f_{ab}(\br_1-\br_2)=\frac{r^2\delta_{ab}-3r_ar_b}{r^5} \, ,
+    \label{zfs:eq:9}
+\end{align}
+$\br=\br_1-\br_2$ and $a,b \in \{x,y,z\}$. Here $\rho(\br_1,\br_2)$ is the two-particle charge density which is constructed by the anti-symmetric product of single particle orbitals:
+\begin{align}
+    \Psi(\br_1,\br_2)=\frac{1}{\sqrt{2}}\left[ \psi_i(\br_1)\psi_j(\br_2) - \psi_i(\br_2)\psi_j(\br_1) \right] \, .
+    \label{zfs:eq:10}
+\end{align}
+And thus the two particle charge density is given by (note $f_{ab}$ is symmetric under particle exchange):
+\begin{align}
+    \rho(\br_1,\br_2)=\left[
+    \psi_i^*(\br_1)\psi_j^*(\br_2)\psi_i(\br_1)\psi_j(\br_2) - \psi_i^*(\br_2)\psi_j^*(\br_1)\psi_i(\br_1)\psi_j(\br_2) \right] \, .
+    \label{zfs:eq:11}
+\end{align}
+
+Here we alleviate the expense in this calculation by expanding $\rho(\br_1,\br_2)$ in terms of plane waves and thus circumventing the cost from direct integration. This expansion gives
+\begin{align}
+    \rho(\br_1,\br_2) = \sum_{\bG_1,\bG_2} \rho(\bG_1,\bG_2) e^{i\bG_1\cdot\br_1} e^{i\bG_2\cdot\br_2}
+    \label{zfs:eq:12}
+\end{align}
+and thus
+\begin{align}
+    I_{ab} = \frac{1}{8} \sum_{\bG_1,\bG_2} \rho(\bG_1,\bG_2)\iint
+    e^{i[\br\cdot(\bG_1-\bG_2)]/2} e^{i[\bR\cdot(\bG_1+\bG_2)]/2} f_{ab}(\br)\, d\br\, d\bR \, ,
+    \label{zfs:eq:13}
+\end{align}
+where $\br=\frac{1}{2}(\br_1-\br_2)$ and $\bR=\frac{1}{2}(\br_1+\br_2)$, with $d\br_1\,d\br_2=1/2\,d\br\, d\bR$. The integration over $\bR$ can be done directly and yields $8\Omega\delta_{\bG_1,-\bG_2}$. Therefore $\bG_1=-\bG_2=\bG$ and Eq.~\ref{zfs:eq:13} simplifies to
+\begin{align}
+    I_{ab} = \Omega \sum_{\bG} \rho(\bG,-\bG)\int
+    e^{i\bG\cdot\br} f_{ab}(\br)\, d\br\, ,
+    \label{zfs:eq:14}
+\end{align}
+where $\Omega$ is the volume of the unit cell. The integration over $r$ is slightly more tricky but can still be evaluated to give the final result (see appendix for integration over $\bR$ and $\br$)
+\begin{align}
+    I_{ab} = 4\pi\Omega \sum_\bG \rho(\bG,-\bG) \left( \frac{G_aG_b}{G^2} - \frac{\delta_{ab}}{3} \right)\, ,
+    \label{zfs:eq:15}
+\end{align}
+where
+\begin{align}
+D_{ab}= \frac{\mu_0}{4\pi}g^2\mu_{B}^2\, \left[\frac{1}{2}I_{ab}\right] \, .
+    \label{zfs:eq:16}
+\end{align}
+Therefore the spin-spin Hamiltonian is given by (Ref.~\cite{ivady2014pressure})
+\begin{align}
+    \H = D \left(\svar{z}^2-\frac{S(S+1)}{3} \right) + E \left(\frac{\svar{+}^2+\svar{-}^2}{2}\right) \, ,
+    \label{zfs:eq:17}
+\end{align}
+with
+\begin{align}
+    D=\frac{3}{2}D_{zz} \, , \quad
+    E=\frac{D_{yy}-D_{xx}}{2}  \, , \quad
+    \svar{\pm} = \svar{x} \pm i \, \svar{y}
+    \label{zfs:eq:18}
+\end{align}
+
+
+\section{Beyond two-band result}
+
+Consider a two particle wavefunction built of parallel spin electrons with $i\neq j$:
+\begin{align}
+    \Psi^\alpha(1,2)&=\frac{1}{\sqrt{2}} \begin{bmatrix}
+    \psi_i^\alpha(1) &
+    \psi_j^\alpha(1) \label{zfs:eq:19} \\
+    \psi_i^\alpha(2) &
+    \psi_j^\alpha(2)
+   \end{bmatrix} \\
+   &= \frac{1}{\sqrt{2}}\left[ \psi_i^\alpha(1)\psi_j^\alpha(2) - \psi_i^\alpha(2)\psi_j^\alpha(1) \right]
+    \label{zfs:eq:20}
+\end{align}
+The corresponding two particle density is:
+\begin{align}
+    \rho^{\alpha} &= \Psi^\alpha(1,2)^* \Psi^\alpha(1,2) \label{zfs:eq:21} \\
+    &= \frac{1}{2} \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_j^\alpha(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_j^\alpha(1)|^2 \label{zfs:eq:22} \\
+    &\hspace{1cm}- \psi_i^\alpha(1)^*\psi_j^\alpha(2)^*\psi_i^\alpha(2)\psi_j^\alpha(1)
+                 - \psi_i^\alpha(2)^*\psi_j^\alpha(1)^*\psi_i^\alpha(1)\psi_j^\alpha(2)
+    \bigg]
+    \nonumber
+\end{align}
+Consider a two particle wavefunction built of anti-parallel spin electrons with $i\neq j$:
+\begin{align}
+    \Psi^{\alpha\beta}(1,2)&=\frac{1}{\sqrt{2}} \begin{bmatrix}
+    \psi_i^\alpha(1) &
+    \psi_j^\beta(1) \\
+    \psi_i^\alpha(2) &
+    \psi_j^\beta(2)
+   \end{bmatrix} \label{zfs:eq:23} \\
+   &= \frac{1}{\sqrt{2}}\left[ \psi_i^\alpha(1)\psi_j^\beta(2) - \psi_i^\alpha(2)\psi_j^\beta(1) \right]
+    \label{zfs:eq:24}
+\end{align}
+The corresponding two particle density is:
+\begin{align}
+    \rho^{\alpha\beta} &= \Psi^{\alpha\beta}(1,2)^* \Psi^{\alpha\beta}(1,2) \label{zfs:eq:25} \\
+    &= \frac{1}{2} \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_j^\beta(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_j^\beta(1)|^2 \label{zfs:eq:26} \\
+    &\hspace{1cm} - \psi_i^\alpha(1)^*\psi_j^\beta(2)^*\psi_i^\alpha(2)\psi_j^\beta(1)
+    - \psi_i^\alpha(2)^*\psi_j^\beta(1)^*\psi_i^\alpha(1)\psi_j^\beta(2)
+    \bigg] \nonumber \\
+    &=\frac{1}{2} \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_j^\beta(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_j^\beta(1)|^2 \bigg]
+    \label{zfs:eq:27}
+\end{align}
+
+
+The full many-particle D tensor including spin operator terms is given by (see Eq. 18 of Ref.~\cite{rayson2008first} and Eq. 31 of Ref.~\cite{ganyushin2006first}):
+\begin{align}
+    D_{ab}=&\frac{1}{S(2S-1)} \left[
+        \sum_{i>j}\braket{\Psi|f_{ab}(\br_i,\br_j)
+        (2\svar{i_z}\svar{j_z}-\svar{i_x}\svar{j_x}-\svar{i_y}\svar{j_y})|\Psi}
+        \right] \label{zfs:eq:28} \\
+    =&\frac{1}{S(2S-1)} \bigg[
+        \frac{1}{2}\sum_{i>j}\braket{\Psi|f_{ab}(\br_i,\br_j)
+        \ovar{i_z}\ovar{j_z}|\Psi} \label{zfs:eq:29} \\
+        &\hspace{1cm}-\frac{1}{4}\sum_{i>j}\braket{\Psi|f_{ab}(\br_i,\br_j)
+        \ovar{i_x}\ovar{j_x}|\Psi}
+        -\frac{1}{4}\sum_{i>j}\braket{\Psi|f_{ab}(\br_i,\br_j)
+        \ovar{i_y}\ovar{j_y}|\Psi}
+        \bigg]
+    \nonumber
+\end{align}
+Recalling that $\ovar{z}\ket{\pm}=\pm\ket{\pm}$, $\ovar{x}\ket{\pm}=\ket{\mp}$, and $\ovar{y}\ket{\pm}=\pm i\ket{\mp}$. We have:
+\begin{align}
+    &\text{for parallel spin states: }&
+        \ovar{i_z}\ovar{j_z} = 1 \text{,  }
+        \ovar{i_x}\ovar{j_x} = 1 \text{,  }
+        \ovar{i_y}\ovar{j_y} = -1 \text{,  } \label{zfs:eq:30} \\
+    &\text{for anti-parallel spin states: }&
+        \ovar{i_z}\ovar{j_z} = -1 \text{,  }
+        \ovar{i_x}\ovar{j_x} = 1 \text{,  }
+        \ovar{i_y}\ovar{j_y} = 1 \text{. }
+        \label{zfs:eq:31}
+\end{align}
+Now we consider each term in Eq.~\ref{zfs:eq:29}, first for the case of parallel spins then in the case of anti-parallel spins.\\
+Parallel spins ($\ovar{i_z}\ovar{j_z}$ term):
+\begin{align}
+    (\ovar{i_z}\ovar{j_z})\rho^{\alpha} &= \Psi^\alpha(1,2)^*(\ovar{i_z}\ovar{j_z})\Psi^\alpha(1,2) \label{zfs:eq:32} \\
+     &= \Psi^\alpha(1,2)^*\Psi^\alpha(1,2) \label{zfs:eq:33} \\
+    &= \frac{1}{2} \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_j^\alpha(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_j^\alpha(1)|^2 \label{zfs:eq:34} \\
+    &\hspace{2cm}- \psi_i^\alpha(1)^*\psi_j^\alpha(2)^*\psi_i^\alpha(2)\psi_j^\alpha(1) \notag \\
+    &\hspace{2cm}- \psi_i^\alpha(2)^*\psi_j^\alpha(1)^*\psi_i^\alpha(1)\psi_j^\alpha(2) \bigg] \notag \\
+    f_{ab}(1,2)(\ovar{i_z}\ovar{j_z})\rho^{\alpha}&= J_{ij}^{\alpha} - K_{ij}^{\alpha} \label{zfs:eq:35}
+\end{align}
+Parallel spins ($\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y}$ term):
+% , since these terms both flip the spin of the operand, they will be identical up to their sign which will be opposite as noted above, for parallel spins $\ovar{i_x}\ovar{j_x}=1$ and $\ovar{i_y}\ovar{j_y}=-1$. Therefore:
+\begin{align}
+    (\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\rho^{\alpha} &= \Psi^\alpha(1,2)^*(\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\Psi^\alpha(1,2) \label{zfs:eq:36} \\
+    &= \Psi^\alpha(1,2)^*\Psi^\beta(1,2) - \Psi^\alpha(1,2)^*\Psi^\beta(1,2) \label{zfs:eq:37} \\
+    f_{ab}(1,2)(\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\rho^{\alpha}&= 0
+    \label{zfs:eq:38}
+\end{align}
+Anti-parallel spins ($\ovar{i_z}\ovar{j_z}$ term):
+\begin{align}
+    (\ovar{i_z}\ovar{j_z})\rho^{\alpha\beta} &= \Psi^{\alpha\beta}(1,2)^*(\ovar{i_z}\ovar{j_z})\Psi^{\alpha\beta}(1,2) \label{zfs:eq:39} \\
+    &= - \Psi^{\alpha\beta}(1,2)^*\Psi^{\alpha\beta}(1,2) \label{zfs:eq:40} \\
+    &= - \frac{1}{2} \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_j^\beta(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_j^\beta(1)|^2
+    \bigg] \label{zfs:eq:41} \\
+    f_{ab}(1,2)(\ovar{i_z}\ovar{j_z})\rho^{\alpha\beta}&= - J_{ij}^{\alpha\beta}  \label{zfs:eq:42}
+\end{align}
+Anti-parallel spins ($\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y}$ term):
+\begin{align}
+    (\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\rho^{\alpha\beta} &= \Psi^{\alpha\beta}(1,2)^*(\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\Psi^{\alpha\beta}(1,2)  \label{zfs:eq:43} \\
+    &= 2\Psi^{\alpha\beta}(1,2)^*\Psi^{\beta\alpha}(1,2)  \label{zfs:eq:44} \\
+    &= \bigg[
+    \psi_i^\alpha(1)^*\psi_i^\beta(1)\psi_j^\beta(2)^*\psi_j^\alpha(2)  \label{zfs:eq:45} \\
+    &\hspace{2cm} + \psi_i^\alpha(2)^*\psi_i^\beta(2)\psi_j^\beta(1)^*\psi_j^\alpha(1) \notag \\
+    &\hspace{2cm} - \psi_i^\alpha(1)^*\psi_j^\beta(2)^*\psi_i^\beta(2)\psi_j^\alpha(1) \notag \\
+    &\hspace{2cm} - \psi_i^\alpha(2)^*\psi_j^\beta(1)^*\psi_i^\beta(1)\psi_j^\alpha(2) \bigg]  \notag \\
+    f_{ab}(1,2)(\ovar{i_x}\ovar{j_x} + \ovar{i_y}\ovar{j_y})\rho^{\alpha\beta}&= - 2K_{ij}^{\alpha\beta}
+    \label{zfs:eq:46}
+\end{align}
+Plugging Eq.~\ref{zfs:eq:35} (both up and down), Eq.~\ref{zfs:eq:38}, Eq.~\ref{zfs:eq:42}, and Eq.~\ref{zfs:eq:46} into Eq.~\ref{zfs:eq:29} gives:
+\begin{align}
+    D_{ab}
+    =&\frac{1}{S(2S-1)} \left[
+        \frac{1}{2}(\sum_{i>j}^{\alpha}J_{ij}^{\alpha} - K_{ij}^{\alpha})
+        +\frac{1}{2}(\sum_{i>j}^{\beta}J_{ij}^{\beta} - K_{ij}^{\beta})
+        +\frac{1}{2}(\sum_{i>j}^{\alpha\beta}-J_{ij}^{\alpha\beta})
+        -\frac{1}{4}(\sum_{i>j}^{\alpha\beta}-2K_{ij}^{\alpha\beta})
+        \right]
+\end{align}
+\textit{Origin of each term:} $\hspace{1.7cm}\text{Eq.~\ref{zfs:eq:35}}
+\hspace{1.9cm}\text{Eq.~\ref{zfs:eq:35}}
+\hspace{1.5cm}\text{Eq.~\ref{zfs:eq:42}}
+\hspace{1.5cm}\text{Eq.~\ref{zfs:eq:46}}$\\
+\\
+Therefore in final we have:
+\begin{align}
+    D_{ab}
+    =&\frac{1}{2S(2S-1)}
+        \sum_{i>j}\chi_{ij}(J_{ij} - K_{ij})
+\end{align}
+Note that the inclusion of an anti-parallel $i=j$ term is theoretically possible but resolves to zero. This is because in this case the $J$ and $K$ term will cancel:
+\begin{align}
+    K_{ii}^{\alpha\beta} &= f_{ab}(1,2) \bigg[
+    \psi_i^\alpha(1)^*\psi_i^\beta(2)^*\psi_i^\beta(2)\psi_i^\alpha(1)
+    + \psi_i^\alpha(2)^*\psi_i^\beta(1)^*\psi_i^\beta(1)\psi_i^\alpha(2)
+    \bigg]  \\
+    &=f_{ab}(1,2) \bigg[
+    |\psi_i^\alpha(1)|^2|\psi_i^\beta(2)|^2
+    + |\psi_i^\alpha(2)|^2|\psi_i^\beta(1)|^2
+    \bigg] \\
+    &= J_{ii}^{\alpha\beta}
+\end{align}
+
+
+\section{Important notes}
+
+\textbf{Spin Contamination} One very important drawback when approximating the multielectron wavefunction with Kohn-Sham wavefunctions as in Eq.~\ref{zfs:eq:10} is the affect of spin-contamination. In principle, the sum over multiple states above may not be necessary and terms where $i=j$ for anti-parallel should cancel to zero. However, due to the construction of a Slater determinant from spin-unrestricted DFT calculations, the wavefunctions are no longer eigenfunctions of the total spin operator $S^2$, thereby introducing error into the calculation of ZFS (see Ref.~\cite{biktagirov2018calculation} for more detail). Hence a more appropriate form of Eq.~\ref{zfs:eq:48} should be written as:
+\begin{align}
+    D_{ab}
+    =&\frac{1}{S(2S-1)} \left[
+        \frac{1}{2}(\sum_{i>j}^{\alpha}J_{ij}^{\alpha} - K_{ij}^{\alpha})
+        +\frac{1}{2}(\sum_{i>j}^{\beta}J_{ij}^{\beta} - K_{ij}^{\beta})
+        -\frac{1}{2}(\sum_{i}^{\alpha}\sum_{j}^{\beta}J_{ij}^{\alpha\beta}-K_{ij}^{\alpha\beta})
+        \right]
+\end{align}
+Therefore there are $\binom{\alpha+\beta}{2}$ number of $J_{ij}-K_{ij}$ terms to be computed. This form is more explicit to what is actually implemented in the code.
+\medskip
+
+\textbf{Convert $G$ vectors to Cartesian} A second important note, is that in most plane-wave basis codes the $G$-vectors will be defined in 3D on a crystal basis (so the components are simple integers). However, when computing the sum in Eq.~\ref{zfs:eq:15} it is essential (for non-simple cubic systems) to convert the $G$-vectors to the Cartesian basis. For example if $g = (n,l,m)$ in the crystal basis ($n,l,m\in \mathbb{Z}$), we can convert it to it's Cartesian form as:
+\begin{align}
+    \begin{bmatrix}
+        b_{1x} & b_{2x} & b_{3x} \\
+        b_{1y} & b_{2y} & b_{3y} \\
+        b_{1z} & b_{2z} & b_{3z}
+    \end{bmatrix}
+    \begin{bmatrix}
+        n \\ l \\ m
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        n b_{1x} + l b_{2x} + m b_{3x} \\
+        n b_{1y} + l b_{2y} + m b_{3y} \\
+        n b_{1z} + l b_{2z} + m b_{3z}
+    \end{bmatrix}
+\end{align}
+
+\textbf{Diagonalize $D_{ab}$} The resulting matrix from the approach detailed above will be in the Cartesian basis and therefore in order to obtain the ZFS parameters $D_x, D_y, D_z $, one must compute the eigenvalues and eigenvectors of the matrix $D_{ab}$. The eigenvector corresponding to $D_z$ is known as the principal axis and can be identified as the eigenvector with the largest eigenvalue (and should also be fairly recognizable given the symmetry of the defect and the orientation of the defect orbitals). In many cases, such as cases with $C_{3v}$, or $D_{3h}$ symmetry, etc. the eigenvalues $D_x$ and $D_y$ will be equivalent. Distinguishing the two can be done in terms of considering the cross product of their eigenvectors ($\hat{v}_{D_x}$ and $\hat{v}_{D_y}$, respectively) should satisfy $\hat{v}_{D_x}\times\hat{v}_{D_y}=\hat{v}_{D_z}$.
+\medskip
+
+
+% \subsubsection*{References}
+% \begin{enumerate}
+%     \item ``Electronic paramagnetic resonance: Elementary theory and practical applications'', J. A. Weil, J. R. Bolton and J. E. Wertz, (John Wiley \& Sons, New York, 1994).
+%     \item ``First principles method for the calculation of zero-field splitting tensors in periodic systems'', M. J. Rayson and P. R. Briddon, \textit{Physical Review B} \textbf{77}, 035119 (2008).
+%     \item ``Designing defect-based qubit candidates in wide-gap binary semiconductors for solid-state quantum technologies'', H. Seo, H. Ma, M. Govoni and G. Galli, \textit{Physical Review Materials} \textbf{1}, 075002 (2017).
+%     \item ``Pressure and temperature dependence of the zero-field splitting in the ground state of NV centers in diamond: A first-principles study'', V. Ivády, T. Simon, J. R. Maze, I. A. Abrikosov and A. Gali, \textit{Physical Review B} \textbf{90}, 235205 (2014).
+%     \item ``First principles calculation of spin-related quantities for point defect qubit research'', V. Ivády, I. A. Abrikosov and A. Gali, \textit{npj Computational Materials} \textbf{4}, 76 (2018).
+%     \item ``First-principles calculations of zero-field splitting parameters'', D. Ganyushin and F. Neese, \textit{The Journal of Chemical Physics} \textbf{125}, 024103 (2006).
+%     \item ``Calculation of spin-spin zero-field splitting within periodic boundary conditions: Towards all-electron accuracy'', T. Biktagirov, W. G. Schmidt, and U. Gerstmann, \textit{Physical Review B} \textbf{97}, 115135 (2018).
+% \end{enumerate}
+% \medskip
+%
+% \hline
+
+\section{Supplemental Derivation}
+% \setcounter{equation}{0}
+% \renewcommand{\theequation}{A\arabic{equation}}
+% \renewcommand{\eqref}[1]{equation \ref{#1}}
+
+\textbf{Proof of Eq.~\ref{zfs:eq:3}}
+Recall $\svar{x}=\svar{1x}+\svar{2x}$ and $[\svar{1x},\svar{2x}]=0$.
+\begin{align}
+    \svar{x}^2 &= \svar{1x}^2+\svar{2x}^2+2\svar{1x}\svar{2x}
+\end{align}
+Therefore,
+\begin{align}
+    \svar{1x}\svar{2x} &= \frac{1}{2} \svar{x}^2 - (\svar{1x}^2+\svar{2x}^2)\, ,
+\end{align}
+and since $\svar{1x}$ and $\svar{2x}$ represent individual pauli matrices, it can be easily shown that $\svar{1x}^2=\svar{2x}^2=(1/2)^2$. This gives:
+\begin{align}
+    \svar{1x}\svar{2x} &= \frac{1}{2} \svar{x}^2 - \frac{1}{4}\mathbb{1}\, .
+\end{align}
+The same is true for $(y,z)$ and components.
+
+
+\textbf{Proof of Eq.~\ref{zfs:eq:4}}
+The anti-commutator (denoted as $\{,\}$) of $\svar{x}$ and $\svar{y}$ is given by
+\begin{align}
+    \{\svar{x},\svar{y}\} &= \svar{x}\svar{y}+\svar{y}\svar{x} \nonumber \\
+    &= (\svar{1x}+\svar{2x})(\svar{1y}+\svar{2y})+(\svar{1y}+\svar{2y})(\svar{1x}+\svar{2x}) \nonumber \\
+    &=\svar{1x}\svar{1y}+\svar{1y}\svar{1x}+\svar{2x}\svar{2y}+\svar{2y}\svar{2x}
+    +\svar{1x}\svar{2y}+\svar{2x}\svar{1y}+\svar{1y}\svar{2x}+\svar{2y}\svar{1x} \nonumber \\
+    &= \{\svar{1x},\svar{1y}\} + \{\svar{2x},\svar{2y}\} +
+    2(\svar{1x}\svar{2y}+\svar{1y}\svar{2x}) \nonumber \\
+    &= 2(\svar{1x}\svar{2y}+\svar{1y}\svar{2x}) \, .
+\end{align}
+Where the anti-commutator relation $\{\svar{1a},\svar{1b}\}=0$ for $a\neq b$ was used and we have shown
+\begin{align}
+    \svar{1x}\svar{2y}+\svar{1y}\svar{2x} = \frac{1}{2}(\svar{x}\svar{y}+\svar{y}\svar{x}) \, .
+\end{align}
+The same is true for other combinations of $(x,y,z)$.
+
+
+\textbf{Substitution between Eq.~\ref{zfs:eq:8} and Eq.~\ref{zfs:eq:13}}
+The transformation of coordinates requires calculating the Jacobian for integration.
+\begin{align}
+    dr_{1x}\,dr_{2x} &=
+    \begin{vmatrix}
+        \partial r_{1x} /\partial r_x & \partial r_{1x} /\partial R_x \\
+        \partial r_{2x} /\partial r_x & \partial r_{2x} /\partial R_x \\
+    \end{vmatrix}
+    dr_x\,dR_x \nonumber \\
+    &=
+    \begin{vmatrix}
+         1/2 &  1/2 \\
+        -1/2 &  1/2 \\
+    \end{vmatrix}
+    dr_x\,dR_x \nonumber \\
+    &= \frac{1}{2}\, dr_x\,dR_x
+\end{align}
+Repeating for $y$ and $z$ components gives a total factor of $1/8$.
+
+
+\textbf{Integration over $\bR$ in Eq.~\ref{zfs:eq:13}}
+Consider the part of $I_{ab}$ from Eq.~\ref{zfs:eq:13} which depends on $R$:
+\begin{align}
+    I_{\bR} = \int_{\Omega} e^{i[\bR\cdot(\bG_1+\bG_2)]/2}\, d\bR
+\end{align}
+For simplicity consider the $x$ component which integrates over lattice vector ($\mathbf{a}$):
+\begin{align}
+    I_{R_x} &= \int_{0}^{a} e^{i[R_x(G_{1x}+G_{2x})]/2}\, dR_x \nonumber \\
+    &= \frac{-2i}{G_{1x}+G_{2x}}\left[ e^{i[a(G_{1x}+G_{2x})]/2} - 1 \right]
+\end{align}
+As $\bG_1$ and $\bG_2$ represent reciprocal lattice vectors they both have the form:
+\begin{align}
+    \bG = v_1\mathbf{b}_1 + v_2\mathbf{b}_2 + v_3\mathbf{b}_3
+\end{align}
+where the reciprocal lattice vectors $\mathbf{b}_i$ obey the property $\mathbf{b}_i\cdot\mathbf{a}_j=2\pi\delta_{ij}$. This will result in
+\begin{align}
+    I_{R_x} &= \frac{-2i}{G_{1x}+G_{2x}}\left[ e^{2\pi i k} - 1 \right]
+\end{align}
+where $k \in \mathbb{Z}$. Therefore the integral equates to zero except under the condition that $G_{1x}=G_{2x}$. In this limit we have:
+\begin{align}
+    \lim_{\eta\to 0} \frac{-2i}{\eta}\left[ e^{ia \eta} -1 \right]
+    &\overset{LH}{=} \lim_{\eta\to 0} -2i (ia) e^{ia \eta} \nonumber \\
+    &= 2a
+\end{align}
+Carrying out the integration over $y$ and $z$ will result in the volume of the unit cell and force $G_{1}=G_{2}$. This gives the final result:
+\begin{align}
+    I_{\bR} = \int_{\Omega} e^{i[\bR\cdot(\bG_1+\bG_2)]/2}\, d\bR = 8\Omega \delta_{\bG_1,\bG_2}
+\end{align}
+
+
+\textbf{Integration over $\br$ in Eq.~\ref{zfs:eq:14}}
+Consider the solution to the following integral:
+\begin{align}
+    \int e^{i\bG\cdot\br} \frac{1}{|\br-\bC|} \, d\br = \frac{4\pi}{G^2}e^{i\bG\cdot\bC}\, .
+\end{align}
+Taking the second derivative ($a,b\in \{x,y,z\}$):
+\begin{align}
+    -\frac{\partial^2}{\partial C_a \partial C_b} \int e^{i\bG\cdot\br} \frac{1}{|\br-\bC|} \, d\br
+    = \frac{4\pi G_a G_b}{G^2}e^{i\bG\cdot\bC}\, .
+\end{align}
+Meanwhile,
+\begin{align}
+    -\frac{\partial^2}{\partial C_a \partial C_b} \frac{1}{|\br-\bC|}
+    = \frac{\delta_{ab}}{r^3} - \frac{3r_a'r_b'}{r^5} + \frac{4\pi\delta_{ab}}{3}\delta(\br)\, .
+\end{align}
+Therefore,
+\begin{align}
+    \int e^{i\bG\cdot\br} \frac{r^2\delta_{ab} - 3r_a'r_b'}{r^5}\, d\br =
+    \frac{4\pi G_a G_b}{G^2}e^{i\bG\cdot\bC} + \frac{4\pi}{3}\delta_{ab} \, ,
+\end{align}
+and the final form fo $I_{ab}$ is obtained:
+\begin{align}
+    I_{ab} = 4\pi\Omega \sum_\bG \rho(\bG,-\bG) \left( \frac{G_aG_b}{G^2} - \frac{\delta_{ab}}{3} \right)
+\end{align}
+
+
+\textbf{Convolution Theorem}
+
+Consider the Fourier transform of $\psi$.
+\begin{align}
+    \psi(\br) = \frac{1}{\Omega}\sum_{\bG} \psi(\bG)\, e^{i\bG\cdot\br} \quad \quad \text{and} \quad \quad
+    \psi(\bG) = \int_\Omega \psi(\br)\, e^{-i\bG\cdot\br} \, d\br
+\end{align}
+The product $\psi_j^*(\br)\psi_i(\br)$ therefore has the form:
+\begin{align}
+    \psi_j^*(\br)\psi_i(\br) = \frac{1}{\Omega^2}\left( \sum_{\bG'} \psi_i(\bG') e^{i\bG'\cdot\br} \right)
+    \left( \sum_{\bG''} \psi_j^*(\bG'') e^{-i\bG''\cdot\br} \right) \, .
+\end{align}
+The Fourier transform of the product of these wavefunctions is thus given by:
+\begin{align}
+    \mathcal{F}\left\{ \psi_j^*(\br)\psi_i(\br) \right\} &= \frac{1}{\Omega^2}
+    \int_\Omega \left[ \left( \sum_{\bG'} \psi_i(\bG') e^{i\bG'\cdot\br} \right)
+    \left( \sum_{\bG''} \psi_j^*(\bG'') e^{-i\bG''\cdot\br} \right) \right]
+    e^{-i\bG\cdot\br} \, d\br \nonumber \\
+    &= \frac{1}{\Omega^2} \sum_{\bG'} \psi_i(\bG') \left[ \sum_{\bG''} \psi_j^*(\bG'') \left(
+    \int_\Omega e^{i(\bG'-\bG''-\bG)\cdot\br} \, d\br \right) \right] \nonumber \\
+    &= \frac{1}{\Omega} \sum_{\bG'} \psi_i(\bG') \left[ \sum_{\bG''} \psi_j^*(\bG'')
+    \, \delta(\bG'-\bG''-\bG) \right] \nonumber \\
+    &= \frac{1}{\Omega} \sum_{\bG'} \psi_i(\bG') \psi_j^*(\bG-\bG') \, .
+\end{align}
+Therefore we can compute $f_1(\bG)$, $f_2(\bG)$, $f_3(\bG)$ as:
+\begin{align}
+    f_1(\bG) = \frac{1}{\Omega} \sum_{\bG'} \psi_1^* (\bG-\bG') \psi_1(\bG') \, , \quad
+    f_2(\bG) = \frac{1}{\Omega} \sum_{\bG'} \psi_2^* (\bG-\bG') \psi_2(\bG') \, , \quad \nonumber\\
+    f_3(\bG) = \frac{1}{\Omega} \sum_{\bG'} \psi_1^* (\bG-\bG') \psi_2(\bG') \, .
+    \hspace{3cm} \label{eq:fG}
+\end{align}
