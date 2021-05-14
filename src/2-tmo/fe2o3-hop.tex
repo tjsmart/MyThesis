@@ -24,26 +24,27 @@ By this means we can answer important experimental questions related to the effe
 \subsection{Methods}
 We obtained the electronic structure of pristine and doped hematite with Density Functional Theory (DFT) calculations including Hubbard U corrections in order to take into account of strong on-site d electron interactions. Total energy, geometry relaxation and electronic structure calculations were performed with open source, plane wave codes Quantum ESPRESSO \cite{QE1}. We used ultrasoft pseudopotentials \cite{gbrv} including Fe $3s$ and $3d$ semicore electrons, which in our case yielded identical results to norm-conserving alternatives \cite{ONCV1,ONCV2}. For the plane wave basis we individually used cutoff energies of 40 Ry for wave functions and 240 Ry for charge density. The Brillouin zone was sampled with a $4\times4\times2$ Monkhorst-Pack $k$-point mesh for geometry optimization of the 30 atom unit cell and the $k$-point mesh was doubled in density of states calculations. Methfessel-Paxton first-order spreading was used to expedite Brillouin zone integration with a smearing width of 0.001 Ry \cite{methfessel1989high}. Total energy was calculated self consistently until a convergence of $10^{-8}$ Ry was achieved and geometry was optimized until the net force per atom reached less than 10$^{-3}$ Ry/au. For the hopping activation barrier calculations, a linear extrapolation scheme of atomic structure between initial and final hopping centers was employed for pristine and defective systems.
 
-\ce{Fe2O3} is arranged in the hexagonal corundum structure with a space group of R$\overline{3}$c \cite{pauling1925crystal} (Figure \ref{fe2o3:fig:pristine}). The unit cell consists of 30 atoms where iron, Fe$^{3+}$, is six coordinated and oxygen, O$^{2-}$, is four coordinated. The system is anti-ferromagnetic where the Fe$^{3+}$ ions have a high spin configuration of partially occupied $3d$ orbitals with aligned spin between ions within $ab$-planes and anti-aligned along the $c$ direction. We first optimized the initial geometry of pristine hematite with a variable cell relaxation which obtained cell parameters of $a=5.13\,${\AA} and $c=13.99\,${\AA} with bond lengths and angles of Fe-O$\ = 1.99,\, 2.14\,${\AA}, O-Fe-O$\ = 90.7,\,86.0,\,78.6\, ^\circ$ , which agree well with other work in both experiment \cite{finger1980crystal} and theory \cite{adelstein2014density}. The pristine structure and fundamental values that we obtained are collected in Table \ref{fe2o3:table:pristine}.\\
+\ce{Fe2O3} is arranged in the hexagonal corundum structure with a space group of R$\overline{3}$c \cite{pauling1925crystal} (Figure \ref{fe2o3:fig:pristine}). The unit cell consists of 30 atoms where iron, Fe$^{3+}$, is six coordinated and oxygen, O$^{2-}$, is four coordinated. The system is anti-ferromagnetic where the Fe$^{3+}$ ions have a high spin configuration of partially occupied $3d$ orbitals with aligned spin between ions within $ab$-planes and anti-aligned along the $c$ direction. We first optimized the initial geometry of pristine hematite with a variable cell relaxation which obtained cell parameters of $a=5.13\,${\AA} and $c=13.99\,${\AA} with bond lengths and angles of Fe-O$\ = 1.99,\, 2.14\,${\AA}, O-Fe-O$\ = 90.7,\,86.0,\,78.6\, ^\circ$, which agree well with other work in both experiment \cite{finger1980crystal} and theory \cite{adelstein2014density}. The pristine structure and fundamental values that we obtained are collected in Table \ref{fe2o3:table:pristine}.\\
 
 \begin{table}[H]
-\begin{center}
-\begin{tabular}{p{2.75cm}p{2.75cm}p{2.75cm}}
- \hline
- \multicolumn{3}{c}{ Pristine Hematite Fundamental Values \vspace{0.5mm}} \\
- \hline
- Value & Present Work & Experiment \cite{finger1980crystal} \\
- \hline
- $a$ ({\AA}) & 5.13  & 5.04 \\
- $c$ ({\AA}) & 13.99  & 13.75 \\
- Fe-O ({\AA}) & 1.99, 2.14  & 1.94, 2.11 \\
- O-Fe-O ($^{\circ}$) &  90.7, 86.0, 78.6 & 90.5, 85.0, 78.2 \\
- $\mu_{Fe}$ ($\mu_B$) & 4.0 & 4.6 \cite{coey1971study} \\
- $E_{gap}$ (eV) &  2.21  & 2.2  \cite{gilbert2009band}\\
- \hline
-\end{tabular}
-\caption{Computed and experimental lattice constants $a$ and $c$ ($b=a$), nearest neighbor bond lengths Fe-O, bond angles O-Fe-O and the band gap energy $E_{gap}$.} \label{fe2o3:table:pristine}
-\end{center}
+    \footnotesize
+    \centering
+    \begin{tabular}{c c c}
+         \hline
+         \multicolumn{3}{c}{ Pristine Hematite Fundamental Values \vspace{0.5mm}} \\
+         \hline
+         Value & Present Work & Experiment~\cite{finger1980crystal} \\
+         \hline
+         $a$ ({\AA}) & 5.13  & 5.04 \\
+         $c$ ({\AA}) & 13.99  & 13.75 \\
+         Fe-O ({\AA}) & 1.99, 2.14  & 1.94, 2.11 \\
+         O-Fe-O ($^{\circ}$) &  90.7, 86.0, 78.6 & 90.5, 85.0, 78.2 \\
+         $\mu_{Fe}$ ($\mu_B$) & 4.0 & 4.6 \cite{coey1971study} \\
+         $E_{gap}$ (eV) &  2.21  & 2.2  \cite{gilbert2009band}\\
+         \hline
+    \end{tabular}
+    \caption{Computed and experimental lattice constants $a$ and $c$ ($b=a$), nearest neighbor bond lengths Fe-O, bond angles O-Fe-O and the band gap energy $E_{gap}$.}
+    \label{fe2o3:table:pristine}
 \end{table}
 
 Hematite is a charge transfer insulator \cite{drager1992high,catti1995theoretical} and in accordance with the strong correlation of electrons in $3d$ orbitals we apply the Hubbard correction \cite{dudarev1998electron} to the Fe $3d$ orbitals in the form of Eq.\ref{fe2o3:eq:U}. Here, $E_\text{DFT}$ is the energy obtained from standard Density Functional Theory methods which is corrected by the following term which includes the occupation matrix $\lambda_i^{I\sigma}$ ($I$ ranges over all Fe ions, $i$ ranges over $3d$ orbitals and $\sigma$ is for spin up or down).

@@ -1,0 +1,42 @@
+\chapter{Why we may average IP \& EA}
+
+From Janak's Theorem the IP and EA of a system are defined in terms of the derivative of the total energy of the system:
+\begin{align}
+    \text{EA}(q)&=-\frac{\partial E}{\partial n}
+    \bigg|_{n=q^+} \label{app:eq:jea} \\
+    \text{IP}(q+1)&=-\frac{\partial E}{\partial n}
+    \bigg|_{n=(q+1)^-} \label{app:eq:jip}
+\end{align}
+Within the framework of DFT (with local and semi-local functionals), energy is a continuous and smooth functional of the number of electrons in the system $E[n]$. As shown in Figure 1, this leads to inconsistency between the eigenvalues of the $q$ and $q+1$ system (resulting in $\text{IP}(q+1)\neq\text{EA}(q)$). In particular, both the IP and EA will be incorrect at local and semi-local levels of theory. We can however, approximate the true eigenvalue between the $q$ and $q+1$ state by averaging the value of the DFT eigenvalue over the range $q$ to $q+1$. In practice this would require having an analytic form of the value of the eigenvalue in terms of electron number. While this is certainly doable, we can obtain a fast approximation easily by first assuming the total energy as quadratic in electron number (\textit{this is the second order approximation we make}):
+\begin{align}
+    E[n] = E_0 + E_1 n+ E_2 n^2
+\end{align}
+From Janak's theorem we can then obtain $\varepsilon [n]$:
+\begin{align}
+    \varepsilon [n] = E_1 + 2E_2 n
+\end{align}
+We can then simply compute the average of $\varepsilon[n]$ over the range $q$ to $q+1$ (denoted as $\varepsilon_{q|q+1}$):
+\begin{align}
+    \varepsilon_{q|q+1}
+    = \frac{1}{(q+1)-q}\int_q^{q+1}\varepsilon[n] \, dn
+    = E_1+ 2E_2 (q+1/2)
+\end{align}
+Since $\varepsilon[n]$ is linear this is identical to the average of $\varepsilon[n]$ at the points $q$ and $q+1$:
+\begin{align}
+    \varepsilon_{q|q+1}
+    = \frac{1}{2}\left( \varepsilon[q+1] + \varepsilon[q] \right)
+    = E_1+ 2E_2 (q+1/2)
+    \label{app:eq:j6}
+\end{align}
+Therefore from Eq.~\ref{app:eq:j6} and Eq.~\ref{app:eq:jea}-\ref{app:eq:jip} we have:
+\begin{align}
+    \varepsilon_{q|q+1}
+    = \frac{1}{2}\left( \text{EA}(q)+\text{IP}(q+1) \right)
+\end{align}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{5-app/figures/F2_large.jpg}
+    \caption{Delocalization error in LDA, taken from Ref.~\cite{cohen2008insights}.}
+    \label{fig:my_label}
+\end{figure}
