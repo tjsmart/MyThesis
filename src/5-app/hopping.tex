@@ -1,0 +1,175 @@
+\chapter{Semiclassical Transport Theory}
+
+\section{Prelude}
+
+Carriers in several transition metal oxides such as \ce{Fe2O3}, \ce{BiVO4}, as well as \ce{ABO3} perovskites form what are known as polarons. A polaron is quasi-particle known for its tendency to self-trap due to large electron-phonon interactions.  Aas the carrier moves through the lattice so due the surrounding lattice distortions as visualized in Figure~\ref{app:fig:hop}a. Due to this, polarons due not conduct via regular band conduction but instead they must hop from site to site in a process known as polaron hopping.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.8\linewidth]{5-app/figures/hopping_barrier.png}
+    \caption{(a) Top is the local geometry $q_A$, where the electron is localized on the left ion. As the electron moves through to the bottom configuration $q_B$, the local geometry distorts along with the movement of the electron. (b) These energy curves are plotted against the geometry of the lattice $q$, representing the potential energy well the electron is in if it is localized at either site $A$ or site $B$. The height of the intersection of these curves, $\Delta G^*$, represents the barrier the electron must overcome to hop from site $A$ to site $B$. When coupling between the states is introduced then this activation energy is reduced by the amound of that coupling, $V_{AB}$.}
+    \label{app:fig:hop}
+\end{figure}
+
+The theory of transport for such systems has been developed by many but for the purposes of this report which hopes to key into the most essential concepts of activation transport, and although I have reviewed many works which I do not mention here, I will rather focus on the works of Newton and Sutin~\cite{brunschwig1980semiclassical}, as well as Landau~\cite{landau1932zur} and Zener~\cite{zener1932non} (although both Landau and Zener are properly referenced here, I only used~\cite{zener1932non} since I could not find a translated copy of~\cite{landau1932zur}). Over the past nearly 50+ years various bits and pieces of this overall theory have been implemented and modified with varying assumptions and approximations (often in literature without explicit mention of what approximations are being made). To make matters more complicated, citations on transport can often be inaccurate; in the sense that a report's citation for a theory or equation will not be derived or fully motivated in the paper they cite! This can lead to a long look down some rabbit holes to find truly resourceful citations for this type of theory, but I guess that is the case with any research, I digress. Nonetheless, I believe the aforementioned citations properly explain the most important concepts of this theory and can explain the equations/approximations implemented in many recent works~\cite{rosso2003an,deskins2007electron,oberhofer2012revisiting,gajdos2013inapplicability,blumberger2013constrained}.
+
+\section{Semiclassical Model}
+
+The work of Newton and Sutin~\cite{brunschwig1980semiclassical} begins with introducing the concept of a semiclassical model for the transition rate $k_{sc}$ to approximate the true quantum mechanical transition rate:
+\begin{align}
+    k_{sc} = \kappa_{el}\Gamma_nk_{el} \sim k_{qm}
+    \label{eq:ksc_general}
+\end{align}
+where $\kappa_{el}$ is the thermally averaged electronic transmission coefficient and $\Gamma_n$ is a thermally averaged nuclear tunneling factor. This semiclassical transition rate is proportional to the classical transition rate, $k_{el}$ and is equivalent when the factors $\kappa_{el}$ and $\Gamma_n$ reach unity. To understand these factors, consider the spirit of Figure~\ref{app:fig:hop}a where the system is initially in state $\psi_A$ and transport occurs if the state $\psi_B$ is reached. The purposes of these factors is to introduce, respectively, non-adiabatic behavior where the system can remain a state $\psi_A$ despite being brought to the crossing point ($q_C$ in Figure~\ref{app:fig:hop}b) and quantum tunneling where the state $\psi_B$ is reached without reaching the crossing point energy. In this sense we see that $0 \leq \kappa_{el} \leq 1$ and $\Gamma_n \geq 1$. From this we see there are perhaps three cases of transport to consider closely:
+\begin{enumerate}
+    \item $\kappa_{el} = 1$ and $\Gamma_n = 1$
+    \item $\kappa_{el} \neq 1$ and $\Gamma_n = 1$
+    \item $\Gamma_n \neq 1$
+\end{enumerate}
+Reviewing several works ~\cite{rosso2003an,deskins2007electron,oberhofer2012revisiting,gajdos2013inapplicability,blumberger2013constrained}, shows that in most cases the latter of these cases is not often used and the assumption that $\Gamma_n \sim 1$ is made.
+
+\subsection{Case 1.}
+The first case pertains to that of a solely classical theory, \textit{i.e.}\ if the crossing point configuration $q_C$ is reached than the transition will occur, 100\% of the time ($\kappa_{el} = 1$) and there is no chance of the transition occurring otherwise ($\Gamma_n = 1$). Therefore we have the transition rate is given by (in the high-temperature limit)
+\begin{align}
+    k_{el} = \nu_n e^{-E^\ddagger/k_B T}
+    \label{eq:kclass}
+\end{align}
+where $E^\ddagger$ is the energy to bring $q$ to the crossing point $q_C$ and $\nu_n$ is an effective vibration frequency of the reactants. More details on the activation energy, $E^\dagger$ are discussed later.
+
+\subsection{Case 2.}
+
+In the second case we relax our assumptions and allow for the case that the system may not reach the final state $\psi_B$ despite reaching the crossing point configuration ($\kappa_{el} \neq 1$). Now in this case the probability the system will undergo a transition from $\psi_A$ to $\psi_B$ is given by
+\begin{align}
+    \kappa_{el} = \frac{2P_{12}}{1+P_{12}}
+    \label{eq:kappa}
+\end{align}
+where $P_{12}$ is the probability of the transition of $\psi_A \rightarrow \psi_B$ per single passage through the intersection region $q_C$.  According to Landau-Zener $P_{12}$ is given by (derivation given below)
+\begin{align}
+    P_{12} = 1 - \exp \left[ - \frac{4\pi^2|H_{ab}|^2}{hv |F_A - F_B|} \right]
+    \label{eq:lz1}
+\end{align}
+where $F_A$ and $F_B$ are the `forces' acting on the two states and $v$ is the average velocity the system moves through the intersection region. In most cases $v$ is taken to be the Boltzmann averaged velocity $v_p=\sqrt{2k_B T/\pi \mu}$. Accordingly evaluating for a linear path tangent to the reaction coordinate at the crossing point gives $v|F_A-F_B| = 4\nu_n \sqrt{\lambda\pi k_B T}$ where $\lambda$ is the reorganization energy (exact derivation not found). This gives a final formula for $P_{12}$ in terms of parameters relevant to the problem.
+\begin{align}
+    P_{12} = 1 - \exp \left[ - \frac{\pi^{3/2}|H_{ab}|^2}{h\nu \sqrt{\lambda\pi k_B T}} \right]
+    \label{eq:lz2}
+\end{align}
+Plugging Eq.~\ref{eq:lz2} and Eq.~\ref{eq:kappa} into Eq.~\ref{eq:ksc_general} along with setting $\Gamma_n = 1$ gives the transition rate $k_{sc}$
+\begin{align}
+    k_{sc} = \frac{1 - \exp \left[ - \frac{\pi^{3/2}|H_{ab}|^2}{h\nu \sqrt{\lambda\pi k_B T}} \right]}{1 - (1/2) \exp \left[ - \frac{\pi^{3/2}|H_{ab}|^2}{h\nu \sqrt{\lambda\pi k_B T}} \right]} \nu_n e^{-E^\ddagger / k_B T}
+    \label{eq:ksc}
+\end{align}
+It's important to notice a few cases dependent on the coupling constant $H_{ab}$. If $H_{ab}$ is large (adiabatic regime) then $P_{12} = 1$ and likewise $\kappa_{el} = 1$ and we have recovered case 1 and if $H_{ab}$ is small then $P_{12} < 1$ and $k_{el} < 1$ so we must use Eq.~\ref{eq:ksc} rather than Eq.~\ref{eq:kclass} (a plot of $P_{12}$ along with $\kappa_{el}$ is shown in Figure~\ref{app:fig:p12}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.5\linewidth]{5-app/figures/p12.png}
+    \caption{How $P_{12}$ and the transfer rate change with the copuling parameter $\gamma$.}
+    \label{app:fig:p12}
+\end{figure}
+
+\section{Supplemental Derivations}
+
+\subsection{Relation of $E^{\ddagger}$ with $\lambda$ and $H_{ab}$}
+Consider the below Figure~\ref{app:fig:hop2}, in this figure, these curves are drawn assuming that the potential energies are harmonic in $q$ with identical curvature and displays the case where the process is not neutrothermal (curves with the same minima so $\Delta E = 0$). With these assumptions made one can express the activation energy $E^\dagger$ in terms of reorganization energy $\lambda$ and the electron transfer energy $\Delta E$, as shown below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.5\linewidth]{5-app/figures/hop2.png}
+    \caption{Alternative schematic of the hopping barrier.}
+    \label{app:fig:hop2}
+\end{figure}
+
+Let $\psi_A$ have potential energy $V_A = q^2$ and let $\psi_B$ have potential energy $V_B = (q - a) 2 + b$. Initial conditions fix $a$ and $b$
+\begin{align}
+    V_b(a) = \Delta E \quad &\Rightarrow \quad b = \Delta E \\
+    V_b(0) = \lambda + \Delta E \quad &\Rightarrow \quad a^2 = \lambda
+\end{align}
+Solving for the intercept of the potential energy surface $q^*$,
+\begin{align}
+    V_a(q^*) = V_b(q^*) \quad &\Rightarrow \quad (q^*)^2 = (q^*)^2 -2q^* q + a^2 +b \\
+    &\Rightarrow \quad q^* = (a^2 +b)/2a
+\end{align}
+Plugging the intercept into $V_A(q)$ gives the activation energy,
+\begin{align}
+    E^\ddagger = V_A(q^*) = \left[ (a^2 +b)/2a \right]^2
+\end{align}
+Finally, plugging in $a$ and $b$ gives
+\begin{align}
+    E^\ddagger = \frac{(\lambda + \Delta E)^2}{4\lambda}
+\end{align}
+In any case where the initial and final configurations are equivalent or nearly equivalent such that $\Delta E \ll \lambda$, then our expression reduces to $E^\ddagger \sim \lambda/4$. If we wish to include a correction of the electronic coupling $|H_{ab}|$ (as shown in Figure~\ref{app:fig:hop}b), we need only subtract this from our above expression to get a final expression for the activation energy.
+\begin{align}
+    E^\ddagger = \frac{(\lambda + \Delta E)^2}{4\lambda} - |H_{ab}|
+\end{align}
+
+\subsection{Probability of transfer $P_{12}$}
+Consider $\psi_A$ and $\psi_B$ as before and the process of transport from $\psi_A$ to $\psi_B$. Initially in this process the configuration is in the state $\psi_A$ but with finite velocity at any subsequent time it is in a linear combination of these states:
+\begin{align}
+    \psi(t) = A(t) \psi_A + B(t) \psi_B
+\end{align}
+As time evolves in the transport $A(t)$ will go from 1 to 0 and $B(t)$ will go from 0 to 1. Furthermore along this transition $E_B$ will become less than $E_A$ and so $\psi_B$ will be more stable than $\psi_A$. Consider an alternative basis of wavefunctions $\phi_1$ and $\phi_2$ which are linear combinations of $\psi_A$ and $\psi_B$, where for all $t$, the energy of the state $\phi_1$ is less than that of $\phi_2$. These new states no longer satisfy the Hamiltonian but rather,
+\begin{align}
+    \begin{bmatrix}
+        H\phi_1 = \epsilon_1 + \epsilon_{12}\phi_2 \\
+        H\phi_2 = \epsilon_{12} + \epsilon_2\phi_2
+    \end{bmatrix} \, ,
+\end{align}
+where $\epsilon_{12}$ is the electronic coupling constant (such as $H_{ab}$ or $V_{ab}$). We then impose the following assumptions so that explicit functions of $A(t)$ and $B(t)$ can be obtained:
+\begin{enumerate}
+    \item $\epsilon_{12}$  relative kinetic energy of the two systems
+    \item the transition region is small so that $\epsilon_{1} - \epsilon_{2}$ is a linear function of time and $\epsilon_{12}$, $\phi_{1}$ and $\phi_{2}$ are independent of time:
+\end{enumerate}
+\begin{align}
+    \frac{2\pi}{h} (\epsilon_1 - \epsilon_2)
+    = \alpha t \, , \quad \dot{\epsilon}_{12}
+    = \dot{\phi}_1 = \dot{\phi}_2 = 0 \, .
+    \label{eq:ansatz}
+\end{align}
+We now want to solve the Schr{\"o}dinger equation and for later reasons we will rewrite the coefficents $A(t)$ and $B(t)$ in terms of new coefficients $C_1(t)$ and $C_2(t)$:
+\begin{align}
+    \left( H - \frac{h}{2\pi i} \frac{\partial}{\partial t} \right)
+    \left[
+        C_1(t) \exp \left( \frac{2\pi i}{h} \int \epsilon_1 \, dt \right) \phi_1
+        + C_2(t) \exp \left( \frac{2\pi i}{h} \int \epsilon_2 \, dt \right) \phi_2
+    \right]
+\end{align}
+Using the assumptions we made above this reduces into two coupled first-order differential equations:
+\begin{align}
+    \frac{h}{2\pi i} \frac{\partial C_1}{\partial t} = \epsilon_{12} \, \exp \left[ - \frac{2\pi i}{h} \int (\epsilon_1 - \epsilon_2) \, dt \right] C_2 \label{eq:dc1dt} \\
+    \frac{h}{2\pi i} \frac{\partial C_2}{\partial t} = \epsilon_{12} \, \exp \left[ \frac{2\pi i}{h} \int (\epsilon_1 - \epsilon_2) \, dt \right] C_1 \label{eq:dc2dt}
+\end{align}
+If we are initially in the state $\psi_A$ or $\phi_1$ then
+\begin{align}
+    |C_1(-\infty)|=1 \quad \text{and} \quad C_2(-\infty)=0
+\end{align}
+Note that $|C_1(\infty)|$ is the probability of transfer and therefore we only need the asymptotic solutions of Eq.~\ref{eq:dc1dt} and Eq.~\ref{eq:dc2dt}. Plugging in Eq.~\ref{eq:dc2dt} into Eq.~\ref{eq:dc1dt} gives a single differential equation for $C_1$,
+\begin{align}
+    \frac{d^2C_1}{dt^2}
+    + \left(
+        \frac{2\pi i}{h} (\epsilon_1 - \epsilon_2) - \frac{ \dot{\epsilon}_{12} }{ \epsilon_{12} }
+    \right) \frac{dC_1}{dt}
+    + \left( \frac{2\pi \epsilon_{12}}{h} \right)^2 C_1
+    = 0
+\end{align}
+Imposing Eq.~\ref{eq:ansatz} and rewriting $C_1 = \exp [ -(\pi i/h) \int (\epsilon_1 - \epsilon_2) dt] U_1$ and $f=(2\pi \epsilon_{12}/h)$ reduces this to the Weber equation:
+\begin{align}
+    \frac{d^2U_1}{dt^2} + \left( f^2 - \frac{i\alpha}{2} + \frac{\alpha^2}{4} t^2 \right) U_1 = 0
+\end{align}
+The solution to this differential equation is known, but is not simple! Referring to the asymptotic forms we indeed find that
+\begin{align}
+    P_{12} = |C_1(\infty)|^2 = 1 - \exp (-2\pi\gamma)\, , \quad \text{where} \quad \gamma = \frac{2\pi}{h} \frac{\epsilon_{12}}{|\frac{d}{dt}(\epsilon_1-\epsilon_2)|}
+    \label{eq:p12multi}
+\end{align}
+Finally, the recognition that
+\begin{align}
+    \left| \frac{dE}{dt} \right| =
+    \left| \frac{dE}{dx}\frac{dx}{dt} \right|
+    \quad \Rightarrow \quad
+    \left| \frac{d}{dt} (\epsilon_1 - \epsilon_2)\right| =
+    v |F_A - F_B|
+\end{align}
+allows us to rewrite Eq.~\ref{eq:p12multi} as
+\begin{align}
+    P_{12} = 1 - \exp \left[ - \frac{4\pi^2 |H_{ab}|^2}{hv |F_A - F_B|} \right]
+\end{align}
+which is precisely Eq.~\ref{eq:lz2}.

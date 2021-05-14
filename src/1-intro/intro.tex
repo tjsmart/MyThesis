@@ -164,15 +164,62 @@ The software computing defect concentrations cane be found (for Ping Group membe
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Defect Mediated Carrier Recombination}
 
+In many fields, properties of carrier dynamics are essential to understand. For example, single-photon emitters (discussed in more detail later) require effecient radiative recombination which must occur at a faster time-scale than those of nonradiative processes. As another example, spin qubits (again will be discussed more later) require intricate arrangements of intersystem crossing in order to ascertain efficient spin polarization for initialization, as well as, photoluminescent contrast for readout. Methods for computing such properties from first-principles are summarized here.
+
 \subsection{Radiative Recombination}
+In order to quantitatively study radiative processes, we computed the radiative rate $\Gamma_R$ from Fermi's Golden Rule and considered the excitonic effects by solving BSE~\cite{wu2019dimensionality}:
+\begin{align}
+    \Gamma_R (\textbf{Q}_{ex}) &=
+    \frac{2\pi}{\hbar}
+    \sum_{q_L, \lambda}
+    \left|
+        \mel{G,1_{q_L,\lambda}}
+        {H^R}
+        {S(\textbf{Q}_{ex}),0}
+    \right|^2
+    \delta(E(\textbf{Q}_{ex}) -\hbar c q_L).
+    \label{intro:eq:rad-full}
+\end{align}
+Here, the radiative recombination rate is computed between the ground state $G$ and the two-particle excited state $S(\textbf{Q}_{ex})$, $1_{q_L,\lambda}$ and 0 denote the presence and absence of a photon, $H^R$ is the electron-photon coupling (electromagnetic) Hamiltonian,  $E(\textbf{Q}_{ex})$ is the exciton energy, and $c$ is the speed of light.
+The summation indices in Eq.~\ref{intro:eq:rad-full} run over all possible wavevector ($q_L$) and polarization ($\lambda$) of the photon.
+Following the approach described in Ref.~\cite{wu2019dimensionality} (please see the SI for much more in-depth discussion), the radiative rate (inverse of radiative lifetime $\tau_R$) in SI unit at zero temperature can be computed for isolated defect-defect transitions as:
+\begin{equation}
+     \Gamma_R = \frac{n_D e^2}{3\pi\epsilon_0\hbar^4 c^3} E_0^3 \mu_{e-h}^2,
+    \label{intro:eq:rad}
+\end{equation}
+where $e$ is the charge of an electron, $\epsilon_0$ is vacuum permittivity, $E_0$ is the exciton energy at $\textbf{Q}_{ex}=0$, $n_D$ is the reflective index of the host material and $\mu_{e-h}^2$ is the modulus square of exciton dipole moment with length$^2$ unit. Note that Eq.~\ref{intro:eq:rad} considers defect-defect transitions in the dilute limit; therefore the lifetime formula for zero-dimensional systems embedded in a host material is used~\cite{gupta2018two,mackoit2019carbon} (also considering $n_D$ is unity in isolated 2D systems at the long-wavelength limit).
 
 
 \subsection{Nonradiative Recombination}
+Phonon-assisted nonradiative recombination rate are computed via a Fermi's golden rule approach:
+\begin{align}
+    \Gamma_{NR} &= \frac{2\pi}{\hbar}g\sum_{n,m}p_{in}\left|\mel{fm}{H^{e-ph}}{in}\right|^2\delta(E_{in}-E_{fm}) \label{intro:eq:nonrad-full}
+\end{align}
+Here, $\Gamma_{NR}$ is the nonradiative recombination rate between electron state $i$ in phonon state $n$ and electron state $f$ in phonon state $m$, $p_{in}$ is the thermal probability distribution of the initial state $\ket{in}$, $H^{e-ph}$ is the electron-phonon coupling Hamiltonian, $g$ is the degeneracy factor and $E_{in}$ is the energy of vibronic state $\ket{in}$. Within the static coupling and one-dimensional (1D) effective phonon approximations, the nonradiative recombination can be reduced to:
+\begin{align}
+    \Gamma_{NR} &= \frac{2\pi}{\hbar}g|W_{if}|^2 X_{if}(T), \label{intro:eq:nonrad}\\
+    X_{if}(T) &= \sum_{n,m}p_{in}\left|\mel{\phi_{fm}(\textbf{R})}{Q-Q_a}{\phi_{in}(\mathbf{R})}\right|^2 \delta(m\hbar\omega_f - n\hbar\omega_i+\Delta E_{if}), \label{intro:eq:nonrad-X} \\
+    W_{if} &= \mel{\psi_i(\mathbf{r}, \textbf{R})}{\frac{\partial H}{\partial Q}}{\psi_f(\mathbf{r},\textbf{R})}\bigg{|}_{\textbf{R}=\textbf{R}_a}. \label{intro:eq:nonrad-W}
+\end{align}
+Here, the static coupling approximation naturally separates the nonradiative recombination rate into phonon and electronic terms, $X_{if}$ and $W_{if}$, respectively. The 1D phonon approximation introduces a generalized coordinate $Q$, with effective frequency $\omega_i$ and $\omega_f$. The phonon overlap in Eq.~\ref{eq:rate-nonrad-X} can be computed using the quantum harmonic oscillator wavefunctions with $Q-Q_a$ from the configuration diagram (Figure~\ref{fig:config}). Meanwhile the electronic overlap in Eq.~\ref{eq:rate-nonrad-W} is computed by finite difference using the Kohn-Sham orbitals from DFT at the $\Gamma$ point. The nonradiative lifetime $\tau_{NR}$ is given by taking the inverse of rate $\Gamma_{NR}$. Additional details of nonradiative recombination are provided in the appendix. Implementation of nonradiative recombination can be found here (for Ping Group): \url{https://github.com/Ping-Group-UCSC/NonRad}.
 
 
 \subsection{Intersystem Crossing}
-
-
-\subsection{Photodynamics}
-
-% Zero field splitting mentioned here, will go into appendix
+In a very similar way to the above formalism, the intersystem crossing (ISC) rate is computed as:
+\begin{align}
+    \Gamma_{ISC} &= 4 \pi \hbar \lambda_\perp^2 \widetilde{X}_{if}(T) \label{eq:isc-full}\\
+    \widetilde{X}_{if}(T) &= \sum_{n,m}p_{in} \left|
+        \braket{\phi_{fm}(\textbf{R})}{\phi_{in}(\mathbf{R})}
+    \right|^2 \delta(m\hbar\omega_f - n\hbar\omega_i+\Delta E_{if}) \label{eq:isc-F}
+\end{align}
+Implementation of intersystem crossing can be found here (for Ping Group): \url{https://github.com/Ping-Group-UCSC/NonRad}.
+Compared with previous formalism~\cite{thiering2017ab}, this method allows for different values of the initial state vibrational frequency ($\omega_i$) and final state one ($\omega_f$) through explicit calculations of phonon wavefunction overlap. Here spin-orbit coupling (SOC) can entangle triplet and singlet states yielding the possibility for a spin-flip transition. The SOC operator is given to zero-order by~\cite{maze2011properties}:
+\begin{align}
+    H_{so} = \frac{1}{2} \frac{1}{c^2m_e^2} \sum_i \left(
+        \nabla_i V \cross \textbf{p}_i \right) \textbf{S}_i \label{eq:soc-full}
+\end{align}
+where $c$ is the speed of light, $m_e$ is the mass of an electron, $\textbf{p}$ and $\textbf{S}$ are the momentum and spin of electron $i$ and $V$ is the nuclear potential energy. The spin-orbit interaction can be rewritten in terms of the angular momentum $L$ and the SOC strength $\lambda$ as~\cite{maze2011properties},
+\begin{align}
+    H_{so} = \sum_i \lambda_{\perp} (L_{x,i}S_{x,i} + L_{y,i}S_{y,i}) + \lambda_z L_{z,i}S_{z,i}.
+\end{align}
+where $\lambda_{\perp}$ and $\lambda_z$ denote the non-axial and axial SOC strength, respectively. In practice, SOC strengths were computed using the ORCA code by TD-DFT~\cite{neese2012orca,de2019predicting}.

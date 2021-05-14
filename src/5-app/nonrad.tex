@@ -1,0 +1,270 @@
+\def\vhq{\frac{\partial h}{\partial Q}}
+
+\chapter{Formalism of Nonradiative Recombination}
+
+\section{Static Coupling}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.41\textwidth]{5-app/figures/nonrad-diag.png}
+    \caption{Diagram of the transition between two vibronic states. The two quadratic curves represent the electronic states $(i,f)$ and the vibrational modes present at each state are superimposed with states $(n,m)$.}
+    \label{app:fig:nonrad}
+\end{figure}
+
+
+Here we consider a system which is initially in a vibronic state $\ket{\Psi_{in}(r,R)}$ and transitions to a final vibronic state $\ket{\Psi_{fm}(r,R)}$ with $i\neq f$. Here the indices $(i,f)$ denote the electronic state, while $(n,m)$ denote the phonon state as shown schematically in Figure~\ref{app:fig:nonrad}. Within the Born-Oppenheimer approximation these states are a direct product of the electronic states $\ket{\psi_{(i,f)}(r,R)}$ and phonon states $\ket{\phi_{(n,m)}(R)}$.
+\begin{align}
+    \ket{\Psi_{(in,fm)}(r,R)}=\ket{\psi_{(i,f)}(r,R)\phi_{(n,m)}(R)}   \label{app:nonrad:eq:vib}
+\end{align}
+The coordinate $r$ denotes the spatial dependence of the electronic wavefunction $\psi_{(i,f)}$ and $R$ is the configuration of atomic positions.
+
+The probability of transitioning between vibronic state $\ket{\Psi_{i,n}(r,R)}$ to the state $\ket{\Psi_{f,m}(r,R)}$ is given by Fermi's Golden Rule:
+\begin{align}
+    \Gamma_{in\rightarrow fm} = \frac{2\pi}{\hbar} f(i,n) |V_{in,fm}|^2 \delta(E_{in}-E_{fm})
+    \label{app:nonrad:eq:g1}
+\end{align}
+Here $f(i,n)$ is the probability of occupying phonon state $n$ when in the electronic state $i$, which follows a thermal Maxwell-Boltzmann distribution. The dirac delta function ensures the conservation of energy between vibronic states $E_{in}$ and $E_{fm}$. And finally $V_{in,fm}$ is the electron phonon coupling matrix, discussed in more detail later.
+
+If we wish to compute the collective transition rate between electronic states $i$ and $f$ this follows readily from Eq. (\ref{app:nonrad:eq:g1}).
+\begin{align}
+    \Gamma_{i \rightarrow f} &=\sum_{n,m} \Gamma_{in\rightarrow fm} \nonumber \\
+    \Gamma_{i \rightarrow f}
+    &=\frac{2\pi}{\hbar}\sum_{n,m}f(i,n)|V_{in,fm}|^2\delta(E_{in}-E_{fm})  \label{app:nonrad:eq:g2}
+\end{align}
+Here we have now summed over all possible initial and final phonon states ($n$ and $m$) to give the full probability of transitioning from electronic state $i$ to state $f$.
+
+A term of particular interest in Eq. (\ref{app:nonrad:eq:g2}) is the electron-phonon coupling matrix $V_{in,fm}$. Within the static coupling approximation we approximate the electron-phonon coupling to first order in $R$. First consider the total Hamiltonian $H_{tot}$ to first order in $R$ about some position $R_{0}$ as:
+\begin{align}
+    H_{tot}(r,R) = H(r,R_0) + \sum_R \frac{\partial H}{\partial R} (R-R_0) \label{app:nonrad:eq:fo1}
+\end{align}
+where $H$ is the electron Hamiltonian, and the partial of $H$ with respect to $R$ is for every atomic position in 3D space. Meanwhile the electronic wavefunction is $\psi_{i}(r,R)$ to first order in $R$ is given by
+\begin{align}
+    \ket{\psi_i(r,R)} = \ket{\psi_i(r,R_0)} + \sum_R (R-R_0) \ket{\frac{\partial \psi_{i}}{\partial R}}\label{app:nonrad:eq:fo2}
+\end{align}
+where in Eq. (\ref{app:nonrad:eq:fo1}-\ref{app:nonrad:eq:fo2}) the evaluation of the derivative with respect to $R$ at $R_{0}$ is implicit.
+
+
+Using the approximations of Eq. (\ref{app:nonrad:eq:fo1}-\ref{app:nonrad:eq:fo2}), the electron-phonon coupling matrix is given by:
+\begin{align}
+    V_{in,fm}
+    &= \braket{\Psi_{f,m}(r,R)|
+    H_{tot}(r,R)
+    |\Psi_{i,n}(r,R)} \nonumber \\
+    &= \braket{\psi_f(r,R_0)\phi_{f,m}(R)|
+    H_0
+    |\psi_i(r,R_0)\phi_{i,n}(R)} \nonumber \\
+    & \hspace{1cm} + \sum_R \bigg( \braket{\psi_f(r,R_0)\phi_{f,m}(R)|
+    \frac{\partial H}{\partial R}(R-R_0)
+    |\psi_i(r,R_0)\phi_{i,n}(R)} \nonumber \\
+    & \hspace{1cm} + \braket{\psi_f(r,R_0)\phi_{f,m}(R)|
+    H_0 (R-R_0)
+    |\frac{\partial \psi_i}{\partial R}\phi_{i,n}(R)} \nonumber \\
+    & \hspace{1cm} + \braket{\frac{\partial \psi_f}{\partial R}\phi_{f,m}(R)|
+    (R-R_0)H_0
+    |\psi_i(r,R_0)\phi_{i,n}(R)} \bigg) \nonumber \\
+    & \hspace{1cm} + \mathcal{O}(R^2) \nonumber \\
+    &= \sum_R \braket{\phi_{f,m}(R)|(R-R_0)
+    |\phi_{i,n}(R)}
+    \bigg[ \braket{\psi_f(r,R_0)|
+    \frac{\partial H}{\partial R}
+    |\psi_i(r,R_0)} \nonumber \\
+    & \hspace{2cm} + \braket{\psi_f(r,R_0)|
+    H_0
+    |\frac{\partial \psi_i}{\partial R}}
+    + \braket{\frac{\partial \psi_f}{\partial R}|
+    H_0
+    |\psi_i(r,R_0)} \bigg] \nonumber \\
+    &= \sum_R
+    \braket{\phi_{f,m}(R)|(R-R_0)|\phi_{i,n}(R)}
+    \braket{\psi_f(r,R_0)|\frac{\partial H}{\partial R}|\psi_i(r,R_0)}
+\end{align}
+Where in the first step we have we have removed any terms of order $R^2$ (denoted with $\mathcal{O}(R^2)$). In the second step, the first term is removed do to orthogonality $\braket{\psi_f|\psi_i}=0$, and the latter part is rewritten with the factorization of the electronic and phonon parts due to there independence on $R$ and $H$, respectively. In the final step, we are left with only one term as the last two terms cancel (see Appendix). Thus, the static coupling approximation gives an electron-phonon coupling matrix of the form:
+\begin{align}
+    V_{in,fm}= \sum_R
+    \braket{\phi_{f,m}(R)|(R-R_0)|\phi_{i,n}(R)}
+    \braket{\psi_f(r,R_0)|\frac{\partial H}{\partial R}|\psi_i(r,R_0)}
+    \label{app:nonrad:eq:eph1}
+\end{align}
+
+Alternatively, the electron-phonon coupling can instead be expressed in terms of phonon modes $Q_k$,
+\begin{eqnarray}
+    V_{in,fm}
+    &=&
+    \sum_k \braket{\psi_f(r,R_0)|
+    \frac{\partial H}{\partial Q_k}|\psi_i(r,R_0)}
+    \braket{\phi_{f,m}(R)|(Q_k-Q_{k,0})|\phi_{i,n}(R)} \\
+    &=& \sum_k C^k_{if}\braket{\phi_{f,m}(R)|
+    \mathbf{Q}_k|\phi_{i,n}(R)} \label{app:nonrad:eq:eph2}
+\end{eqnarray}
+with
+\begin{eqnarray}
+    \mathbf{Q}_{i,k}=\frac{1}{\sqrt{M_k}}\sum_R M_R \mu_k(R) \mathbf{R}_i \nonumber \\
+    \mathbf{Q}_{f,k}=\frac{1}{\sqrt{M_k}}\sum_R M_R \mu_k(R) \mathbf{R}_f
+\end{eqnarray}
+Here $\mathbf{R}_i = R_i - R_i(0)$ and  $\mathbf{R}_f = R_f - R_f(0)$ is the displacement of the atomic positions from equilibrium. $M_R$ is the mass of the atom located at position $R$, $M_k$ is the reduced mass in the $k$th phonon mode, and $\mu_k(R)$ is the phonon mode displacement vector at position $R$.
+
+In Eq. (\ref{app:nonrad:eq:eph2}), we have defined the electron-electron coupling constants $C^k_{if}$.
+\begin{equation}
+    C^k_{if}
+    = \braket{\psi_f(r,R_0)|
+    \frac{\partial H}{\partial Q_k}|\psi_i(r,R_0)}
+    =\sum_R \mu_k(R) \braket{\psi_f(r,R_0)|
+    \frac{\partial H}{\partial R}|\psi_i(r,R_0)}
+\end{equation}
+Now for the full transition rate we have
+\begin{eqnarray}
+    \Gamma_{i\rightarrow f}&=& \frac{2\pi}{\hbar}\sum_{k_1,k_2} C^{k_1}_{if} C^{k_2}_{if}
+    \bigg( \sum_{n,m} f(i,n) \braket{\phi_{i,n}(R)|
+    \mathbf{Q}_{k_1}|\phi_{f,m}(R)} \nonumber \\
+    && \hspace{6mm} \cdot
+    \braket{\phi_{f,m}(R)|\mathbf{Q}_{k_2}|\phi_{i,n}(R)}
+    \delta(\hbar\omega_{in}-\hbar\omega_{fm}-\Delta E_{if}) \bigg) \label{app:nonrad:eq:g3}
+\end{eqnarray}
+If we use the integral form of the dirac delta function $\delta(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{ixt}dt$
+then we can reduce the phonon-phonon coupling piece of Eq. \ref{app:nonrad:eq:g3} (see Appendix for derivation):
+\begin{equation}
+    \Gamma_{if}=\frac{2\pi}{\hbar} \sum_{k1,k2} C^{k_1}_{if}C^{k_2}_{if}\cdot A^{k1,k2}_{if} \label{app:nonrad:eq:g4}
+\end{equation}
+where,
+\begin{align}
+    A^{k1,k2}_{if}=\frac{1}{2\pi \mathcal{Z}}\int_{-\infty}^{\infty}\chi^{k_1,k_2}_{if}(t,T)e^{-it\Delta E_{if}/\hbar}\,dt \label{app:nonrad:eq:a}\\
+    \chi^{k_1,k_2}_{if}(t,T) = \text{Tr}\left[ \mathbf{Q}_{k_1} e^{-it H_{f}/\hbar}
+    \mathbf{Q}_{k_2}e^{-(\beta\hbar-it)H_{i}/\hbar} \right] \label{app:nonrad:eq:chi}
+\end{align}
+
+
+\section{Full-Phonon}
+This section discusses details of computing Eq. \ref{app:nonrad:eq:a} \& \ref{app:nonrad:eq:chi} in practice,  following the implementation of [Shi 2015 PRB]. First of all we will assume that the phonon modes in states $i$ and $j$ are the same, so $k_1 = k_2 = k$. Next we introduce the following diagonal ($N_{vib} \times N_{vib}$) matrices:
+\begin{align}
+    a(\tau_\xi)_k = \frac{\omega_k}{\sinh{(i\hbar\omega_k\tau_\xi)}}\, , \quad
+    c(\tau_\xi)_k = \omega_k\coth{(i\hbar\omega_k\tau_\xi/2)}\, , \quad
+    d(\tau_\xi)_k = \omega_k\tanh{(i\hbar\omega_k\tau_\xi/2)}\, .
+\end{align}
+Where, $\xi = (i,j)$, $\tau_i = -t-i\beta$, $\tau_j = t$, and $\omega_k$ is the frequency of the $k$th harmonic oscillator. We then define matrices:
+\begin{align}
+    C(\tau_i,\tau_j)_k = c(\tau_i)_k + c(\tau_j)_k\, , \quad
+    D(\tau_i,\tau_j)_k = d(\tau_i)_k + d(\tau_j)_k\, .
+\end{align}
+And also
+\begin{align}
+    D_\text{HT} &= -D^{-1} d(\tau_j) \textbf{K} \, , \\
+    A_\text{HT} &= \frac{1}{2} (D^{-1} - C^{-1}) + D_\text{HT}(D_\text{HT})^T\, ,
+\end{align}
+where
+\begin{align}
+    \textbf{K}_k = \Delta Q_{ij,k} = \frac{1}{\sqrt{M_k}} \sum_R M_R \mu_k(R) \Delta R_{ij}\, .
+\end{align}
+This gives the final form:
+\begin{align}
+    \chi_{ij}^k(t,T) =
+        \sqrt{
+            \frac{
+                \det{[a(\tau_j)]} \det{[a(\tau_i)]}
+            }{
+                (i\hbar)^{2N} \det{(C)} \det{(D)}
+            }
+        }\,
+        \exp \left[
+            -\textbf{K}^T d(\tau_j)\textbf{K}
+            + \textbf{K}^T d(\tau_j) D^{-1} d(\tau_i)\textbf{K}
+        \right]
+        (A_\text{HT}) \label{app:nonrad:eq:final}
+\end{align}
+One can then integrate Eq. \ref{app:nonrad:eq:a} to give the final phonon part.
+
+
+\section{Linear Response Theory}
+
+Here we consider the single particle Hamiltonian ($h$) to first order deviation in the one-dimensional effective coordinate ($Q$) as:
+
+\begin{align}
+    h=h_{a}+\frac{\partial h}{\partial Q} (Q-Q_{a})
+\end{align}
+
+We can consider the latter term as a perturbation on the system where only the term $\vhq$ acts on the electronic states ($Q$ acts on phonon states). Therefore, the first-order response of the electronic eigenstate ($\varphi_m$) is given by:
+
+\begin{align}
+    \ket{\Delta\varphi_m} = \sum_{n\neq m} \ket{\varphi_n} \frac{\bra{\varphi_n} \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n} \label{app:nonrad:eq:p}
+\end{align}
+
+We now work to solve for $\bra{\varphi_n} \vhq \ket{\varphi_m}$, the term we want to replace in the current formalism. First consider a simple rewrite of Eq. \ref{app:nonrad:eq:p}.
+
+\begin{align}
+    \ket{ \Delta\varphi_m} =  \left(\sum_{n\neq m} \ket{\varphi_n}\bra{\varphi_n}\right)\frac{ \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n}
+\end{align}
+Evoking the completeness relation gives
+\begin{align}
+    \ket{ \Delta\varphi_m} = \bigg(\mathbb{1}- \ket{\varphi_m}\bra{\varphi_m}\bigg)\frac{ \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n}
+\end{align}
+Then taking the inner product with $\bra{\varphi_n}$ and implementing the orthogonality of these states $\braket{\varphi_n|\varphi_m}=\delta_{nm}$ (in this case $n$ and $m$ differ, so $\braket{\varphi_n|\varphi_m}=0$).
+\begin{align}
+    \braket{\varphi_n|\Delta\varphi_m} &= \bigg(\bra{\varphi_n}- \braket{\varphi_n|\varphi_m}\bra{\varphi_m}\bigg)\frac{ \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n} \\
+    &= \bigg(\bra{\varphi_n}\bigg)\frac{ \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n} \\
+    &= \frac{\bra{\varphi_n} \vhq \ket{\varphi_m}}{\varepsilon_m-\varepsilon_n}
+\end{align}
+This gives the final form we desired ($n=i$ initial state; $m=f$ final state)
+\begin{align}
+    \bra{\varphi_i} \vhq \ket{\varphi_f} = (\varepsilon_f-\varepsilon_i)\braket{\varphi_i|\frac{\partial \varphi_f}{\partial Q}}
+\end{align}
+Note that $\varphi_f$ is also considered to change first order in $Q$ and hence $\ket{\Delta\varphi_f}=\ket{\frac{\partial \varphi_f}{\partial Q}}$.
+
+
+\section{Supplemental Derivations}
+
+\subsection{S1}
+Proof that
+\begin{align}
+    \braket{\psi_f(r,R_0)|H_0|\frac{\partial \psi_i}{\partial R}}
+    + \braket{\frac{\partial \psi_f}{\partial R}|H_0 |\psi_i(r,R_0)}  =  0 .
+\end{align}
+Consider,
+\begin{align}
+    & \frac{\partial}{\partial R}\bigg(\braket{\psi_f(r,R_0)|H_0 |\psi_i(r,R_0)}\bigg) = \\
+    & \hspace{2cm} \braket{\frac{\partial \psi_f(r,R_0)}{\partial R}|H_0 |\psi_i(r,R_0)}
+    + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}}
+    + \braket{\psi_f(r,R_0)|\frac{\partial H_0}{\partial R} |\psi_i(r,R_0)} \nonumber \\
+    & 0 = \braket{\frac{\partial \psi_f(r,R_0)}{\partial R}|H_0 |\psi_i(r,R_0)}
+    + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}}
+    + 0 \nonumber \\
+    & \Rightarrow \braket{\frac{\partial \psi_f(r,R_0)}{\partial R}|H_0 |\psi_i(r,R_0)}
+    + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}} = 0
+\end{align}
+Here the left hand side is zero because $\braket{\psi_{f}|\psi_{i}}=0$, while the final term on the right hand side is zero because $\partial H_0/\partial R = 0$.
+
+\subsection{S2}
+Below the mathematical steps which allow for the rewriting of Eq. (\ref{app:nonrad:eq:g3}) in terms of Eq. (\ref{app:nonrad:eq:g4}-\ref{app:nonrad:eq:chi}) are presented.
+\begin{align}
+    &\sum_{n,m} f(i,n) \braket{\phi_{i,n}(R)|
+    \mathbf{Q}_{k_1}|\phi_{f,m}(R)} \cdot
+    \braket{\phi_{f,m}(R)|\mathbf{Q}_{k_2}|\phi_{i,n}(R)}
+    \delta(\hbar\omega_{fm}-\hbar\omega_{in}+\Delta E_{if}) \nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \sum_{n,m} e^{-\beta \hbar\omega_{in}} \braket{\phi_{i,n}(R)|
+    \mathbf{Q}_{k_1}|\phi_{f,m}(R)} \cdot
+    \braket{\phi_{f,m}(R)|\mathbf{Q}_{k_2}|\phi_{i,n}(R)} \nonumber \\
+    &\hspace{7cm}\cdot \int_{-\infty}^{\infty}
+    e^{it(\omega_{in}-\omega_{fm}-\Delta E_{if}/\hbar)} \,dt\nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \int_{-\infty}^{\infty} \bigg(\sum_{n,m} \braket{\phi_{i,n}(R)|
+    \mathbf{Q}_{k_1}|\phi_{f,m}(R)} \cdot
+    \braket{\phi_{f,m}(R)|\mathbf{Q}_{k_2}|\phi_{i,n}(R)} \nonumber \\
+    &\hspace{7cm}\cdot
+    e^{-(\beta\hbar-it)\omega_{in}-it\omega_{fm}-it\Delta E_{if}/\hbar)} \bigg) \,dt\nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \int_{-\infty}^{\infty} \bigg(\sum_{n,m} \braket{\phi_{i,n}(R)|\mathbf{Q}_{k_1}e^{-it\omega_{fm}}|\phi_{f,m}(R)} \nonumber \\
+    &\hspace{4.5cm} \cdot    \braket{\phi_{f,m}(R)|\mathbf{Q}_{k_2}e^{-(\beta\hbar-it)\omega_{in}}|\phi_{i,n}(R)}    e^{-it\Delta E_{if}/\hbar)} \bigg) \,dt\nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \int_{-\infty}^{\infty} \bigg(\sum_{n} \bra{\phi_{i,n}(R)}\mathbf{Q}_{k_1} \nonumber \\
+    &\hspace{3cm}\sum_m e^{-it \omega_{fm}}\ket{\phi_{f,m}(R)} \cdot    \bra{\phi_{f,m}(R)} \nonumber \\
+    & \hspace{6.2cm} \mathbf{Q}_{k_2}e^{-(\beta\hbar-it)\omega_{in}}\ket{\phi_{i,n}(R)}    e^{-it\Delta E_{if}/\hbar} \bigg) \, dt \nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \int_{-\infty}^{\infty} \bigg(\sum_{n} \bra{\phi_{i,n}(R)}\mathbf{Q}_{k_1} e^{-it H_{f}/\hbar} \mathbf{Q}_{k_2}e^{-(\beta\hbar-it)\omega_{in}}\ket{\phi_{i,n}(R)}    e^{-it\Delta E_{if}/\hbar} \bigg) \, dt \nonumber \\
+    &= \frac{1}{2\pi \hbar\mathcal{Z}} \int_{-\infty}^{\infty} \text{Tr} \left[ \mathbf{Q}_{k_1} e^{-it H_{f}/\hbar}
+    \mathbf{Q}_{k_2}e^{-(\beta\hbar-it)H_{i}/\hbar} \right]
+    e^{-it\Delta E_{if}/\hbar} \, dt
+\end{align}
+Plugging this piece back into Eq. \ref{app:nonrad:eq:g3} gives the final condensed form of the transition rate.
+\begin{equation}
+    \Gamma_{if}=\frac{2\pi}{\hbar} \sum_{k1,k2} C^{k_1}_{if}C^{k_2}_{if}\cdot A^{k1,k2}_{if}
+\end{equation}
+Where we have shown that
+\begin{align}
+    A^{k1,k2}_{if}=\frac{1}{2\pi \mathcal{Z}}\int_{-\infty}^{\infty}\chi^{k_1,k_2}_{if}(t,T)e^{-it\Delta E_{if}/\hbar}\,dt \\
+    \chi^{k_1,k_2}_{if}(t,T) = \text{Tr}\left[ \mathbf{Q}_{k_1} e^{-it H_{f}/\hbar}
+    \mathbf{Q}_{k_2}e^{-(\beta\hbar-it)H_{i}/\hbar} \right]
+\end{align}

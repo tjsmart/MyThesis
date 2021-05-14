@@ -1,0 +1,118 @@
+\def\bq{\mathbf{q}}
+\def\bG{\mathbf{G}}
+\def\bk{\mathbf{k}}
+
+\chapter{Optical Properties}
+
+\section{Macroscopic Dielectric Function}
+See Ref.~\cite{adler1962quantum,wiser1963dielectric,baroni1986ab} for additional details.
+Within the Alder-Wiser formulation (consistent with KS approach for periodic boundary conditions) the irreducible polarizability is given by:
+\begin{align}
+    \chi^{0}_{\bG,\bG'}(\bq)=-\frac{4}{(2\pi)^3}\sum_{v,c}\int_{BZ}d\bk
+    \frac{
+    \bra{\bk+\bq,c}e^{i(\bq+\bG)\cdot r}\ket{\bk,v}
+    \bra{\bk,v}e^{-i(\bq+\bG')\cdot r}\ket{\bk+\bq,c}
+    }{E_c(\bk+\bq)-E_v(\bk)}
+\end{align}
+Note the compressed notation used here $f_{\bG,\bG'}(\bq)=f(\bG+\bq,\bG'+\bq)$.
+
+\subsection{Independent-Particle-Approximation}
+The simplest approach, known as the independent-particle approximation is to directly compute the dielectric matrix $\epsilon$ from the irreducible polarizability.
+\begin{align}
+    \epsilon_{\bG,\bG'}(\bq)=
+    \delta_{\bG,\bG'}-v_\bG(\bq)\chi^{0}_{\bG,\bG'}(\bq)
+    \label{app:eq:dielectric}
+\end{align}
+Here $v_\bG(\bq)$ is the simple Hartree kernel.
+\begin{align}
+    v_\bG(\bq)=\frac{4\pi}{|\bq+\bG|^2}
+\end{align}
+Therefore, within the independent-particle approximation, the macroscopic dielectric function (long-wavelength limit of the $\bG=\bG'=0$ element) is given by:
+\begin{align}
+    \epsilon_{M}=\lim_{q\rightarrow 0} \epsilon_{0,0}(\bq)
+\end{align}
+
+\subsection{Random-Phase-Approximation}
+In reality, the irreducible polarizability should be fed into a Dyson equation for the reducible polarizability which includes the Hartree term explicitly in the polarizability.
+\begin{align}
+    \chi_{\bG,\bG'}(\bq)=\chi^0_{\bG,\bG'}(\bq)+\sum_{G_1,G_2}\chi^0_{\bG,\bG_1}(\bq)\Big[v_{\bG_1}(\bq)\delta_{\bG_1,\bG_2}\Big]\chi_{\bG_2,\bG'}(\bq)
+\end{align}
+Then the dielectric matrix is provided by a calculation reminiscent of Eq.~\cite{app:eq:dielectric}.
+\begin{align}
+    \epsilon^{-1}_{\bG,\bG'}(\bq)=
+    \delta_{\bG,\bG'}+v_\bG(\bq)\chi_{\bG,\bG'}(\bq)
+\end{align}
+An important difference is that here the inverse of the dielectric matrix is computed and therefore an inversion is necessary to obtain the final macroscopic dielectric function.
+\begin{align}
+    \epsilon_{M}=\lim_{q\rightarrow 0} \frac{1}{\epsilon^{-1}_{0,0}(\bq)}
+\end{align}
+% May update with Eq.'s 2.28-2.35 and Eq. 2.72 of \\ https://cms.mpi.univie.ac.at/mmars/ThesisJudithHarlChapter2.pdf
+
+
+\section{Absorption spectra}
+
+Follows Jackson Ch.\ 7~\cite{jackson1999}. A polarized plane wave electromagnetic field has the general form
+\begin{align}
+    \tilde{E}(z,t)=\hat{n}\,\tilde{E}_{0}e^{i\tilde{k}z-i\omega t}
+    \label{app:eq:emfield}
+\end{align}
+This gives the wave vector to be
+\begin{align}
+    \tilde{k}=\omega\sqrt{\mu\tilde{\epsilon}}=\frac{\omega}{c}\sqrt{\frac{\mu\tilde{\epsilon}}{\mu_0\epsilon_0}}\simeq \frac{\omega}{c}\sqrt{\tilde{\epsilon}_r}
+\end{align}
+where $\mu \simeq \mu_0$, and $\tilde{\epsilon}_r \equiv \tilde{\epsilon}/\epsilon_0$. Within a medium the dielectric constant $\tilde{\epsilon}_r$ can take a complex form and therefore so will $\tilde{k}$.
+\begin{align}
+    \tilde{k}= \beta + i \,\frac{\alpha}{2}
+\end{align}
+Plugging this into Eq.~\ref{app:eq:emfield}, we see that $\alpha$ is responsible for the attenuation of the wave within the medium.
+\begin{align}
+    \tilde{E}(z,t)=\hat{n}\,\tilde{E}_{0}e^{-\alpha z/2} e^{i\beta z-i\omega t}
+\end{align}
+The intensity of the beam is proportional to the square of the electric field and so we see the intensity dies exponentially with $\alpha$ as it travels a distance $z$ in the medium.
+\begin{align}
+    I(z)\propto e^{-\alpha z}
+\end{align}
+For this reason $\alpha$ is known as the absorption coefficient and is responsible for the energy transfer of light to the medium due to the medium's dielectric response $\epsilon_r$. A direct relation between $\alpha$ and $\tilde{\epsilon}_r$ can be obtained with some algebra:
+\begin{align}
+    \tilde{k} &= \beta + i \, \frac{\alpha}{2} = \frac{\omega}{c}\sqrt{\tilde{\epsilon_r}} \\
+    \Rightarrow \tilde{k}^2 &= \beta^2 - \frac{\alpha^2}{4} + i\, \beta\alpha = \frac{\omega^2}{c^2}\tilde{\epsilon_r}
+\end{align}
+Relating real and imaginary parts and taking $\tilde{\epsilon}_r=\epsilon_1+i\,\epsilon_2$, we have:
+\begin{align}
+    \beta^2 - \frac{\alpha^2}{4} = \frac{\omega^2}{c^2}\epsilon_1 \\
+    \beta\alpha = \frac{\omega^2}{c^2}\epsilon_2
+\end{align}
+Multiplying by $\beta^2$ and inserting where appropriate we have
+\begin{align}
+    \beta^4-\left(\frac{\omega^2}{c^2}\epsilon_1\right)\beta^2-\left(\frac{\omega^4}{c^4}\epsilon_2^2\right)=0
+\end{align}
+This is a biquadratic function whose solutions resemble that of the quadratic function. In this case our solutions are given by ($\beta>0$ and $\beta\in \mathbb{R}$):
+\begin{align}
+    \beta &= \sqrt{\frac{\frac{\omega^2}{c^2}\epsilon_1 +\sqrt{\frac{\omega^4}{c^4}\epsilon_1^2+\frac{\omega^4}{c^4}\epsilon_2^2}}{2}} \\
+    \beta &= \frac{\omega}{c} \sqrt{\frac{\epsilon_1 +\sqrt{\epsilon_1^2+\epsilon_2^2}}{2}}
+\end{align}
+Finally, the absorption coefficient (up to $\mu\simeq\mu_0$):
+\begin{align}
+    \alpha(\omega)=\frac{\omega}{c}\frac{\epsilon_2(\omega)}{\sqrt{\frac{\epsilon_1(\omega) +\sqrt{\epsilon_1^2(\omega)+\epsilon_2^2(\omega)}}{2}}}
+\end{align}
+Unless the absorption is very strong, we have $\epsilon_1\gg\epsilon_2$ and can write the absorption coefficient in the simple form:
+\begin{align}
+    \alpha(\omega)\simeq\frac{\omega}{c}\frac{\epsilon_2(\omega)}{\sqrt{\epsilon_1(\omega)}}
+\end{align}
+
+
+
+\section{Additional forms of the absorption coefficient}
+
+\begin{align}
+    \alpha(\omega)
+    &= \frac{2\omega}{c} k(\omega) \\
+    &= \frac{2\omega}{c} \text{Im}\left(\sqrt{\epsilon(\omega)}\right) \\
+    &= \frac{2\omega}{c} \text{Im}\left(\sqrt{\epsilon_1(\omega)+\epsilon_2(\omega)}\right) \\
+    &= \frac{\omega}{c} \sqrt{2(|\epsilon(\omega)|-\epsilon_1(\omega))} \\
+    &= \frac{\omega}{c} \sqrt{2(|\epsilon(\omega)|-\epsilon_1(\omega))}  \frac{\sqrt{|\epsilon(\omega)|+\epsilon_1(\omega)}}{\sqrt{|\epsilon(\omega)|+\epsilon_1(\omega)}} \\
+    &= \frac{\omega}{c} \frac{\sqrt{2(|\epsilon(\omega)|^2-\epsilon_1(\omega)^2)}}{\sqrt{|\epsilon(\omega)|+\epsilon_1(\omega)}} \\
+    &= \frac{\omega}{c} \frac{\sqrt{(\epsilon_1(\omega)^2+\epsilon_2(\omega)^2)-\epsilon_1(\omega)^2}}{\sqrt{\frac{|\epsilon(\omega)|+\epsilon_1(\omega)}{2}}} \\
+    &= \frac{\omega}{c} \frac{\epsilon_2(\omega)}{\sqrt{\frac{|\epsilon(\omega)|+\epsilon_1(\omega)}{2}}} \\
+    &= \frac{\omega}{c} \frac{\epsilon_2(\omega)}{\sqrt{\frac{\epsilon_1(\omega)+\sqrt{\epsilon_1(\omega)^2+\epsilon_2(\omega)^2}}{2}}}
+\end{align}

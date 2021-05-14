@@ -1,0 +1,111 @@
+\newcommand{\hw}{\hbar\omega}
+
+\chapter{Photoluminescence}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[keepaspectratio=true,width=0.5\linewidth]{5-app/figures/pl_diagram.png}
+    \caption{Top, schematic representation of two adiabatic potential energy surfaces with various vibronic levels with energetic separation ($\hbar\omega$). Bottom, luminescence (red) and absoprtion (blue) spectra of NV center in diamond. This diagram provides an amazing visual representation so I borrowed it from Ref.~\cite{gali2019ab}, a fantastic reference for the NV center.}
+    \label{fig:screen}
+\end{figure}
+
+\section{Normalized Photoluminescence}
+
+Following Ref.~\cite{alkauskas2014first1}, at $T= 0$K the absolute luminescence intensity $I(\hw)$ (photons per unit time per unit energy) for a single emitter is given by:
+\begin{align}
+    I(\hw) = \frac{n_D\omega^3}{3\epsilon_0\pi c^3\hbar} |\vec{\mu}_{eg}|^2
+        \sum_m |\braket{\chi_{gm}|\chi_{e0}}|^2 \, \delta(E_{ZPL} - E_{gm} - \hw)\, .
+    \label{eq:Ihw}
+\end{align}
+Here $n_D$ is the refractive index ($n = \sqrt{\epsilon}$); $\chi_{e0}$ and $\chi_{gm}$ are vibrational levels of the excited and ground state with energy $E_{e0}$ and $E_{gm}$ (with $E_{ZPL} = E_{e0} - E_{g0}$). Here we assume the Franck-Condon approximation holds, i.e. the transition dipole moment $|\vec{\mu}_{eg}|$ depends weakly on the lattice parameters. A prefactor of $\omega^3$ arises from the density of states of photons that cause the spontaneous emission ($\sim\omega^2$ -- Pg. 465 Ashcroft \& Mermin: Debye model) and the perturbing electric field ($|\vec{E}|^2\sim\omega$).
+
+If only the normalized luminescence is desired (experimentally the absolute intensity is difficult), then we can consider the normalized luminescence intensity, defined as
+\begin{align}
+    L(\hw) = C \omega^3 \, A(\hw)\, ,
+    \label{eq:Lhw}
+\end{align}
+where
+\begin{align}
+    A(\hw) = \sum_m |\braket{\chi_{gm}|\chi_{e0}}|^2 \, \delta(E_{ZPL} - E_{gm} - \hw)
+    \label{eq:Ahw}
+\end{align}
+is the optical spectral function, and $C$ is a normalization constant.
+
+
+\section{The optical spectral function}
+In Ref.~\cite{alkauskas2014first1}, the direct calculation of Eq.~\ref{eq:Ahw} is avoided. We assume: (1) normal modes that contribute the luminescence are those of the solid with the defect (opposed to bulk modes without the defect) and (2) the modes of the excited state are identical to the ground state. Using a generating function approach in which the main quantity to compute directly from first-principles results is the HR function:
+\begin{align}
+    S(\hw) = \sum_k S_k \delta(\hw - \hw_k)\, ,
+    \label{eq:Shw}
+\end{align}
+where
+\begin{align}
+    S_k = \omega_k \, q_k^2 /(2\hbar)
+\end{align}
+are partial Huang-Rhys (HR) factors and
+\begin{align}
+    q_k = \sum_i \sqrt{m_i} \, (\vec{R}_{e;i} - \vec{R}_{g;i}) \cdot \Delta \vec{r}_{k;i}
+\end{align}
+are generalized coordinates in vibrational mode $k$ ($\Delta \vec{r}_{k;i}$ is a normalized vector that describes the displacement of ion $i$ in phonon mode $k$). The larger the dot product between the normalized phonon mode $k$ and the displacement vector ($\vec{R}_{e;i} - \vec{R}_{g;i}$); the greater the contribution of mode $k$ to the overall HR function in equation~\ref{eq:Shw}. From $S(\hw)$ we can compute $A(\hw)$ as:
+\begin{align}
+    A(E_{ZPL} - \hw) = \frac{1}{2\pi} \int_{-\infty}^{\infty}
+        G(t)\, e^{i\omega t -\gamma |t|} \, dt
+    \label{eq:pl}
+\end{align}
+with the generating function $G(t)$ defined as
+\begin{align}
+    G(t) = e^{S(t) - S(0)}\, ,
+\end{align}
+where $S(t)$ is the Fourier transform of the $HR$ function
+\begin{align}
+    S(t) = \int_{0}^{\infty} S(\hw) e^{-i\omega t} \, d(\hw)\, .
+\end{align}
+A broadening of the ZPL $\gamma$ enters the form of the photoluminescence in Eq.~\ref{eq:pl} and can be chosen to reproduce the experimental ZPL width.
+This procedure of computing photoluminescence is implemented here: \url{https://github.com/Ping-Group-UCSC/PL-code}.
+
+
+\section{Additonal Derviations}
+
+The form of the spectral function:
+\begin{align}
+    A(\hbar\omega) = \sum_m |\braket{\chi_{gm}|\chi_{e0}}|^2 \delta(E_{ZPL}-E_{gm}-\hbar\omega)
+\end{align}
+isn't quite exact, in fact while the quantum number $m$ represents the state of a vibrational mode, in a solid crystal (in 3D space) has 3N vibrational modes which we denoted by $k$.  More exactly:
+\begin{align}
+    A(\hbar\omega) = \sum_k \sum_m |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2 \delta(E_{ZPL}-E_{gm}^k-\hbar\omega)
+\end{align}
+where $E_{gm}^k$ is actually $E_{gm}^k = E_{gm}^k - E_{e0}^k$ but since we have assumed $g$ and $e$ have the same vibrational states $k_g = k_e$ and so $E_{gm}^k = (m+1/2)\hbar\omega_k - (0+1/2)\hbar\omega_k  = m\hbar\omega_k$. Hence,
+\begin{align}
+    A(\hbar\omega) = \sum_k \sum_m |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2 \delta(E_{ZPL}-m\hbar\omega_k-\hbar\omega)
+\end{align}
+or
+\begin{align}
+    A(E_{ZPL}-\hbar\omega) = \sum_k \sum_m |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2 \delta(\hbar\omega-m\hbar\omega_k)
+\end{align}
+
+
+Now focusing on the phonon overlap:
+\begin{align}
+    \sum_m |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2
+\end{align}
+The solution of this overlap is~\cite{davies1981jahn}
+\begin{align}
+    |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2 = e^{-S_k}\frac{S_k^{m}}{m!}
+\end{align}
+in addition
+\begin{align}
+    \sum_m |\braket{\chi_{gm}^k|\chi_{e0}^k}|^2 = e^{-S_k} \sum_m \frac{(S_k)^{m}}{m!} = e^{-S_k} \left(e^{S_k}\right) = 1
+\end{align}
+where
+\begin{align}
+    S_k = \omega_k q_k^2/2\hbar
+\end{align}
+The spectral density $S(\hbar\omega)$ is defined as:
+\begin{align}
+    S(\hbar\omega) = \sum_k S_k \delta(\hbar\omega - \hbar\omega_k) = \sum_k \frac{\omega_k q_k^2}{2\hbar} \delta(\hbar\omega - \hbar\omega_k)
+\end{align}
+
+
+\vspace{10mm}
+
+Note: $\chi_{gm}(Q) = \chi_{em}(Q-Q_0 + \Delta Q)$ when $\Delta Q = Q_0$
