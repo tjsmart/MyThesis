@@ -1,6 +1,9 @@
 \def\be{\Delta_{quad}}
 
 \section{Dopant Clustering in \ce{Fe2O3}}
+
+In our 2021 work published in Chemistry of Materials~\cite{smart2021doping}, we investigated the doping bottleneck in \ce{Fe2O3} and demonstrated it is caused by a novel form of dopant clustering which is mediated by dopant and small polaron interactions which give rise to dopant pairs which resemble electric quadrupoles and can form at very low concentrations.
+As we have discussed above, applications of hematite and other transition metal oxides are limited by small polaron formation.
 To overcome these limitations, several efforts have been made to dope hematite by tetravalent ions that yield improved photoelectrochemical performance of hematite photoelectrodes
 \cite{lohaus2018limitation,biswas2020tuning,ling2011sn,li2017morphology,kumar2011electrodeposited,fu2014highly,malviya2017influence,yang2013new,tian2020electronic,liu2013ge}.
 While the performance can be moderately improved via group IV and XIV dopants, the optimal doping concentration strongly varies with each individual dopant,\cite{kumar2011electrodeposited,fu2014highly,malviya2017influence,yang2013new,tian2020electronic,liu2013ge} thereby requiring extensive experimental testing each time \cite{walsh2017instilling}.
@@ -67,31 +70,31 @@ Finally, in order to compute the strain contribution to the binding energy, we e
 Here $E_{X}^{strain}$ is the strain energy of system $X$, computed as a difference of total energy of the pristine system with its equilibrium geometry and with relaxed geometry from the doped system (first relax with dopants then substitute back Fe atoms to keep the same composition as pristine \ce{Fe2O3}). We note a similar approach was used in Ref.~\cite{bao2017first} to evaluate strain energies.
 % Here $E_{prist}$ is the total energy of the pristine system with a relaxed structure and $E_{prist}(R_{X})$ is the total energy of the pristine system with a fixed structure corresponding to the atomic positions in the doped system. We note a similar approach was used in Ref~\cite{bao2017first}.
 
-\subsection{Charged Defect Formation Energy and Concentration}
-We computed the formation energy ($E^f_q$) of each defect at a charge state $q$ according to:
-\begin{align}
-    E^f_q(X; \varepsilon_F) = E_q(X) - E_{prist} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q,
-    \label{eq:cfe}
-\end{align}
-where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ was computed with techniques developed in Refs. \cite{PING2017JCP, wu2017first} and implemented in the JDFTx code \cite{JDFTx}. The chemical potentials were carefully evaluated against the stability of byproduct compounds as detailed in the elemental chemical potential section of the SI.
-The corresponding charge transition levels of the defects were obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
-\begin{align}
-    \epsilon_{q|q'} = \frac{E^f_q - E^f_{q'}}{q' - q}
-    \label{eq:ctl}
-\end{align}
-The ionization energies are computed by referencing the CTLs to the free polaron state.
-\cite{seo2018role,radmilovic2020combined,zhou2020interstitial,lee2020electrochemical}
-Namely in \ce{Fe2O3}, it has been experimentally observed that photoexcited carriers relax on picosecond timescale to form small polarons~\cite{carneiro2017excitation}, which have been measured to form at energies $\sim$0.5 eV below the conduction band minimum (CBM)~\cite{lohaus2018limitation,pastor2019situ}. Theoretically this free polaron level is computed as the charge transition level from $q=0$ to $q=-1$ in the pristine system, $\varepsilon_{FP} = \varepsilon_{-1|0}^{prist} = E^f_{-1}(prist) - E^f_0(prist)$. By this method we obtain that the free polaron level is positioned at 0.497 eV below the CBM in excellent agreement with experimental observation.~\cite{lohaus2018limitation,pastor2019situ}
-
-From charge defect formation energies, charged defect concentration ($c_q$) can be computed as:
-\begin{align}
-    c_q(X; \varepsilon_F) = g \exp [- E^f_q(X; \varepsilon_F) / k_B T],
-\end{align}
-where $g$ is the degeneracy factor accounting for the internal degrees of freedom of the point defect, $k_B$ is the Boltzmann factor, and $T$ is temperature.
-Concentrations including intrinsic defects, extrinsic dopants and free electron polarons were computed by determine their charge neutrality condition~\cite{lee2013thermodynamics,freysoldt2014first}
-(additional details are provided in the defect concentration section of the SI).
-To best relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K.
-The partial pressure of oxygen gas ($p_{\rm O_2}$) corresponding to atmospheric condition (1 atm) is used.
+% \subsection{Charged Defect Formation Energy and Concentration}
+% We computed the formation energy ($E^f_q$) of each defect at a charge state $q$ according to:
+% \begin{align}
+%     E^f_q(X; \varepsilon_F) = E_q(X) - E_{prist} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q,
+%     \label{eq:cfe}
+% \end{align}
+% where $E_q(X)$ is the total energy of the defect system ($X$) with charge $q$, $E_{prist}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the electron chemical potential. A charged defect correction $\Delta_q$ was computed with techniques developed in Refs. \cite{PING2017JCP, wu2017first} and implemented in the JDFTx code \cite{JDFTx}. The chemical potentials were carefully evaluated against the stability of byproduct compounds as detailed in the elemental chemical potential section of the SI.
+% The corresponding charge transition levels of the defects were obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
+% \begin{align}
+%     \epsilon_{q|q'} = \frac{E^f_q - E^f_{q'}}{q' - q}
+%     \label{eq:ctl}
+% \end{align}
+% The ionization energies are computed by referencing the CTLs to the free polaron state.
+% \cite{seo2018role,radmilovic2020combined,zhou2020interstitial,lee2020electrochemical}
+% Namely in \ce{Fe2O3}, it has been experimentally observed that photoexcited carriers relax on picosecond timescale to form small polarons~\cite{carneiro2017excitation}, which have been measured to form at energies $\sim$0.5 eV below the conduction band minimum (CBM)~\cite{lohaus2018limitation,pastor2019situ}. Theoretically this free polaron level is computed as the charge transition level from $q=0$ to $q=-1$ in the pristine system, $\varepsilon_{FP} = \varepsilon_{-1|0}^{prist} = E^f_{-1}(prist) - E^f_0(prist)$. By this method we obtain that the free polaron level is positioned at 0.497 eV below the CBM in excellent agreement with experimental observation.~\cite{lohaus2018limitation,pastor2019situ}
+%
+% From charge defect formation energies, charged defect concentration ($c_q$) can be computed as:
+% \begin{align}
+%     c_q(X; \varepsilon_F) = g \exp [- E^f_q(X; \varepsilon_F) / k_B T],
+% \end{align}
+% where $g$ is the degeneracy factor accounting for the internal degrees of freedom of the point defect, $k_B$ is the Boltzmann factor, and $T$ is temperature.
+% Concentrations including intrinsic defects, extrinsic dopants and free electron polarons were computed by determine their charge neutrality condition~\cite{lee2013thermodynamics,freysoldt2014first}
+% (additional details are provided in the defect concentration section of the SI).
+% To best relate to experimental measurements of \ce{Fe2O3} photoanodes, we computed the concentration first at a synthesis temperature of $T_S=1073$ K (800 $^\circ$C is a common synthesis temperature \cite{ling2011sn,tian2020electronic}), and then recomputed charge neutrality at normal operation (room) temperature $T_O=300$ K.
+% The partial pressure of oxygen gas ($p_{\rm O_2}$) corresponding to atmospheric condition (1 atm) is used.
 
 % In order to maintain charge neutrality, the introduction of defect $X$ with charge $q$ into the lattice must be compensated by defects of opposite charge or through the generation of free carriers. Specifically charge neutrality must be held:
 % \begin{align}
@@ -203,7 +206,7 @@ Remarkably, this Sn-Sn pair distance ($\sim$3.7 {\AA}) matches the theoretically
 After confirming the existence of Sn-Sn clustering both theoretically and experimentally, we turn to investigate the mechanisms of their formation.
 Above the analogy was made between the single Sn-doped system and electric dipoles,
 so in order to probe this electrostatic interaction, we plotted the total energy of the single Sn-doped system as a function of Sn-polaron distance, as shown in Figure~\ref{fig:mechanisms}a.
-The computed total energies were fitted to a Coulomb potential ($-a/r+b$) with the fitted values of $a=0.658\ {\rm eV\cdot\text{AA}}$ and $b=0.230$ eV, and a coefficient of determination ($R^2$) of 0.85.
+The computed total energies were fitted to a Coulomb potential ($-a/r+b$) with the fitted values of $a=0.658\ {\rm eV\cdot\text{\AA}}$ and $b=0.230$ eV, and a coefficient of determination ($R^2$) of 0.85.
 This validates a clear electrostatic attraction between the two bodies with opposite charges like a dipole.
 %where the interaction is analogous to two point charges of opposite charge and the denotation of this system as a first-order multipole (dipole).
 Furthermore, we find that $b$ is close to the value of ionization energy of Sn (0.25 eV), as expected.

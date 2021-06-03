@@ -40,9 +40,9 @@
 % shortcut for NV center
 \def\nv{\text{NV}}
 
-\section{Spin Properties}
+\section{Intersystem Crossing and Exciton-Defect Coupling of Spin Defects}
 
-\subsection{Introduction}
+In our 2021 work published in npj Computational Materials~\cite{smart2021intersystem}, we implemented and employed methods for computing static and dynamic properties of spin defects in h-BN, in particular zero-field splitting and intersystem crossing rates were computed. Using a vast array of methods we are able to identify new extrinsic dopants in h-BN as single photon emitters and spin defect qubits.
 Optically addressable defect-based qubits offer a distinct advantage in their ability to operate with high fidelity under room temperature conditions~\cite{koehl2011room,weber2010quantum}.
 Despite tremendous progress made in years of research, systems which exist today remain inadequate for real-world applications. The identification of stable single photon emitters in 2D materials has opened up a new playground for novel quantum phenomena and quantum technology applications, with improved scalability in device fabrication and
 a leverage in doping spatial control, qubit entanglement, and qubit tuning~\cite{liu20192d,aharonovich2017quantum}.
@@ -134,7 +134,7 @@ From the optical spectra we can compute their radiative lifetimes as detailed in
 We find the transition metal defects' radiative lifetimes (tabulated in Table~\ref{table:rad}) are long, exceeding $\mu$s.
 % Therefore, they are not good candidates for SPEs, although they still have potentials for spin qubits with optically-allowed intra-defect transitions.
 Therefore, they are not good candidates for SPE. In addition, while they still are potential spin qubits with optically-allowed intra-defect transitions, optical readout of these defects will be difficult.
-Referring to Table~\ref{table:rad} and the expression of radiative lifetime in Eq.~\ref{eq:rate-radiative-0D} we can see this is due to their low excitation energies ($E_0$, in the infrared region) and small dipole moment strength ($\mu^2_{e-h}$). The latter is related to the tight localization of the excitonic wavefunction for $\ti$ and $\mo$ (shown in Figure~\ref{fig:bse}d-f), as strong localization of the defect-bound exciton leads to weaker oscillator strength.~\cite{hours2005exciton}
+Referring to Table~\ref{table:rad} and the expression of radiative lifetime in Eq.~\ref{intro:eq:rad} we can see this is due to their low excitation energies ($E_0$, in the infrared region) and small dipole moment strength ($\mu^2_{e-h}$). The latter is related to the tight localization of the excitonic wavefunction for $\ti$ and $\mo$ (shown in Figure~\ref{fig:bse}d-f), as strong localization of the defect-bound exciton leads to weaker oscillator strength.~\cite{hours2005exciton}
 
 \begin{figure}[ht!]
     \centering
@@ -237,7 +237,7 @@ We then computed the SOC strength for the $\ti$ defect ($\lambda_z = 149$ GHz, $
 The value of $\lambda_\perp$ in particular leads to the potential for a spin-selective pathway for both defects, analogous to $\nv$ center in diamond.
 
 % To compute the ISC rate, we considered a new approach which is a derivative of the nonradiative recombination formalism presented in Eq.~\ref{eq:rate-nonrad-allterms}:
-To compute the ISC rate, we developed an approach which is a derivative of the nonradiative recombination formalism presented in Eq.~\ref{eq:rate-nonrad-allterms}:
+To compute the ISC rate, we developed an approach which is a derivative of the nonradiative recombination formalism presented in Eq.~\ref{intro:eq:nonrad}:
 \begin{align}
     \Gamma_{ISC} &= 4 \pi \hbar \lambda_\perp^2 \widetilde{X}_{if}(T) \label{eq:isc-full}\\
     \widetilde{X}_{if}(T) &= \sum_{n,m}p_{in} \left|
@@ -327,24 +327,24 @@ as well as other spectroscopic fingerprints from first-principles calculations t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{First-Principles Calculations} In this study, we used the open source plane-wave code Quantum ESPRESSO~\cite{QE1} to perform calculations on all structural relaxations and total energies with optimized norm-conserving Vanderbilt (ONCV) pseudopotentials~\cite{ONCV1} and a wavefunction cutoff of 50 Ry. A supercell size of $6\times 6$ or higher was used in our calculations with a $3\times 3\times 1$ k-point mesh. Charged cell total energies were corrected to remove spurious charge interactions by employing the techniques developed in Refs.~\cite{PING2017JCP,wu2017first,wang2020layer} and implemented in the JDFTx code~\cite{JDFTx}.
+\subsection{Computational Details} In this study, we used the open source plane-wave code Quantum ESPRESSO~\cite{QE1} to perform calculations on all structural relaxations and total energies with optimized norm-conserving Vanderbilt (ONCV) pseudopotentials~\cite{ONCV1} and a wavefunction cutoff of 50 Ry. A supercell size of $6\times 6$ or higher was used in our calculations with a $3\times 3\times 1$ k-point mesh. Charged cell total energies were corrected to remove spurious charge interactions by employing the techniques developed in Refs.~\cite{PING2017JCP,wu2017first,wang2020layer} and implemented in the JDFTx code~\cite{JDFTx}.
 The total energies, charged defect formation energies and geometry were evaluated at the Perdew-Burke-Ernzerhof (PBE) level~\cite{perdew1996generalized}.
 Single-point calculations with k-point meshes of $2\times 2\times 1$ and $3\times 3\times 1$ were performed using hybrid exchange-correlation functional PBE0($\alpha$), where the mixing parameter $\alpha=0.41$ was determined by the generalized Koopmans’ condition as discussed in Ref.~\cite{smart2018fundamental,miceli2018nonempirical}. Moreover, we used the YAMBO code~\cite{YAMBO} to perform many-body perturbation theory with the GW approximation to compute the quasi-particle correction
 using PBE0($\alpha$) eigenvalues and wavefunctions as the starting point.
 The random phase approximation (RPA) and Bethe-Salpeter Equation (BSE) calculations were further solved on top of the GW approximation for the electron-hole interaction to investigate the optical properties of the defects, including absorption spectra and radiative lifetime.
 %%%%%%%%%
 
-\subsection{Thermodynamic Charge Transition Levels and Defect Formation Energy}
-The defect formation energy ($FE_q$) was computed for the $\ti$ and $\mo$ defects following:
-\begin{align}
-    FE_q(\varepsilon_F) = E_q - E_{pst} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q
-    \label{eq:cfe}
-\end{align}
-where $E_q$ is the total energy of the defect system with charge $q$, $E_{pst}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the Fermi energy. A charged defect correction $\Delta_q$ was computed for charged cell calculations by employing the techniques developed in Ref.~\cite{wu2017first,PING2017JCP}. The chemical potential references are computed as $\mu_{Ti} = E_{Ti}^{bulk}$ (total energy of bulk Ti), $\mu_{Mo} = E_{Mo}^{bulk}$ (total energy of bulk Mo),  $\mu_{BN} = E_{BN}^{ML}$ (total energy of monolayer $h$-BN). Meanwhile the corresponding charge transition levels of defects can be obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
-\begin{align}
-    \epsilon_{q|q'} = \frac{FE_q - FE_{q'}}{q' - q}
-    \label{eq:ctl}
-\end{align}
+% \subsection{Thermodynamic Charge Transition Levels and Defect Formation Energy}
+% The defect formation energy ($FE_q$) was computed for the $\ti$ and $\mo$ defects following:
+% \begin{align}
+%     FE_q(\varepsilon_F) = E_q - E_{pst} + \sum_i \mu_i \Delta N_i + q \varepsilon_F + \Delta_q
+%     \label{eq:cfe}
+% \end{align}
+% where $E_q$ is the total energy of the defect system with charge $q$, $E_{pst}$ is the total energy of the pristine system, $\mu_i$ and $\Delta N_i$ are the chemical potential and change in the number of atomic species $i$, and $\varepsilon_F$ is the Fermi energy. A charged defect correction $\Delta_q$ was computed for charged cell calculations by employing the techniques developed in Ref.~\cite{wu2017first,PING2017JCP}. The chemical potential references are computed as $\mu_{Ti} = E_{Ti}^{bulk}$ (total energy of bulk Ti), $\mu_{Mo} = E_{Mo}^{bulk}$ (total energy of bulk Mo),  $\mu_{BN} = E_{BN}^{ML}$ (total energy of monolayer $h$-BN). Meanwhile the corresponding charge transition levels of defects can be obtained from the value of $\varepsilon_F$ where the stable charge state transitions from $q$ to $q'$.
+% \begin{align}
+%     \epsilon_{q|q'} = \frac{FE_q - FE_{q'}}{q' - q}
+%     \label{eq:ctl}
+% \end{align}
 
 \subsection{Zero-Field Splitting}
 The first-order ZFS due to spin-spin interactions was computed for the dipole-dipole interactions of the electron spin:
@@ -372,48 +372,48 @@ Here the summation on pairs of $i,j$ runs over all occupied spin-up and spin-dow
 To verify our implementation is accurate, we computed the ZFS of the $\nv$ center in diamond which has a well-established result. Using ONCV pseudopotentials, we obtained a ZFS of 3.0 GHz for $\nv$ center, in perfect agreement with previous reported results~\cite{seo2017designing}.
 For heavy elements such as transition metals, spin-orbit (SO) coupling can have substantial contribution to zero-field splitting. Here, we also computed the SO contribution of the ZFS as implemented in the ORCA code~\cite{neese2012orca,neese2007calculation} (additional details can be found in Supplementary Note 10, Figure 12, and Table 6).
 
-\subsection{Radiative Recombination}
-In order to quantitatively study radiative processes, we computed the radiative rate $\Gamma_R$ from Fermi's Golden Rule and considered the excitonic effects by solving BSE~\cite{wu2019dimensionality}:
-\begin{align}
-    \Gamma_R (\textbf{Q}_{ex}) &=
-    \frac{2\pi}{\hbar}
-    \sum_{q_L, \lambda}
-    \left|
-        \mel{G,1_{q_L,\lambda}}
-        {H^R}
-        {S(\textbf{Q}_{ex}),0}
-    \right|^2
-    \delta(E(\textbf{Q}_{ex}) -\hbar c q_L).
-    \label{eq:rate-radiative-full}
-\end{align}
+% \subsection{Radiative Recombination}
+% In order to quantitatively study radiative processes, we computed the radiative rate $\Gamma_R$ from Fermi's Golden Rule and considered the excitonic effects by solving BSE~\cite{wu2019dimensionality}:
 % \begin{align}
-%     \Gamma_R (\textbf{Q}) &= \frac{4\pi^2e^2}{\hbar c^2V} \Omega(\textbf{Q})^2 \sum_{q, \lambda} \frac{1}{q} \left|
-%         \epsilon_{q\lambda} \cdot \mel{G}{\textbf{r}}{S}
-%     \right|^2 \delta(\frac{\Omega(\textbf{Q})}{c} - q)
-%     \label{eq: rate-radiative-full}
+%     \Gamma_R (\textbf{Q}_{ex}) &=
+%     \frac{2\pi}{\hbar}
+%     \sum_{q_L, \lambda}
+%     \left|
+%         \mel{G,1_{q_L,\lambda}}
+%         {H^R}
+%         {S(\textbf{Q}_{ex}),0}
+%     \right|^2
+%     \delta(E(\textbf{Q}_{ex}) -\hbar c q_L).
+%     \label{eq:rate-radiative-full}
 % \end{align}
-Here, the radiative recombination rate is computed between the ground state $G$ and the two-particle excited state $S(\textbf{Q}_{ex})$, $1_{q_L,\lambda}$ and 0 denote the presence and absence of a photon, $H^R$ is the electron-photon coupling (electromagnetic) Hamiltonian,  $E(\textbf{Q}_{ex})$ is the exciton energy, and $c$ is the speed of light.
-The summation indices in Eq.~\ref{eq:rate-radiative-full} run over all possible wavevector ($q_L$) and polarization ($\lambda$) of the photon.
-Following the approach described in Ref.~\cite{wu2019dimensionality}, the radiative rate (inverse of radiative lifetime $\tau_R$) in SI unit at zero temperature can be computed for isolated defect-defect transitions as:
- %\Gamma_R  &= \frac{4e^2}{3\hbar c^3} \Omega_0^3 |\mu|_{e-h}^2,\\
-\begin{equation}
-     \Gamma_R = \frac{n_D e^2}{3\pi\epsilon_0\hbar^4 c^3} E_0^3 \mu_{e-h}^2,
-    \label{eq:rate-radiative-0D}
-\end{equation}
-where $e$ is the charge of an electron, $\epsilon_0$ is vacuum permittivity, $E_0$ is the exciton energy at $\textbf{Q}_{ex}=0$, $n_D$ is the reflective index of the host material and $\mu_{e-h}^2$ is the modulus square of exciton dipole moment with length$^2$ unit. Note that Eq.~\ref{eq:rate-radiative-0D} considers defect-defect transitions in the dilute limit; therefore the lifetime formula for zero-dimensional systems embedded in a host material is used~\cite{gupta2018two,mackoit2019carbon} (also considering $n_D$ is unity in isolated 2D systems at the long-wavelength limit). We did not consider the radiative lifetime of $\ti$ defect at a finite temperature because the first and second excitation energy separation is much larger than $kT$. Therefore a thermal average of the first and higher excited states is not necessary and the first excited state radiative lifetime is nearly the same at 10 K as zero temperature.
+% % \begin{align}
+% %     \Gamma_R (\textbf{Q}) &= \frac{4\pi^2e^2}{\hbar c^2V} \Omega(\textbf{Q})^2 \sum_{q, \lambda} \frac{1}{q} \left|
+% %         \epsilon_{q\lambda} \cdot \mel{G}{\textbf{r}}{S}
+% %     \right|^2 \delta(\frac{\Omega(\textbf{Q})}{c} - q)
+% %     \label{eq: rate-radiative-full}
+% % \end{align}
+% Here, the radiative recombination rate is computed between the ground state $G$ and the two-particle excited state $S(\textbf{Q}_{ex})$, $1_{q_L,\lambda}$ and 0 denote the presence and absence of a photon, $H^R$ is the electron-photon coupling (electromagnetic) Hamiltonian,  $E(\textbf{Q}_{ex})$ is the exciton energy, and $c$ is the speed of light.
+% The summation indices in Eq.~\ref{eq:rate-radiative-full} run over all possible wavevector ($q_L$) and polarization ($\lambda$) of the photon.
+% Following the approach described in Ref.~\cite{wu2019dimensionality}, the radiative rate (inverse of radiative lifetime $\tau_R$) in SI unit at zero temperature can be computed for isolated defect-defect transitions as:
+%  %\Gamma_R  &= \frac{4e^2}{3\hbar c^3} \Omega_0^3 |\mu|_{e-h}^2,\\
+% \begin{equation}
+%      \Gamma_R = \frac{n_D e^2}{3\pi\epsilon_0\hbar^4 c^3} E_0^3 \mu_{e-h}^2,
+%     \label{eq:rate-radiative-0D}
+% \end{equation}
+% where $e$ is the charge of an electron, $\epsilon_0$ is vacuum permittivity, $E_0$ is the exciton energy at $\textbf{Q}_{ex}=0$, $n_D$ is the reflective index of the host material and $\mu_{e-h}^2$ is the modulus square of exciton dipole moment with length$^2$ unit. Note that Eq.~\ref{eq:rate-radiative-0D} considers defect-defect transitions in the dilute limit; therefore the lifetime formula for zero-dimensional systems embedded in a host material is used~\cite{gupta2018two,mackoit2019carbon} (also considering $n_D$ is unity in isolated 2D systems at the long-wavelength limit). We did not consider the radiative lifetime of $\ti$ defect at a finite temperature because the first and second excitation energy separation is much larger than $kT$. Therefore a thermal average of the first and higher excited states is not necessary and the first excited state radiative lifetime is nearly the same at 10 K as zero temperature.
 
 
-\subsection{Phonon-Assisted Nonradiative Recombination} In this work, we compute the phonon-assisted nonradiative recombination rate via a Fermi's golden rule approach:
-\begin{align}
-    \Gamma_{NR} &= \frac{2\pi}{\hbar}g\sum_{n,m}p_{in}\left|\mel{fm}{H^{e-ph}}{in}\right|^2\delta(E_{in}-E_{fm}) \label{eq:rate-nonradiative-fg}
-\end{align}
-Here, $\Gamma_{NR}$ is the nonradiative recombination rate between electron state $i$ in phonon state $n$ and electron state $f$ in phonon state $m$, $p_{in}$ is the thermal probability distribution of the initial state $\ket{in}$, $H^{e-ph}$ is the electron-phonon coupling Hamiltonian, $g$ is the degeneracy factor and $E_{in}$ is the energy of vibronic state $\ket{in}$. Within the static coupling and one-dimensional (1D) effective phonon approximations, the nonradiative recombination can be reduced to:
-\begin{align}
-    \Gamma_{NR} &= \frac{2\pi}{\hbar}g|W_{if}|^2 X_{if}(T), \label{eq:rate-nonrad-allterms}\\
-    X_{if}(T) &= \sum_{n,m}p_{in}\left|\mel{\phi_{fm}(\textbf{R})}{Q-Q_a}{\phi_{in}(\mathbf{R})}\right|^2 \delta(m\hbar\omega_f - n\hbar\omega_i+\Delta E_{if}), \label{eq:rate-nonrad-X} \\
-    W_{if} &= \mel{\psi_i(\mathbf{r}, \textbf{R})}{\frac{\partial H}{\partial Q}}{\psi_f(\mathbf{r},\textbf{R})}\bigg{|}_{\textbf{R}=\textbf{R}_a}. \label{eq:rate-nonrad-W}
-\end{align}
-Here, the static coupling approximation naturally separates the nonradiative recombination rate into phonon and electronic terms, $X_{if}$ and $W_{if}$, respectively. The 1D phonon approximation introduces a generalized coordinate $Q$, with effective frequency $\omega_i$ and $\omega_f$. The phonon overlap in Eq.~\ref{eq:rate-nonrad-X} can be computed using the quantum harmonic oscillator wavefunctions with $Q-Q_a$ from the configuration diagram (Figure~\ref{fig:config}). Meanwhile the electronic overlap in Eq.~\ref{eq:rate-nonrad-W} is computed by finite difference using the Kohn-Sham orbitals from DFT at the $\Gamma$ point. The nonradiative lifetime $\tau_{NR}$ is given by taking the inverse of rate $\Gamma_{NR}$. Supercell convergence of phonon-assisted nonradiative lifetime is shown in Supplementary Note 11 and Table 7. We validated the 1D effective phonon approximation by comparing the Huang-Rhys factor with the full phonon calculations in Supplementary Table 8.
+% \subsection{Phonon-Assisted Nonradiative Recombination} In this work, we compute the phonon-assisted nonradiative recombination rate via a Fermi's golden rule approach:
+% \begin{align}
+%     \Gamma_{NR} &= \frac{2\pi}{\hbar}g\sum_{n,m}p_{in}\left|\mel{fm}{H^{e-ph}}{in}\right|^2\delta(E_{in}-E_{fm}) \label{eq:rate-nonradiative-fg}
+% \end{align}
+% Here, $\Gamma_{NR}$ is the nonradiative recombination rate between electron state $i$ in phonon state $n$ and electron state $f$ in phonon state $m$, $p_{in}$ is the thermal probability distribution of the initial state $\ket{in}$, $H^{e-ph}$ is the electron-phonon coupling Hamiltonian, $g$ is the degeneracy factor and $E_{in}$ is the energy of vibronic state $\ket{in}$. Within the static coupling and one-dimensional (1D) effective phonon approximations, the nonradiative recombination can be reduced to:
+% \begin{align}
+%     \Gamma_{NR} &= \frac{2\pi}{\hbar}g|W_{if}|^2 X_{if}(T), \label{eq:rate-nonrad-allterms}\\
+%     X_{if}(T) &= \sum_{n,m}p_{in}\left|\mel{\phi_{fm}(\textbf{R})}{Q-Q_a}{\phi_{in}(\mathbf{R})}\right|^2 \delta(m\hbar\omega_f - n\hbar\omega_i+\Delta E_{if}), \label{eq:rate-nonrad-X} \\
+%     W_{if} &= \mel{\psi_i(\mathbf{r}, \textbf{R})}{\frac{\partial H}{\partial Q}}{\psi_f(\mathbf{r},\textbf{R})}\bigg{|}_{\textbf{R}=\textbf{R}_a}. \label{eq:rate-nonrad-W}
+% \end{align}
+% Here, the static coupling approximation naturally separates the nonradiative recombination rate into phonon and electronic terms, $X_{if}$ and $W_{if}$, respectively. The 1D phonon approximation introduces a generalized coordinate $Q$, with effective frequency $\omega_i$ and $\omega_f$. The phonon overlap in Eq.~\ref{eq:rate-nonrad-X} can be computed using the quantum harmonic oscillator wavefunctions with $Q-Q_a$ from the configuration diagram (Figure~\ref{fig:config}). Meanwhile the electronic overlap in Eq.~\ref{eq:rate-nonrad-W} is computed by finite difference using the Kohn-Sham orbitals from DFT at the $\Gamma$ point. The nonradiative lifetime $\tau_{NR}$ is given by taking the inverse of rate $\Gamma_{NR}$. Supercell convergence of phonon-assisted nonradiative lifetime is shown in Supplementary Note 11 and Table 7. We validated the 1D effective phonon approximation by comparing the Huang-Rhys factor with the full phonon calculations in Supplementary Table 8.
 
 \subsection{Spin-Orbit Coupling Constant} Spin-orbit coupling (SOC) can entangle triplet and singlet states yielding the possibility for a spin-flip transition. The SOC operator is given to zero-order by~\cite{maze2011properties}:
 \begin{align}
