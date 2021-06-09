@@ -6,8 +6,6 @@
 \newcommand{\sub}[2]{\text{#1}_\text{#2}}
 % shortcut for interstitial (X_i)
 \newcommand{\itl}[1]{\text{#1}_i}
-
-% shortcut for all defects
 \def\vo{\vac{O}}
 \def\vfe{\vac{Fe}}
 \def\oi{\itl{O}}
@@ -23,3 +21,181 @@
 
 
 \section{Carrier Concentrations in \ce{Fe2O3}}
+
+Outstanding questions remain in the pursuit of highly-efficient \ce{Fe2O3}-based devices with atomic doping. For example, the identity of intrinsic free carrier donor remains under debate.
+Specifically, various experimental works have claimed that oxygen vacancies ($\vo$) are the source of extra carriers in $n$-type \ce{Fe2O3}, \cite{zhang2019interfacial} whereas theoretical works have shown that $\vo$ have an unreasonably large ionization energy,\cite{smart2017effect} which suggests that they cannot be the primary contributor of free carriers. Meanwhile, some theoretical works have supported that iron interstitials ($\fei$) are the major carrier donors due to a significantly smaller ionization energy than that of $\vo$.~\cite{lee2013thermodynamics} Another important question, which is more general to oxides than particularly \ce{Fe2O3}, is how to determine dopants which will yield the best performances of oxide based devices? Insights into the design of efficient oxide based devices by simple yet practical prediction of atomic doping are highly desired.~\cite{yang2017progress}
+
+There have been some theoretical works on intrinsic defects and atomic doping in \ce{Fe2O3}, for example, defect formation energy and charge transition levels have been computed for \ce{Fe2O3}, which can help determine dopants with low ionization energy such as Sn, Ge, and Ti. \cite{smart2017effect,zhou2015understanding}
+However, these works cannot yet address the above questions since directly obtaining carrier concentrations requires understanding the combined effects of dopant solubility and dopant ionization energy.
+Furthermore, intrinsic defects should be considered simultaneously as they may compensate $n$-type dopants, and yet, the effects of intrinsic defects with or without external doping are not well-established in \ce{Fe2O3}, as mentioned above.
+
+In this work, we provide answers to these questions by investigating carrier concentrations in \ce{Fe2O3} from first-principles. By careful evaluation of defect concentrations including the presence of small electron polarons we can reliably predict the concentrations of free carriers in \ce{Fe2O3}, in excellent agreement with experiments.
+Further detailed computational analysis of dopant solubility, ionization energy, chemical condition, and synthesis temperature are provided in order to answer outstanding questions such as: What are the intrinsic carrier donors in pristine \ce{Fe2O3}? Which dopants are the best at raising carrier concentrations? What makes a dopant effective in raising carrier concentrations (\textit{e.g.}\ solubility or ionization energy)?
+The work is organized as follows, first we briefly present our computational methodology. Second we discuss intrinsic defects in undoped \ce{Fe2O3}. Third we systematically study several tetravalent and pentavalent dopants idenitifying the best dopants for this system. Finally we analyze the importance of solubility against ionization energy in determining which dopants will be the best at enhancing carrier concentrations. The contribution of entropy to the formation energy is rigorously studied and the general trends of formation energy (ionization energy) within each group with respect to ionic radius is also presented.
+This work provides detailed understanding of the interactions between intrinsic defects, extrinsic dopants, and small polarons in polaronic oxides.
+
+Density functional theory calculations were performed in the open-source plane-wave code QuantumESPRESSO~\cite{QE1} using ultrasoft GBRV pseudopotentials~\cite{gbrv} and an effective Hubbard $U$~\cite{dudarev1998electron} value of 4.3 eV for Fe $3d$ orbitals \cite{smart2017effect,adelstein2014density}.
+Plane-wave cutoff energies of 40 Ry and 240 Ry were used for wavefunctions and charge density, respectively. All calculations employed a $2\times 2\times 1$ supercell (120 atoms) of the hexagonal unit cell with a $2\times 2\times 2$ $k$-point mesh for integration over the Brillouin zone.
+Charged defect formation energies and defect concentrations, including free carrier concentrations were evaluated from first-principles.
+
+
+\subsection{Intrinsic Defect Contributions to Polaron Concentration}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[keepaspectratio=true,width=0.95\linewidth]{Figures/dc.png}
+\includegraphics[keepaspectratio=true,width=1\linewidth]{2-tmo/figures-fe2o3/Figure1_v5.png}
+\caption{Identification of the source of free carriers in undoped \ce{Fe2O3}.
+(a) Local structure and electron wavefunctions (yellow cloud) of $\vo$ with two $EP$s.
+(b) Local structure and electron wavefunctions of $\fei$ with three $EP$s (one of which forms at the interstitial site).
+(c) Intrinsic defect concentrations as a function of \ce{O2} partial pressure in undoped hematite computed at room temperature with synthesis at $T_S = 873$, 1073, 1373 K.
+(d) $\vo^+$, $\fei^+$ and $EP$ concentration at room temperature and $\po=1$ atm, as a function of synthesis temperature.
+(e) Polaron concentration and (f) difference between $\fei^+$ and $\vo^+$ at room temperature as a function of synthesis temperature ($T_S$) and oxygen partial pressure ($\po$).
+In the atomic plots, gold=Fe, red=O, and blue=$\fei$.
+The yellow cloud is an isosurface of the polaron wavefunction with an isosurface level of 5\% its maximum.
+}
+\label{fig:intrinsic}
+\end{figure}
+
+In undoped hematite, intrinsic defects such as vacancies ($\vo$, $\vfe$), and interstitials ($\oi$, $\fei$) may form within the lattice along with the generation of carriers such as free small electron polarons ($EP$).
+Since $\vo$ and $\fei$ are $n$-type defects, they introduce small electron polarons into the lattice as shown in Figure~\ref{fig:intrinsic}a-b.
+In Figure~\ref{fig:intrinsic}c, intrinsic defect concentrations are provided at room temperature (300 K) as a function of oxygen partial pressure ($\po$) in pristine hematite for three synthesis temperatures ($T_S = 873$, 1073, and 1373 K).
+First we note that the largest presence of any defect is $\vo$ (lowest formation energy in Table~\ref{table:intrinsic}), which grows monotonically with decreasing $p_{\rm O_2}$, and should be chiefly responsible for the non-stoichiometry observed in \ce{Fe2O3}. \cite{dieckmann1993point}
+Second, we find that intrinsically excess electrons can form into free electron polarons (dashed red line labeled as $EP$) whereas the concentrations of free delocalized band electrons and holes are negligible (less than $10^8$ cm$^{-3}$), consistent with experimental measurements of photoexcited electrons in \ce{Fe2O3}.\cite{carneiro2017excitation} Also, the intrinsic $n$-type nature of \ce{Fe2O3} is consistent with the lower formation energy of $\vo$ and $\fei$ compared with $p$-type defects in Table~\ref{table:intrinsic}.
+
+In terms of identifying the primary donor of these $EP$, the conclusions are dependent on the synthesis conditions and cannot be determined from formation energy or ionization energies alone. At $T_S=873$ K, it is the case that ionized oxygen vacancies ($\vo^+$, solid purple line) are the primary donor to free electron polaron concentrations (overlaps with the dashed red line labeled $EP$).
+Interestingly, as the synthesis temperature is elevated, for example to $T_S=1373$ K, free electron polaron concentrations are not just more abundant, they are also originating from a different source, namely, Fe interstitials ($\fei^+$, solid light blue line) in Figure~\ref{fig:intrinsic}c.
+The change in electron polaron concentration versus synthesis temperature is directly shown in Figure~\ref{fig:intrinsic}d at atmospheric pressure ($\po=1$ atm).
+We find that for synthesis temperatures below a critical temperature of $\sim$1104 K, $\vo^+$ is the primary donor, whereas above this threshold $\fei^+$ will become the primary donor.
+To simultaneously show the effect of oxygen partial pressure we plot a heat map of electron polaron concentration and the difference between $\fei^+$ and $\vo^+$ concentration in Figure~\ref{fig:intrinsic}e-f. The correspondence between the two figures reveals the importance of forming $\fei$ in achieving higher carrier concentrations in \ce{Fe2O3}.
+
+
+\begin{table}[H]
+\footnotesize
+\centering
+\begin{tabular}{c|cccc}
+\hline \hline
+Defect & $E^f$ (eV) &  $IE$ (eV) \\
+\hline
+$\vo$ &    2.06 &       0.70 \\
+$\fei$ &    3.46 &      -0.01 \\
+$\vfe$ &    4.14 &       --   \\
+$\oi$ &    3.15 &       --   \\
+\hline \hline
+\end{tabular}
+    \caption{The formation energy and first ionization energy of intrinsic defects at $\po=1$ atm in undoped \ce{Fe2O3}.}
+\label{table:intrinsic}
+\end{table}
+
+The observation above is important in resolving the long-standing confusion about which defect acts as the major carrier donor in pristine hematite.
+Our results here suggest that previous debate over the primary donor can be explained by the transition from $\vo^+$ to $\fei^+$ which has not been previously identified.
+Furthermore, this transition highlights the varying importance of defect solubility versus ionization energy.
+While the ionization energy of $\vo$ is 0.7 eV, it has the highest solubility amongst intrinsic defects, with a formation energy 1.4 eV lower than that of $\fei$.
+At lower synthesis temperatures (\textit{e.g.}\ below $1100$ K), the formation of $\fei$ is sparse (less than 10$^{10}$ cm$^{-3}$ when $T_S=873$ K as shown in Figure~\ref{fig:intrinsic}c) and by consequence $\vo$ is the primary source of carriers.
+In this situation the carrier concentrations are extremely low, $\sim$10$^{12}$ cm$^{-3}$ because the Fermi level is pinned at the first charge transition level of $\vo$ at $\sim$0.94 eV. This observation is in good agreement with recent measurements of undoped \ce{Fe2O3} which exhibit Fermi level positions between 0.8 and 1.2 eV.~\cite{lohaus2018limitation}
+When the synthesis temperature is increased or the oxygen partial pressure is decreased, the formation of $\fei$ is more achievable and eventually it can act as the major donor in \ce{Fe2O3}.
+In this situation, $\fei$ is always ionized $\fei^+$ due to a negative ionization energy, -0.01 eV, and so the carrier concentrations of hematite can be dramatically increased (red regions in Figure~\ref{fig:intrinsic}d-f where $\fei^+$ is the primary donor, $EP$ concentrations can reach $\sim$10$^{18}$ cm$^{-3}$). In this situation the Fermi level will approach the free polaron limit as experimentally observed.~\cite{lohaus2018limitation}
+It has to be noted that there is some difference between our computed polaron concentration and expeimentally measured polaron concentration for pristine hematite, which could be related to two perspectives0.\cite{wang2011facile, ling2012influence} First, experimentally, hematite are often grown and measured on substrate such as fluorine doped hematite (FTO). The interface between hematite film and substrate could actually play an important role in shifting Fermi level (carrier concentration), i.e. low and high work function contact materials could raise and lower the Fermi level at the interface, respectively.\cite{lohaus2018limitation}
+ Second, the carrier concentration (or Fermi level) of pristine system is very sensitive to temperature and pressure. The experimental vacuum synthesis condition is not easy to be correctly defined in simulation.
+
+\subsection{Tetravalent and Pentavalent Dopant Raise Carrier Concentrations}
+
+ \begin{figure}[H]
+\centering
+\includegraphics[keepaspectratio=true,width=1\linewidth]{2-tmo/figures-fe2o3/Figure2_v4.png}
+\caption{
+Atomic structures and defect concentrations of extrinsic dopants which are best at raising carrier concentrations in \ce{Fe2O3}.
+(a) Atomic structures of \ce{Fe2O3} with neutral dopants Ti, Ge, Nb, and Sb. In the case of tetravalent and pentavalent the yellow cloud(s) represent the one or two nearby electron polaron(s), respectively.
+(b) Room temperature defect, dopant, and carrier concentrations of Ti, Ge, Nb and Sb doped hematite at $p_{O_2}$ = 1 atm and as a function of synthesis temperature.
+In the atomic plots, gold=Fe, red=O, and the remaining colored atom is the dopant as labeled within each figure.
+The yellow cloud is an isosurface of the polaron wavefunction with an isosurface level of 5\% its maximum.
+}
+\label{fig:dopant}
+ \end{figure}
+
+
+ \begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{c|cccc}
+\hline \hline
+Dopant & $E^f$ (eV) &  $IE$ (eV) &  $\rho_{EP}$(${\rm cm}^{-3}$) &  $\rho_{EP}^{exp}$(${\rm cm}^{-3}$)  \\
+\hline
+Ti &        0.884 &           0.157 &        7.4$\cross 10^{19}$ &  1.4$\cross 10^{19}$-3.3$\cross 10^{20}$ \cite{wang2011facile,rioult2014single,malviya2017influence,hahn2010photoelectrochemical,zandi2013highly,glasscock2007enhancement}\\
+Ge &        0.810 &           0.197 &        4.7$\cross 10^{19}$ &  3.0$\cross 10^{19}$ \cite{liu2014highly}\\
+Sb &        0.546 &           0.247 &        4.1$\cross 10^{19}$ &  1.1$\cross 10^{20}$ \cite{annamalai2018influence}\\
+Nb &        1.461 &           0.153 &        2.2$\cross 10^{19}$ &  5.0$\cross 10^{19}$ \cite{sanchez1988photoelectrochemistry} \\
+Bi &        1.155 &           0.198 &        1.4$\cross 10^{19}$ &  N/A\\
+As &        0.808 &           0.268 &        1.3$\cross 10^{19}$ &  N/A\\
+Sn &        0.883 &           0.255 &        1.2$\cross 10^{19}$ &  6.5$\cross 10^{18}$-1.1$\cross 10^{20}$ \cite{li2017morphology,tian2020electronic,ling2011sn,yang2016acid}\\
+Pb &        1.061 &           0.241 &        9.0$\cross 10^{18}$ &  N/A\\
+Ta &        1.224 &           0.260 &        6.1$\cross 10^{18}$ &  N/A\\
+Hf &        1.143 &           0.267 &        4.2$\cross 10^{18}$ &  N/A\\
+Zr &        1.230 &           0.259 &        3.7$\cross 10^{18}$ &  N/A\\
+V &        1.137 &           0.344 &        1.0$\cross 10^{18}$ &  N/A\\
+P &        1.926 &           0.348 &        1.8$\cross 10^{17}$ &  N/A\\
+Si &        1.949 &           0.165 &        1.4$\cross 10^{17}$ &  N/A\\
+\hline \hline
+\end{tabular}
+\caption{Summary of representative dopants considered in this work with their formation energy ($E^f$), first ionization energy ($IE$), and induced polaron concentration ($\rho_{EP}$) computed at room temperature with synthesis at $T_S=1073$ K and $\po=1$ atm.
+}
+\label{table:summary}
+\end{table}
+
+
+
+ In order to achieve higher carrier concentrations and optimize the efficiency of \ce{Fe2O3}-based devices, extrinsic doping will be necessary.
+ In order to broadly survey potential dopants and identify optimal doping strategies we studied all group IV, V, XIV, and XV elements. Intuitively substituting trivalent Fe ions by tetravalent or pentavalent ions will donate electrons due to the increased valence count.
+ In Figure~\ref{fig:dopant} we show the results of four dopants (Ti, Ge, Nb, Sb) that we found enhance carrier concentration of \ce{Fe2O3} the most, at room temperature and under typical synthesis conditions, $\po=1$ atm and $T_S=1073$ K.~\cite{tian2020electronic}
+ We find dramatic enhancement in electron polaron concentration of \ce{Fe2O3} after atomic doping (dashed red line in Figure~\ref{fig:dopant}b).
+ Specifically, whereas in undoped \ce{Fe2O3} free electron polaron concentrations are maximally $\sim$10$^{18}$ cm$^{-3}$, many dopants can raise electron polaron concentrations higher.
+ When comparing all of the studied dopants together (see Table~\ref{table:summar}) we find that Ti-doped \ce{Fe2O3} has the highest yield for enhancing polaron concentration which exhibits concentrations of $\rm 10^{20}\ cm^{-3}$, in great agreement with experimental measurement. \cite{hahn2010photoelectrochemical,glasscock2007enhancement,rioult2014single,fu2014highly,malviya2017influence}
+ Meanwhile our predictions of Ge and Sb as effective dopants in raising carrier concentrations to $\rm 10^{19}-10^{20}\ cm^{-3}$ are consistent with experimental measurements as well.\cite{annamalai2018influence,liu2014highly}
+ The excellent agreement with experiments on various dopants highlight the robustness of our first-principles prediction of defect properties and the depiction of carriers as small electron polarons.
+ Based on our carrier concentration calculation results, we predict that Ti, Ge, Nb and Sb are excellent candidates for further investigation as potentially promising dopants for enhancing PEC performance in hematite.
+
+
+ In Table~\ref{table:summary}, some correlation between the dopant formation energy and the carrier concentration ($\rho_{EP}$) is apparent, while the ionization energy seems less important.
+ % however, it is worth noting that this trend actually breaks for certain cases where the formation energy  ($E^f$) should be considered.
+ The best example of this is the case of P and Si which have nearly identical formation energies (1.926 and 1.949 eV), and despite a remarkable difference in their ionization energy (0.35 and 0.17 eV), P doping is predicted to have only slightly larger electron polaron concentrations than Si (1.8$\times\ 10^{17}$ and 1.4$\times\ 10^{17}$ cm$^{-3}$).
+ Meanwhile, in Figure~\ref{fig:trends}a we show there is a dramatic change in carrier concentrations for Si doping as a function of synthesis temperature, which underperforms P doping at low temperatures but then outperforms at higher temperatures.
+ This result is reminiscent of Figure~\ref{fig:intrinsic}d, and touches on the outstanding question of what is most important in determining the ability for a dopant or defect to raise carrier concentrations, \textit{e.g.}\ low formation energy or low ionization energy?
+
+\subsection{Critical Role of Synthesis Temperature}
+
+ In order to directly address this question, we performed linear regression on the larger data sets obtained from dopant calculations to analyze the importance of dopant formation energy or solubility against that of ionization energy. % Furthermore we computed our data sets for various synthesis temperature to highlight the importance of experimental conditions.
+ Figure~\ref{fig:trends}b shows the predictive score (\textit{e.g.}\ the coefficient of determination $R^2$) of modeling the data sets such as those shown in Figure~\ref{fig:trends}c-e by three cases. First (red line in Figure~\ref{fig:trends}b) the polaron concentration is predicted by a single exponential term from the dopants ionization energy ($e^{IE}$). Second (in blue) a single exponential from the dopants formation energy ($e^{FE}$) was used to predict the polaron concentration. Finally (in black) the polaron concentration is predicted by both terms ($e^{IE}+e^{FE}$).
+ When using both terms (black), the predictive score is typically exceeding 0.85 which signifies that these two dopant properties uniquely determine the induced electron polaron concentrations. Formation energy determines how much dopants can be incorporated into the crystal lattice of hematite while ionization energy determins how much dopants can be ionized.
+
+ \begin{figure}[H]
+\centering
+\includegraphics[keepaspectratio=true,width=1\linewidth]{2-tmo/figures-fe2o3/Figure3_v8.png}
+\caption{
+Resolving the importance of dopant formation energy and ionization energy in determining carrier concentrations of \ce{Fe2O3}.
+(a) Electron polaron concentration change of Si (red) and P (blue) doped hematite at room temperature and $\po=1$ atm as a function of synthesis temperature ($T_S$).
+(b) Predictive score of linear regression models on the induced carrier concentrations using dopants formation energy (blue), dopants ionization energy (red), or both (black).
+Electron polaron concentrations at room temperature and $\po=1$ atm for various synthesis temperatures: (c) 873, (d) 1073, and (e) 1373 K, plotted against dopant formation energies and with dopant ionization energies distinguished in colors. (f) The correlation between formation energy and ionic radius of different dopants. (g) The correlation between ionization energy and ionic radius of different dopants.
+}
+\label{fig:trends}
+ \end{figure}
+
+
+More importantly, the decomposition into dopant formation energy (blue) or dopant ionization energy (red) reveals the relative importance of these two factors in determining the induced carrier concentrations.
+ For lower temperatures the solubility of the dopant (formation energy, $R^2 \sim 0.8$) almost uniquely determines how well the dopant is able to raise carrier concentrations, while ionization energy is significantly less important ($R^2 \sim 0.1$).
+ This explains the above observation that P and Si, which have similar formation energy (1.926 and 1.949 eV), have nearly identical polaron concentrations ($\sim$10$^{17}$ cm$^{-3}$) at low synthesis temperature, despite significant difference in their ionization energy (0.348 and 0.165 eV).
+ It can also explain how $\vo$, despite a significantly larger ionization energy (0.7 eV) than $\fei$ (-0.01 eV), is still the major donor in \ce{Fe2O3} at lower synthesis temperatures due to its lower formation energy (2.06 vs. 3.46 eV).
+ Meanwhile, as the synthesis temperature is elevated poor solubility can be overcome and dopants ability to ionize is weighted equally with its formation energy (blue and red lines approach $R^2 \sim 0.5$ as synthesis temperature is increased in Figure~\ref{fig:trends}b).
+ This helps to explain the dramatic increase in polaron concentration under Si doping shown in Figure~\ref{fig:trends}a, as well as the transition from $\vo$ to $\fei$ as the source of carriers in undoped \ce{Fe2O3} shown in Figure~\ref{fig:intrinsic}c-f.
+ Beyond this we conclude that less soluble dopants such as Si, require higher synthesis temperatures to reach carrier concentrations seen for more soluble dopants such as Ti, Ge, and Sb (Figure~\ref{fig:dopant}b).
+
+ We also explicitly consider the effect of entropy to the total formation energy. Entropy contributes formation energy from two aspects: configurational entropy and vibrational entropy. Configurational entropy is depending on the number of different possible configurations for the defect to be placed in hematite lattice, which always stabilizes the dopant formation. It can be separated into two parts, entropy from ideal solution and excess entropy of mixing. Since the second term is small compared to the first term,\cite{ye2015generalized, ye2016high} in this work, the configurational entropy of ideal solution is used to approximate the total configurational entropy. On the other hand, the vibrational entropy is computed by taking the difference of vibrational entropy between doped species and undoped species. We chose Sn and Nb as two representatives for group IV and V elements and computed the entropy correction of them to the formation energy and found that their contribution to the total formation energy is 0.1-0.2 eV, which does not affect the defect concentration significantly (Figure ~\ref{fig:Snentropy} and ~\ref{fig:Nbentropy}). Based on that, formation energy without entropy correction is used across the whole paper.
+
+ Some general trends between formation energy/ionization energy and ionic radius of dopants within each group are also observed. The formation energies of dopants in each group have a parabolic shape with respect to their ionic radius (Figure~\ref{fig:trends}f). Some dopants such as Ti and Sb have small formation energies, while some others such as P and Pb have much lower solubility. A radius around 60 pm seems to be a sweet spot, which is slightly smaller than that of the ionic radius of $Fe^{3+}$ (64.5 pm) due to the repulsion caused by polaron formation. A dashed line at 60 pm is drawn to guide the eyes. On the other hand, in Figure~\ref{fig:trends}g, it can be noted that the trends for group IV and group V elements are different. For group V elements, ionization energy is generally getting smaller with ionic radius. However, the trend is opposite for group IV elements, ionization energy is generally increasing with ionic radius, which could be related to the electronic configurations of the dopants after ionization. For instance, group IV dopants have inert gas electronic configurations after ionization energy, which are very stable and lower the ionization energy compared to group V dopants overall. In addition, with the increase of ionic radius, the electronic configurations of ionized group IV dopants are getting less stable, which explains the upside trend of them.
+ These trends could help experimentalists make reasonable choices about what dopants to choose when there is only very limited information such as ionic radius.
+
+\subsection{Conclusions}
+
+ In summary, this work demonstrates the role of defects, dopants, and small polarons in determining carrier concentrations in a prototypical oxide, \ce{Fe2O3}. This work identifies from first-principles calculations that the critical role of synthesis temperature on small polaron carrier concentration in hematite, both pristine and doped. For pristine hematite, the major electron polaron donor switches from $V_O$ to $Fe_i$ with the ramp up of synthesis temperature because the high formation energy of $Fe_i$ can be overcome at higher temperature and its low ionization energy makes it easier to be ionized compared to $V_O$. From our survey of all group IV and V dopants, we find that Ti, Ge, Sb, and Nb, are able to achieve the highest free carrier concentration in \ce{Fe2O3}.
+ The linear regression on our data set of these dopants under different chemical conditions and synthesis temperatures reveals that dopant solubility is more important in determining the improvement on carrier concentration in \ce{Fe2O3}.
+ Our study suggests that lower solubility dopants such as Si will require elevated synthesis temperatures for them to be incorporated into the lattice.
+ This work addresses several outstanding questions for hematite but will also be applicable to other polaronic oxides, therefore, our study has broader interests to fundamentally designing more efficient oxide-based energy conversion and storage devices.
