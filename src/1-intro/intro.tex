@@ -8,7 +8,7 @@
 \chapter{Introduction}
 
 % general "big picture" motivation, will introduce briefly both renewable energy and quantum information science motivations
-Understanding and developing material properties is essential to solving some of societies greatest concerns. One such concern of particular interest is the desperate need for renewable energy sources.
+Understanding and developing material properties is essential to solving some of societies greatest concerns. One such concern of particular interest is the desperate need for renewable energy resources.
 Advancing novel technologies for energy harvesting, conversion, and storage is critical to ensure the economic viability of U.S. energy and chemical industries.~\cite{eia,renewable} For many of these technologies, a detailed understanding of chemical processes at electrochemical interfaces is essential. For instance, optimizing water splitting reactions at the semiconductor-water interface in photoelectrochemical cells is key for improving the device efficiency and stability for generating hydrogen fuel from water and sunlight.~\cite{mccrory2015} Alternatively, the causes of oxidation and corrosion at the interface can be illuminated via chemical degradation processes.~\cite{huang2019} Last but not least, understanding the relationship between reactivity and electronic properties of liquid electrolytes at the interface with electrode materials is also one of the prerequisites for manipulating the electrochemical stability of electrode-electrolyte interfaces in ion batteries and supercapacitors.~\cite{wang2018}
 
 However, the development of renewable energy resources is only a single example of the type of problem in which material design is crucial. As another example, material science is unsurprisingly at the very heart of developing brand new technologies, particularly those in the realm of quantum information science. The development of innovative quantum technologies is immanent and will make broad impacts on our national technology sector.~\cite{quantum} For example, point defects in two-dimensional materials are hosts for emerging quantum phenomena such as single-photon emitters and defect-based spin qubits. Both of these technologies necessitate the development of material design.
@@ -26,7 +26,7 @@ As such, my research in modeling materials from first-principles calculations is
 
 \subsection{Background}
 
-In the interrelated field of physics, chemistry, and material science, there is no greater problem than that of the electron. The electron can determine so many of the properties of material, from its ability to absorb light, conduct electrical currents, thermally or electrically insulate, and so much more. Hence, in order to have a grasp on fundamental material properties we must understand the electron and the quantum mechanical nature by which it lives by solving the multi-electron Schr{\"o}dinger equation (SE). The multi-electron problem essentially refers to any problem involving interactions between more than one electron, often in an external field. In principle, the problem is well understood in the formalism of Schr{\"o}dinger quantum mechanics, the Hamiltonian of the multi-electron system in a material with ion potential within the Born-Oppenheimer approximation (rigid ion approximation) is given by:
+In the interrelated field of physics, chemistry, and material science, there is no greater problem than that of the electron. The electron can determine so many of the properties of a material, from its ability to absorb light, conduct electrical currents, thermally or electrically insulate, and so much more. Hence, in order to have a grasp on fundamental material properties we must understand the electron and the quantum mechanical nature by which it lives by solving the multi-electron Schr{\"o}dinger equation (SE). The multi-electron problem essentially refers to any problem involving interactions between more than one electron, often in an external field. In principle, the problem is well understood in the formalism of Schr{\"o}dinger quantum mechanics, where the Hamiltonian of the multi-electron system within the Born-Oppenheimer approximation (rigid ion approximation) is given by:
 \begin{align}
     \left[ -\frac{\hbar^2}{2m} \sum_i \nabla_i^2 + \sum_i V_{ext} (\textbf{r}_i) + \frac{1}{2} \sum_{i\neq j} \frac{e^2}{|\textbf{r}_i-\textbf{r}_j|} \right] \Psi(\textbf{r}_1,\textbf{r}_2,\ldots\textbf{r}_N) = E\ \Psi(\textbf{r}_1,\textbf{r}_2,\ldots\textbf{r}_N)
     \label{intro:eq:multi-se}
@@ -48,7 +48,7 @@ Typically, one may envision that given an external potential $V_{ext}(\textbf{r}
 \begin{figure}[h]
 \begin{center}
 \includegraphics[keepaspectratio=true,width=\linewidth]{1-intro/figures/hks.png}
-    \caption{Top left, the true multi-particle potential and wavefunctions are replaced by an auxiliary single-particle system, as in the top right. At the end the Kohn-Sham method involves solving the Schr{\"o}dinger equation for the auxiliary Hamiltonian ($H_{KS}$) as defined on the bottom panel. Adapted from Ref.~\cite{martin2020electronic}.}  \label{intro:fig:hks}
+    \caption{Top left, the true multi-particle potential and wavefunctions are replaced by an auxiliary single-particle system, as in the top right. At the end the Kohn-Sham method involves solving the Schr{\"o}dinger equation for the auxiliary Hamiltonian ($H_{KS}$) as defined in the bottom panel. Adapted from Ref.~\cite{martin2020electronic}.}  \label{intro:fig:hks}
 \end{center}
 \end{figure}
 
@@ -78,7 +78,7 @@ The shortcoming of LDA and GGA, comes for systems where the electrons in the sys
 \end{align}
 Here, $E_\text{DFT}$ is the energy obtained from standard DFT methods which is corrected by the following term which includes the occupation matrix $\lambda_i^{I\sigma}$ ($I$ ranges over all ions, $i$ ranges over $3d$ orbitals and $\sigma$ is for spin up or down). For example, we have shown that applying a $U$ of 4.3 eV on Fe $3d$ orbitals in \ce{Fe2O3} yields bandgap, electron localization, hopping barrier, and ionization energies which agree with experiment.~\cite{smart2017effect}
 
-An alternative method, is built upon mixture of the semi-local PBE exchange-correlation functional and that of the non-local exact Hartree-Fock exchange:
+An alternative method, is built upon a mixture of the semi-local PBE exchange-correlation functional and that of the non-local exact Hartree-Fock exchange:
 \begin{align}
     E_x^{HF} = -\frac{1}{2} \sum_{i,j} \int\int \psi_i^*(\textbf{r}_1)\psi_j^*(\textbf{r}_2) \frac{1}{r_{12}} \psi_j(\textbf{r}_1)\psi_i(\textbf{r}_2) d\textbf{r}_1 d\textbf{r}_2
     \label{intro:eq:HF}
@@ -91,7 +91,7 @@ A popular and most simple hybrid functional method (PBE0($\alpha$)) mixes $E_x^{
 where most commonly $\alpha=0.25$ (denoted simply PBE0). Other variations of hybrid functionals, including HSE, B3LYP, and B3PW, will be discussed in necessary detail as they pertain to the research in later sections.
 
 
-More exact methods of including many-body interactions include the GW approximation. In the one shot $G_0W_0$ (here all cases will be one-shot, so I will simply write GW instead of explicitly $G_0W_0$) approach the self energy $\Sigma$ perturbatively replaces the XC functional obtained in DFT. First the single particle Green's function is constructed:
+More exact methods of including many-body interactions include the GW approximation. In the one-shot $G_0W_0$ (here all cases will be one-shot, so I will simply write GW instead of explicitly $G_0W_0$) approach the self energy $\Sigma$ perturbatively replaces the XC functional obtained in DFT. First the single particle Green's function is constructed:
 \begin{align}
     G_0 = \sum_i \frac{\varphi_i(r)\varphi_i^*(r')}{\omega-\varepsilon_i \pm i\eta },
     \label{intro:eq:g0}
@@ -193,11 +193,11 @@ Following the approach described in Ref.~\cite{wu2019dimensionality}, the radiat
      \Gamma_R = \frac{n_D e^2}{3\pi\epsilon_0\hbar^4 c^3} E_0^3 \mu_{e-h}^2,
     \label{intro:eq:rad}
 \end{equation}
-where $e$ is the charge of an electron, $\epsilon_0$ is vacuum permittivity, $E_0$ is the exciton energy at $\textbf{Q}_{ex}=0$, $n_D$ is the reflective index of the host material and $\mu_{e-h}^2$ is the modulus square of exciton dipole moment with length$^2$ unit. Note that Eq.~\ref{intro:eq:rad} considers defect-defect transitions in the dilute limit; therefore the lifetime formula for zero-dimensional systems embedded in a host material is used~\cite{gupta2018two,mackoit2019carbon} (also considering $n_D$ is unity in isolated 2D systems at the long-wavelength limit).
+where $e$ is the charge of an electron, $\epsilon_0$ is vacuum permittivity, $E_0$ is the exciton energy at $\textbf{Q}_{ex}=0$, $n_D$ is the refractive index of the host material and $\mu_{e-h}^2$ is the modulus square of exciton dipole moment with length$^2$ unit. Note that Eq.~\ref{intro:eq:rad} considers defect-defect transitions in the dilute limit; therefore the lifetime formula for zero-dimensional systems embedded in a host material is used~\cite{gupta2018two,mackoit2019carbon} (also considering $n_D$ is unity in isolated 2D systems at the long-wavelength limit).
 
 
 \subsection{Nonradiative Recombination}
-Phonon-assisted nonradiative recombination rate are computed via a Fermi's golden rule approach:
+Phonon-assisted nonradiative recombination rates are computed via a Fermi's golden rule approach:
 \begin{align}
     \Gamma_{NR} &= \frac{2\pi}{\hbar}g\sum_{n,m}p_{in}\left|\mel{fm}{H^{e-ph}}{in}\right|^2\delta(E_{in}-E_{fm}) \label{intro:eq:nonrad-full}
 \end{align}
@@ -207,7 +207,7 @@ Here, $\Gamma_{NR}$ is the nonradiative recombination rate between electron stat
     X_{if}(T) &= \sum_{n,m}p_{in}\left|\mel{\phi_{fm}(\textbf{R})}{Q-Q_a}{\phi_{in}(\mathbf{R})}\right|^2 \delta(m\hbar\omega_f - n\hbar\omega_i+\Delta E_{if}), \label{intro:eq:nonrad-X} \\
     W_{if} &= \mel{\psi_i(\mathbf{r}, \textbf{R})}{\frac{\partial H}{\partial Q}}{\psi_f(\mathbf{r},\textbf{R})}\bigg{|}_{\textbf{R}=\textbf{R}_a}. \label{intro:eq:nonrad-W}
 \end{align}
-Here, the static coupling approximation naturally separates the nonradiative recombination rate into phonon and electronic terms, $X_{if}$ and $W_{if}$, respectively. The 1D phonon approximation introduces a generalized coordinate $Q$, with effective frequency $\omega_i$ and $\omega_f$. The phonon overlap in Eq.~\ref{intro:eq:nonrad-X} can be computed using the quantum harmonic oscillator wavefunctions with $Q-Q_a$ from the configuration diagram. Meanwhile the electronic overlap in Eq.~\ref{intro:eq:nonrad-W} is computed by finite difference using the Kohn-Sham orbitals from DFT at the $\Gamma$ point. The nonradiative lifetime $\tau_{NR}$ is given by taking the inverse of rate $\Gamma_{NR}$. Additional details of nonradiative recombination are provided in the appendix. Implementation of nonradiative recombination can be found here (for Ping Group): \url{https://github.com/Ping-Group-UCSC/NonRad}.
+Here, the static coupling approximation naturally separates the nonradiative recombination rate into phonon and electronic terms, $X_{if}$ and $W_{if}$, respectively. The 1D phonon approximation introduces a generalized coordinate $Q$, with effective frequency $\omega_i$ and $\omega_f$. The phonon overlap in Eq.~\ref{intro:eq:nonrad-X} can be computed using the quantum harmonic oscillator wavefunctions with $Q-Q_a$ from the configuration diagram. Meanwhile the electronic overlap in Eq.~\ref{intro:eq:nonrad-W} is computed by finite difference using the Kohn-Sham orbitals from DFT at the $\Gamma$ point. The nonradiative lifetime $\tau_{NR}$ is given by taking the inverse of the rate $\Gamma_{NR}$. Additional details of nonradiative recombination are provided in the appendix. Implementation of nonradiative recombination can be found here (for Ping Group): \url{https://github.com/Ping-Group-UCSC/NonRad}.
 
 
 \subsection{Intersystem Crossing}
