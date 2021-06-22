@@ -137,7 +137,7 @@ where,
 This section discusses details of computing Eq. \ref{app:nonrad:eq:a} \& \ref{app:nonrad:eq:chi} in practice,  following the implementation of [Shi 2015 PRB]. First of all we will assume that the phonon modes in states $i$ and $j$ are the same, so $k_1 = k_2 = k$. Next we introduce the following diagonal ($N_{vib} \times N_{vib}$) matrices:
 \begin{align}
     a(\tau_\xi)_k = \frac{\omega_k}{\sinh{(i\hbar\omega_k\tau_\xi)}}\, , \quad
-    c(\tau_\xi)_k = \omega_k\coth{(i\hbar\omega_k\tau_\xi/2)}\, , \quad
+    c(\tau_\xi)_k = \omega_k\coth{(i\hbar\omega_k\tau_\xi/2)}\, , \quad \nonumber \\
     d(\tau_\xi)_k = \omega_k\tanh{(i\hbar\omega_k\tau_\xi/2)}\, .
 \end{align}
 Where, $\xi = (i,j)$, $\tau_i = -t-i\beta$, $\tau_j = t$, and $\omega_k$ is the frequency of the $k$th harmonic oscillator. We then define matrices:
@@ -156,15 +156,15 @@ where
 \end{align}
 This gives the final form:
 \begin{align}
-    \chi_{ij}^k(t,T) =
+    \chi_{ij}^k(t,T) &=
         \sqrt{
             \frac{
                 \det{[a(\tau_j)]} \det{[a(\tau_i)]}
             }{
                 (i\hbar)^{2N} \det{(C)} \det{(D)}
             }
-        }\,
-        \exp \left[
+        }\, \nonumber \\
+        & \hspace{2cm} \times \exp \left[
             -\textbf{K}^T d(\tau_j)\textbf{K}
             + \textbf{K}^T d(\tau_j) D^{-1} d(\tau_i)\textbf{K}
         \right]
@@ -221,8 +221,8 @@ Consider,
 \begin{align}
     & \frac{\partial}{\partial R}\bigg(\braket{\psi_f(r,R_0)|H_0 |\psi_i(r,R_0)}\bigg) = \\
     & \hspace{2cm} \braket{\frac{\partial \psi_f(r,R_0)}{\partial R}|H_0 |\psi_i(r,R_0)}
-    + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}}
-    + \braket{\psi_f(r,R_0)|\frac{\partial H_0}{\partial R} |\psi_i(r,R_0)} \nonumber \\
+    + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}} \nonumber \\
+    & \hspace{2cm} + \braket{\psi_f(r,R_0)|\frac{\partial H_0}{\partial R} |\psi_i(r,R_0)} \nonumber \\
     & 0 = \braket{\frac{\partial \psi_f(r,R_0)}{\partial R}|H_0 |\psi_i(r,R_0)}
     + \braket{\psi_f(r,R_0)|H_0 |\frac{\partial \psi_i(r,R_0)}{\partial R}}
     + 0 \nonumber \\
